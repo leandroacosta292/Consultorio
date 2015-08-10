@@ -5,6 +5,8 @@
  */
 package consultorio;
 
+import telas.principal;
+
 /**
  *
  * @author leandro
@@ -15,7 +17,9 @@ public class Consultorio {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        principal telaPrincipal = new principal();
+        telaPrincipal.setVisible(true);
+               
     }
     
 }
