@@ -56,8 +56,10 @@ public class principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         cadastrarPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/cadastrar64.png"))); // NOI18N
+        cadastrarPaciente.setToolTipText("");
         cadastrarPaciente.setMaximumSize(new java.awt.Dimension(80, 80));
         cadastrarPaciente.setMinimumSize(new java.awt.Dimension(80, 80));
+        cadastrarPaciente.setName(""); // NOI18N
         cadastrarPaciente.setPreferredSize(new java.awt.Dimension(80, 80));
         cadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +93,7 @@ public class principal extends javax.swing.JFrame {
         jButton5.setMinimumSize(new java.awt.Dimension(80, 80));
         jButton5.setPreferredSize(new java.awt.Dimension(80, 80));
 
-        fundo.setBackground(javax.swing.UIManager.getDefaults().getColor("InternalFrame.activeTitleGradient"));
+        fundo.setBackground(java.awt.SystemColor.activeCaption);
 
         javax.swing.GroupLayout fundoLayout = new javax.swing.GroupLayout(fundo);
         fundo.setLayout(fundoLayout);
