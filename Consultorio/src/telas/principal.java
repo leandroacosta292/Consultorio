@@ -5,9 +5,15 @@
  */
 package telas;
 
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import apoio.conexao;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,6 +24,8 @@ public class principal extends javax.swing.JFrame {
     /**
      * Creates new form principal
      */
+    public static Connection con = conexao.connection;
+
     public principal() {
         initComponents();
         try {
@@ -26,8 +34,7 @@ public class principal extends javax.swing.JFrame {
         } catch (Exception e) {
             //JOptionPane.showMessageDialog(null, e.getMessage());
         }
-       
-    }
+            }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,16 +89,31 @@ public class principal extends javax.swing.JFrame {
         jButton3.setMinimumSize(new java.awt.Dimension(80, 80));
         jButton3.setOpaque(false);
         jButton3.setPreferredSize(new java.awt.Dimension(80, 80));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/agenda64.png"))); // NOI18N
         jButton4.setMaximumSize(new java.awt.Dimension(80, 80));
         jButton4.setMinimumSize(new java.awt.Dimension(80, 80));
         jButton4.setPreferredSize(new java.awt.Dimension(80, 80));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/caixa64.png"))); // NOI18N
         jButton5.setMaximumSize(new java.awt.Dimension(80, 80));
         jButton5.setMinimumSize(new java.awt.Dimension(80, 80));
         jButton5.setPreferredSize(new java.awt.Dimension(80, 80));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         fundo.setBackground(java.awt.SystemColor.activeCaption);
 
@@ -103,7 +125,7 @@ public class principal extends javax.swing.JFrame {
         );
         fundoLayout.setVerticalGroup(
             fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
+            .addGap(0, 620, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -136,7 +158,7 @@ public class principal extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(fundo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(fundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jMenu1.setText("File");
@@ -171,6 +193,30 @@ public class principal extends javax.swing.JFrame {
         cadastroPaciente.setVisible(true);
     }//GEN-LAST:event_cadastrarPacienteActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Statement stm = null;
+        try {
+            stm = con.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            stm.executeUpdate("INSERT INTO pessoas VALUES (2,'Cynthia','23/07/14',1101717583,01929843062,'Ana','Tio','1111','11121','puta','rua')");
+        } catch (SQLException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        atender atendimento = new atender();
+        fundo.add(atendimento);
+        atendimento.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -199,12 +245,11 @@ public class principal extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new principal().setVisible(true);
-                
+
             }
         });
     }
