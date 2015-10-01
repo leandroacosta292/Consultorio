@@ -17,6 +17,7 @@ public class procuraPaciente extends javax.swing.JDialog {
     public procuraPaciente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setVisible(true);
     }
 
     /**
@@ -33,10 +34,11 @@ public class procuraPaciente extends javax.swing.JDialog {
         btnProcurar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        lblNome = new javax.swing.JLabel();
+        tfdCPF = new javax.swing.JTextField();
+        lblCPF = new javax.swing.JLabel();
+        tfdNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -47,6 +49,11 @@ public class procuraPaciente extends javax.swing.JDialog {
         btnFechar.setMaximumSize(new java.awt.Dimension(122, 50));
         btnFechar.setMinimumSize(new java.awt.Dimension(122, 50));
         btnFechar.setPreferredSize(new java.awt.Dimension(122, 50));
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
 
         btnProcurar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/procurar32.png"))); // NOI18N
         btnProcurar.setText("Procurar");
@@ -77,9 +84,23 @@ public class procuraPaciente extends javax.swing.JDialog {
 
         jPanel3.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jLabel1.setText("Nome");
+        lblNome.setText("Nome");
 
-        jLabel15.setText("CPF");
+        tfdCPF.setEnabled(false);
+        tfdCPF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfdCPFMouseClicked(evt);
+            }
+        });
+
+        lblCPF.setText("CPF");
+
+        tfdNome.setEnabled(false);
+        tfdNome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfdNomeMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -88,27 +109,29 @@ public class procuraPaciente extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel15))
+                    .addComponent(lblNome)
+                    .addComponent(lblCPF))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNome)
+                    .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
+                    .addComponent(tfdCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCPF))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel1.setText("*Clique para habilitar");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -118,11 +141,16 @@ public class procuraPaciente extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
@@ -145,11 +173,27 @@ public class procuraPaciente extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void tfdCPFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfdCPFMouseClicked
+        tfdCPF.setEnabled(true);
+        tfdNome.setEnabled(false);
+        tfdNome.setText("");
+    }//GEN-LAST:event_tfdCPFMouseClicked
+
+    private void tfdNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfdNomeMouseClicked
+        tfdCPF.setEnabled(false);
+        tfdNome.setEnabled(true);
+        tfdCPF.setText("");
+    }//GEN-LAST:event_tfdNomeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -197,11 +241,12 @@ public class procuraPaciente extends javax.swing.JDialog {
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnProcurar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel lblCPF;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JTextField tfdCPF;
+    private javax.swing.JTextField tfdNome;
     // End of variables declaration//GEN-END:variables
 }

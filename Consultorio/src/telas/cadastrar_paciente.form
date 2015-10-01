@@ -68,11 +68,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnAlterar" min="-2" pref="122" max="-2" attributes="0"/>
                       <Component id="btnProcurar" min="-2" pref="122" max="-2" attributes="0"/>
-                      <Component id="btnImprimir" min="-2" pref="122" max="-2" attributes="0"/>
+                      <Component id="btnNovo" min="-2" pref="122" max="-2" attributes="0"/>
                       <Component id="btnSair" min="-2" pref="122" max="-2" attributes="0"/>
                       <Component id="btnSalvar" min="-2" pref="122" max="-2" attributes="0"/>
-                      <Component id="btnAlterar" min="-2" pref="122" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
@@ -83,13 +83,13 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="btnProcurar" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnNovo" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnAlterar" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnSalvar" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnImprimir" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSair" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -130,6 +130,9 @@
               <Dimension value="[122, 50]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSair">
           <Properties>
@@ -147,13 +150,16 @@
               <Dimension value="[122, 50]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnImprimir">
+        <Component class="javax.swing.JButton" name="btnNovo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icones/imprimir32.png"/>
+              <Image iconType="3" name="/icones/cadastrar32.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Imprimir"/>
+            <Property name="text" type="java.lang.String" value="Novo"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[122, 50]"/>
             </Property>
@@ -164,6 +170,9 @@
               <Dimension value="[122, 50]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnProcurar">
           <Properties>
@@ -181,6 +190,9 @@
               <Dimension value="[122, 50]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProcurarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -248,17 +260,14 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="tfdRg" min="-2" pref="140" max="-2" attributes="0"/>
-                                                      <EmptySpace max="32767" attributes="0"/>
-                                                      <Component id="lblCPF" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="tfdDataNasc" min="-2" pref="140" max="-2" attributes="0"/>
-                                                      <EmptySpace max="32767" attributes="0"/>
-                                                      <Component id="lblSexo" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="jdateDataNasc" max="32767" attributes="0"/>
+                                                  <Component id="tfdRg" pref="140" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lblCPF" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblSexo" alignment="1" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="cmbSexo" min="-2" pref="121" max="-2" attributes="0"/>
@@ -299,11 +308,13 @@
                           <Component id="tfdNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblDataNasc" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdDataNasc" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSexo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbSexo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblDataNasc" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblSexo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbSexo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jdateDataNasc" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -344,7 +355,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="lblNomeMae">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nome M&#xe3;e"/>
+                <Property name="text" type="java.lang.String" value="Nome M&#xe3;e*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblRG">
@@ -354,7 +365,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblNome">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nome"/>
+                <Property name="text" type="java.lang.String" value="Nome*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfdEmpresa">
@@ -392,11 +403,6 @@
                 <Property name="text" type="java.lang.String" value="Sexo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfdDataNasc">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdDataNascActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JTextField" name="tfdProfissao">
             </Component>
             <Component class="javax.swing.JTextField" name="tfdFone">
@@ -408,12 +414,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblCPF">
               <Properties>
-                <Property name="text" type="java.lang.String" value="CPF"/>
+                <Property name="text" type="java.lang.String" value="CPF*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblDataNasc">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Data Nasc"/>
+                <Property name="text" type="java.lang.String" value="Data Nasc*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblEmpresa">
@@ -435,6 +441,11 @@
             <Component class="javax.swing.JTextField" name="tfdNomePai">
             </Component>
             <Component class="javax.swing.JTextField" name="tfdNome">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdNomeActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="jdateDataNasc">
             </Component>
           </SubComponents>
         </Container>
@@ -458,28 +469,43 @@
                           <Component id="lblCEP" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cmbUF" max="32767" attributes="0"/>
-                                  <Component id="tfdRua" max="32767" attributes="0"/>
-                                  <Component id="tfdCompl" min="-2" pref="140" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lblCidade" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblBairro" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="370" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cmbCidade" min="-2" pref="144" max="-2" attributes="0"/>
-                                  <Component id="tfdNum" min="-2" pref="144" max="-2" attributes="0"/>
-                                  <Component id="tfdBairro" min="-2" pref="144" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="cmbUF" max="32767" attributes="0"/>
+                                      <Component id="tfdRua" max="32767" attributes="0"/>
+                                      <Component id="tfdCompl" min="-2" pref="140" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="tfdCEP" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="lblCidade" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblBairro" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cmbCidade" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <Component id="tfdNum" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <Component id="tfdBairro" min="-2" pref="144" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="lblID" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="tfdID" min="-2" pref="77" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Component id="tfdCEP" min="-2" pref="140" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -494,35 +520,55 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cmbUF" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblUF" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCidade" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="lblID" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfdID" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cmbUF" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblUF" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblRua" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdRua" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblRua" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdRua" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblCompl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdCompl" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblCEP" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdCEP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lblUltAtend" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="107" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblBairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdBairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblCompl" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdCompl" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblBairro" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdBairro" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblCEP" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdCEP" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblUltAtend" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="107" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -644,6 +690,13 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="UF"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblID">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ID"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfdID">
             </Component>
           </SubComponents>
         </Container>
