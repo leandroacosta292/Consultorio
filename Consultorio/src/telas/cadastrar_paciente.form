@@ -221,9 +221,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jPanel4" max="32767" attributes="0"/>
+                      <Component id="jPanel2" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -237,19 +237,13 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="tfdCpf" min="-2" pref="121" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblNomeMae" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblProfissão" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblNomePai" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblDataNasc" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblRG" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblNome" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblFone" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -259,38 +253,56 @@
                                   <Component id="tfdNomePai" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="jdateDataNasc" max="32767" attributes="0"/>
-                                                  <Component id="tfdRg" pref="140" max="32767" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lblCPF" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblSexo" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="cmbSexo" min="-2" pref="121" max="-2" attributes="0"/>
-                                          </Group>
                                           <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="tfdFone" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                                  <Component id="tfdProfissao" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="tfdFone" pref="130" max="32767" attributes="0"/>
+                                                  <Component id="tfdProfissao" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lblFone2" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblEmpresa" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="lblEmpresa" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Component id="lblFone2" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="tfdFone2" min="-2" pref="121" max="-2" attributes="0"/>
-                                                  <Component id="tfdEmpresa" min="-2" pref="121" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="tfdFone2" pref="130" max="32767" attributes="0"/>
+                                                  <Component id="tfdEmpresa" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Component id="tfdNome" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblSus" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDataNasc" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblRG" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="tfdRg" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="tfdSus" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jdateDataNasc" pref="130" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="lblSexo" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="cmbSexo" min="-2" pref="130" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="lblCPF" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="tfdCpf" min="-2" pref="130" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -307,23 +319,28 @@
                           <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfdNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="lblDataNasc" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblSexo" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cmbSexo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jdateDataNasc" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tfdRg" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblRG" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblCPF" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfdCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="tfdSus" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblNomeMae" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfdNomeMae" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -447,6 +464,13 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="jdateDataNasc">
             </Component>
+            <Component class="javax.swing.JLabel" name="lblSus">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="SUS"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfdSus">
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel4">
@@ -470,10 +494,6 @@
                       </Group>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jScrollPane1" min="-2" pref="370" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
@@ -483,31 +503,26 @@
                                   </Group>
                                   <Component id="tfdCEP" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="27" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblCidade" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblBairro" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblID" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="lblCidade" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblBairro" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cmbCidade" min="-2" pref="144" max="-2" attributes="0"/>
-                                          <Component id="tfdNum" min="-2" pref="144" max="-2" attributes="0"/>
-                                          <Component id="tfdBairro" min="-2" pref="144" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lblID" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="tfdID" min="-2" pref="77" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                                  <Component id="tfdID" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="tfdBairro" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfdNum" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="cmbCidade" pref="130" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
+                          <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -549,8 +564,6 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="lblUltAtend" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="107" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -569,6 +582,8 @@
                               </Group>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="107" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>

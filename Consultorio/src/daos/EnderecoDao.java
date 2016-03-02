@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controlas;
+package daos;
 
 /**
  *
- * @author leandro
+ * @author lacosta
  */
-public class controlaPaciente {
+public class EnderecoDao {
     
 }

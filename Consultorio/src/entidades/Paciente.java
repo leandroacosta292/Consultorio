@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package negocio;
+package entidades;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author leandro
  */
-public class paciente {
+public class Paciente {
     
     private int ID;
     private String Nome;
@@ -19,6 +19,7 @@ public class paciente {
     private String Sexo;
     private String Rg;
     private String CPF;
+    private String SUS;
     private String NomeMae;
     private String NomePai;
     private String Fone;
@@ -297,6 +298,20 @@ public class paciente {
      */
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    /**
+     * @return the SUS
+     */
+    public String getSUS() {
+        return SUS;
+    }
+
+    /**
+     * @param SUS the SUS to set
+     */
+    public void setSUS(String SUS) {
+        this.SUS = SUS;
     }
     
     
