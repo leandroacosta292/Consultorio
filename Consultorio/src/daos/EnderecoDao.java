@@ -11,4 +11,6 @@ package daos;
  */
 public class EnderecoDao {
     
+    
+    
 }
