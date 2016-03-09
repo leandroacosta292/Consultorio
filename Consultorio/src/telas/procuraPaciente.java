@@ -5,6 +5,10 @@
  */
 package telas;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import entidades.Paciente;
+
 /**
  *
  * @author leandro
@@ -19,6 +23,7 @@ public class procuraPaciente extends javax.swing.JDialog {
         initComponents();
         this.setVisible(true);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,6 +44,8 @@ public class procuraPaciente extends javax.swing.JDialog {
         lblCPF = new javax.swing.JLabel();
         tfdNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblLista = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -57,9 +64,15 @@ public class procuraPaciente extends javax.swing.JDialog {
 
         btnProcurar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/procurar32.png"))); // NOI18N
         btnProcurar.setText("Procurar");
+        btnProcurar.setEnabled(false);
         btnProcurar.setMaximumSize(new java.awt.Dimension(122, 50));
         btnProcurar.setMinimumSize(new java.awt.Dimension(122, 50));
         btnProcurar.setPreferredSize(new java.awt.Dimension(122, 50));
+        btnProcurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcurarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,6 +168,27 @@ public class procuraPaciente extends javax.swing.JDialog {
                 .addGap(18, 18, 18))
         );
 
+        tblLista.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nome", "CPF", "DataNasc"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblLista);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,8 +197,12 @@ public class procuraPaciente extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +211,9 @@ public class procuraPaciente extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,13 +227,35 @@ public class procuraPaciente extends javax.swing.JDialog {
         tfdCPF.setEnabled(true);
         tfdNome.setEnabled(false);
         tfdNome.setText("");
+        btnProcurar.setEnabled(true);
     }//GEN-LAST:event_tfdCPFMouseClicked
 
     private void tfdNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfdNomeMouseClicked
         tfdCPF.setEnabled(false);
         tfdNome.setEnabled(true);
         tfdCPF.setText("");
+        btnProcurar.setEnabled(true);
     }//GEN-LAST:event_tfdNomeMouseClicked
+
+    private void btnProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarActionPerformed
+       /* if (tfdCPF.isEnabled()) {
+            Paciente tmpPaciente;
+            
+            if (tmpPaciente == null) {
+                JOptionPane.showMessageDialog(null, "Não Encontrado!");
+            } else {
+                String colunas[] = {"Nome", "CPF", "Data Nasc"};
+                DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
+                modelo.addRow(new String[]{tmpPaciente.getNome(), tmpPaciente.getCPF(), "data"});
+                tblLista.setModel(modelo);
+            }
+        }
+        if (tfdNome.isEnabled()) {
+            ctlPaciente.ProcurarPacienteNome(tfdNome.getText());
+            //testar
+        }
+        */
+    }//GEN-LAST:event_btnProcurarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,8 +306,10 @@ public class procuraPaciente extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JTable tblLista;
     private javax.swing.JTextField tfdCPF;
     private javax.swing.JTextField tfdNome;
     // End of variables declaration//GEN-END:variables

@@ -42,18 +42,14 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         lblNomeMae = new javax.swing.JLabel();
         lblRG = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
-        tfdEmpresa = new javax.swing.JTextField();
         lblFone = new javax.swing.JLabel();
         cmbSexo = new javax.swing.JComboBox();
-        lblProfissão = new javax.swing.JLabel();
         tfdCpf = new javax.swing.JTextField();
         lblSexo = new javax.swing.JLabel();
-        tfdProfissao = new javax.swing.JTextField();
         tfdFone = new javax.swing.JTextField();
         lblNomePai = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
         lblDataNasc = new javax.swing.JLabel();
-        lblEmpresa = new javax.swing.JLabel();
         tfdRg = new javax.swing.JTextField();
         lblFone2 = new javax.swing.JLabel();
         tfdFone2 = new javax.swing.JTextField();
@@ -190,8 +186,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
             }
         });
 
-        lblProfissão.setText("Profissão");
-
         lblSexo.setText("Sexo");
 
         lblNomePai.setText("Nome Pai");
@@ -199,8 +193,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         lblCPF.setText("CPF*");
 
         lblDataNasc.setText("Data Nasc*");
-
-        lblEmpresa.setText("Empresa");
 
         lblFone2.setText("Fone2");
 
@@ -222,7 +214,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNomeMae, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblProfissão, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblNomePai, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblNome, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblFone, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -233,20 +224,11 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfdFone, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                            .addComponent(tfdProfissao))
+                                        .addComponent(tfdFone, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(lblFone2)
                                         .addGap(18, 18, 18)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addComponent(lblEmpresa)
-                                                .addGap(18, 18, 18))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                                .addComponent(lblFone2)
-                                                .addGap(18, 18, 18)))
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfdFone2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                            .addComponent(tfdEmpresa)))
+                                        .addComponent(tfdFone2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(tfdNome))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -309,13 +291,7 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                     .addComponent(lblFone)
                     .addComponent(tfdFone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblFone2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProfissão)
-                    .addComponent(tfdProfissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEmpresa)
-                    .addComponent(tfdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(49, 49, 49))
         );
 
         lblBairro.setText("Bairro");
@@ -515,10 +491,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
          tmpPaciente.setNomePai(tfdNomePai.getText());
          tmpPaciente.setFone(tfdFone.getText());
          tmpPaciente.setFone2(tfdFone2.getText());
-         tmpPaciente.setProfissao(tfdProfissao.getText());
-         tmpPaciente.setEmpresa(tfdEmpresa.getText());
-         tmpPaciente.setUF((String) cmbUF.getSelectedItem());
-       
             
         }else{
             JOptionPane.showMessageDialog(null, "Preencha os campos: "+TestarPreenchimento());
@@ -554,14 +526,12 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblCompl;
     private javax.swing.JLabel lblDataNasc;
-    private javax.swing.JLabel lblEmpresa;
     private javax.swing.JLabel lblFone;
     private javax.swing.JLabel lblFone2;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNomeMae;
     private javax.swing.JLabel lblNomePai;
-    private javax.swing.JLabel lblProfissão;
     private javax.swing.JLabel lblRG;
     private javax.swing.JLabel lblRua;
     private javax.swing.JLabel lblSexo;
@@ -573,7 +543,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfdCEP;
     private javax.swing.JTextField tfdCompl;
     private javax.swing.JTextField tfdCpf;
-    private javax.swing.JTextField tfdEmpresa;
     private javax.swing.JTextField tfdFone;
     private javax.swing.JTextField tfdFone2;
     private javax.swing.JTextField tfdID;
@@ -581,7 +550,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfdNomeMae;
     private javax.swing.JTextField tfdNomePai;
     private javax.swing.JTextField tfdNum;
-    private javax.swing.JTextField tfdProfissao;
     private javax.swing.JTextField tfdRg;
     private javax.swing.JTextField tfdRua;
     private javax.swing.JTextField tfdSus;

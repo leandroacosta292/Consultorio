@@ -11,55 +11,25 @@ package entidades;
  */
 public class Endereco {
     
-    private String UF;
-    private String Cidade;
-    private String Rua;
+    private String Logradouro;
     private String Numero;
     private String Complemento;
     private String Bairro;
     private String CEP;
-    
-    
-     /**
-     * @return the UF
+    private int Cidade_Id;
+
+    /**
+     * @return the Logradouro
      */
-    public String getUF() {
-        return UF;
+    public String getLogradouro() {
+        return Logradouro;
     }
 
     /**
-     * @param UF the UF to set
+     * @param Logradouro the Logradouro to set
      */
-    public void setUF(String UF) {
-        this.UF = UF;
-    }
-
-    /**
-     * @return the Cidade
-     */
-    public String getCidade() {
-        return Cidade;
-    }
-
-    /**
-     * @param Cidade the Cidade to set
-     */
-    public void setCidade(String Cidade) {
-        this.Cidade = Cidade;
-    }
-
-    /**
-     * @return the Rua
-     */
-    public String getRua() {
-        return Rua;
-    }
-
-    /**
-     * @param Rua the Rua to set
-     */
-    public void setRua(String Rua) {
-        this.Rua = Rua;
+    public void setLogradouro(String Logradouro) {
+        this.Logradouro = Logradouro;
     }
 
     /**
@@ -117,4 +87,19 @@ public class Endereco {
     public void setCEP(String CEP) {
         this.CEP = CEP;
     }
+
+    /**
+     * @return the Cidade_Id
+     */
+    public int getCidade_Id() {
+        return Cidade_Id;
+    }
+
+    /**
+     * @param Cidade_Id the Cidade_Id to set
+     */
+    public void setCidade_Id(int Cidade_Id) {
+        this.Cidade_Id = Cidade_Id;
+    }
+    
 }

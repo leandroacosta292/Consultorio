@@ -12,7 +12,7 @@ import java.util.Date;
  * @author leandro
  */
 public class Paciente {
-    
+
     private int ID;
     private String Nome;
     private Date DataNasc;
@@ -21,9 +21,9 @@ public class Paciente {
     private String CPF;
     private String SUS;
     private String NomeMae;
-    private String NomePai;
     private String Fone;
     private String Fone2;
+    private int EnderecoId;
 
     /**
      * @return the Nome
@@ -110,20 +110,6 @@ public class Paciente {
     }
 
     /**
-     * @return the NomePai
-     */
-    public String getNomePai() {
-        return NomePai;
-    }
-
-    /**
-     * @param NomePai the NomePai to set
-     */
-    public void setNomePai(String NomePai) {
-        this.NomePai = NomePai;
-    }
-
-    /**
      * @return the Fone
      */
     public String getFone() {
@@ -178,15 +164,19 @@ public class Paciente {
     public void setSUS(String SUS) {
         this.SUS = SUS;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    /**
+     * @return the EnderecoId
+     */
+    public int getEnderecoId() {
+        return EnderecoId;
+    }
+
+    /**
+     * @param EnderecoId the EnderecoId to set
+     */
+    public void setEnderecoId(int EnderecoId) {
+        this.EnderecoId = EnderecoId;
+    }
+
 }

@@ -9,7 +9,6 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import apoio.conexao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -24,7 +23,7 @@ public class principal extends javax.swing.JFrame {
     /**
      * Creates new form principal
      */
-    public static Connection con = conexao.connection;
+    
 
     public principal() {
         initComponents();
@@ -198,17 +197,9 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        Statement stm = null;
-        try {
-            stm = con.createStatement();
-        } catch (SQLException ex) {
-            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            stm.executeUpdate("INSERT INTO pessoas VALUES (2,'Cynthia','23/07/14',1101717583,01929843062,'Ana','Tio','1111','11121','puta','rua')");
-        } catch (SQLException ex) {
-            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
+          
+       
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
