@@ -54,6 +54,8 @@ public class principal extends javax.swing.JFrame {
         fundo = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         jRadioButtonMenuItem1.setSelected(true);
@@ -160,10 +162,17 @@ public class principal extends javax.swing.JFrame {
                 .addComponent(fundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jMenu1.setText("File");
+        jMenu1.setText("Cadastrar");
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu3.setText("Opções");
+
+        jMenuItem1.setText("Usuários");
+        jMenu3.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu2.setText("Sair");
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -254,7 +263,9 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     // End of variables declaration//GEN-END:variables

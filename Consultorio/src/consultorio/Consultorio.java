@@ -20,10 +20,9 @@ public class Consultorio {
      */
     public static void main(String[] args) {
 
-        if (ConexaoBD.getInstance().getConnection() == null) {
+        if (ConexaoBD.getInstance().getConnection() != null) {
             ConexaoBD.getInstance().getConnection();
-            principal telaPrincipal = new principal();
-            telaPrincipal.setVisible(true);
+            new principal().setVisible(true);
         } else {
             System.out.println("Deu merda");
         }

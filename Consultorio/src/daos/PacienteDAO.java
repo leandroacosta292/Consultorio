@@ -5,6 +5,7 @@
  */
 package daos;
 
+import apoio.ConexaoBD;
 import entidades.Paciente;
 import interfaces.IDAO;
 import java.sql.Statement;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author lacosta
+ * @author Leandro
  */
 public class PacienteDAO implements IDAO {
 
@@ -20,26 +21,18 @@ public class PacienteDAO implements IDAO {
     public String salvar(Object o) {
         Paciente paciente = (Paciente) o;
         try {
-            //Statement st = consultorio.Consultorio.conexao.createStatement();
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "INSERT INTO categoria VALUES"
-                    + "(DEFAULT, "
-                    + "'" + paciente.getNome() + "'"
-                    + "'" + paciente.getDataNasc() + "'"
-                    + "'" + paciente.getSexo() + "'"
-                    + "'" + paciente.getRg() + "'"
-                    + "'" + paciente.getCPF() + "'"
-                    + "'" + paciente.getSUS() + "'"
-                    + "'" + paciente.getNomeMae() + "'"
-                    + "'" + paciente.getFone()+ "'"
-                    + "'" + paciente.getFone2()+ "'"
-                    + "'" + paciente.getEnderecoId() + "');";
+            String sql = "INSERT INTO paciente VALUES("
+                    + "'" + paciente.getPessoaId()+ "'"
+                    + "'" + paciente.getResponsavel() + "'"
+                    + "'" + paciente.getTelResponsavel() + "');";
             System.out.println("sql: " + sql);
 
 //            int resultado = st.executeUpdate(sql);
             return null;
         } catch (Exception e) {
-            System.out.println("Erro salvar Paciente = " + e);
+            System.out.println("Erro salvar Pessoa = " + e);
             return e.toString();
         }
 

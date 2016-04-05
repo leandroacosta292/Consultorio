@@ -5,14 +5,19 @@
  */
 package daos;
 
+import apoio.ConexaoBD;
+import entidades.Estado;
 import interfaces.IDAO;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Leandro
  */
-public class EstadoDAO implements IDAO{
+public class EstadoDAO implements IDAO {
 
     @Override
     public String salvar(Object o) {
@@ -43,5 +48,5 @@ public class EstadoDAO implements IDAO{
     public Object consultarId(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

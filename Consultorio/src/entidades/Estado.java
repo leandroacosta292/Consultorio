@@ -11,6 +11,7 @@ package entidades;
  */
 public class Estado {
     
+    private int EstadoId;
     private String Nome;
     private String Sigla;
 
@@ -40,6 +41,20 @@ public class Estado {
      */
     public void setSigla(String Sigla) {
         this.Sigla = Sigla;
+    }
+
+    /**
+     * @return the EstadoId
+     */
+    public int getEstadoId() {
+        return EstadoId;
+    }
+
+    /**
+     * @param EstadoId the EstadoId to set
+     */
+    public void setEstadoId(int EstadoId) {
+        this.EstadoId = EstadoId;
     }
     
     
