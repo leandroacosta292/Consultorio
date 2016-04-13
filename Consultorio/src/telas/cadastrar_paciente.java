@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import entidades.Pessoa;
 import apoio.Uteis;
 import daos.CombosDAO;
-import daos.EnderecoDAO;
+import daos.EnderecoDao;
 import apoio.ComboItens;
 import entidades.Endereco;
 import apoio.limpaCampos;
@@ -29,7 +29,7 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
     PessoaDAO pessoaDAO;
     Uteis uteis;
     CombosDAO combo;
-    EnderecoDAO endDAO;
+    EnderecoDao endDAO;
     CidadeDAO cidDAO;
     int id = 0;
     Pessoa tmpPessoa;
@@ -42,7 +42,7 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         pessoaDAO = new PessoaDAO();
         uteis = new Uteis();
         combo = new CombosDAO();
-        endDAO = new EnderecoDAO();
+        endDAO = new EnderecoDao();
         cidDAO = new CidadeDAO();
         new CombosDAO().popularCombo("estado", cmbEstado);
         ligarCampos(false);
