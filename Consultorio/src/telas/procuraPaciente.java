@@ -7,6 +7,7 @@ package telas;
 
 import daos.PessoaDAO;
 import entidades.Pessoa;
+import javax.swing.JTable;
 
 /**
  *
@@ -18,18 +19,18 @@ public class procuraPaciente extends javax.swing.JDialog {
      * Creates new form procuraPaciente
      */
     PessoaDAO pessoaDAO;
-    private Pessoa pessoaSeleciona;
+    private Pessoa pessoaSelecionada;
 
     public procuraPaciente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         pessoaDAO = new PessoaDAO();
         initComponents();
         this.setVisible(true);
-       // pessoaDAO.popularTabela(tabela, "", "");
+        // pessoaDAO.popularTabela(tabela, "", "");
     }
 
-    public Pessoa retornarPessoa (){
-        return pessoaSeleciona;
+    public Pessoa retornarPessoa() {
+        return pessoaSelecionada;
     }
 
     /**
@@ -191,6 +192,11 @@ public class procuraPaciente extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabela);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -242,7 +248,7 @@ public class procuraPaciente extends javax.swing.JDialog {
     private void btnProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarActionPerformed
         if (tfdCPF.isEnabled()) {
             pessoaDAO.popularTabela(tabela, tfdCPF.getText(), "cpf");
-            
+
         }
         if (tfdNome.isEnabled()) {
             pessoaDAO.popularTabela(tabela, tfdNome.getText(), "nome");
@@ -253,6 +259,14 @@ public class procuraPaciente extends javax.swing.JDialog {
     private void tfdNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdNomeActionPerformed
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        if (evt.getClickCount() == 2) {
+            JTable dadosTabela = tabela;
+            pessoaSelecionada = (Pessoa) pessoaDAO.consultarId((int)dadosTabela.getValueAt(tabela.getSelectedRow(), 0));
+            this.dispose();
+        }
+    }//GEN-LAST:event_tabelaMouseClicked
 
     /**
      * @param args the command line arguments

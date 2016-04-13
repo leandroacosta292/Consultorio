@@ -5,40 +5,43 @@
  */
 package daos;
 
-import entidades.Endereco;
+import apoio.ConexaoBD;
+import entidades.Medico;
 import interfaces.IDAO;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
  *
- * @author lacosta
+ * @author Leandro
  */
-public class EnderecoDAO implements IDAO{
+public class MedicoDAO implements IDAO {
 
     @Override
     public String salvar(Object o) {
-        Endereco endereco = (Endereco) o;
+      Medico medico = (Medico) o;
         try {
-           // Statement st = consultorio.Consultorio.conexao.createStatement();
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "INSERT INTO categoria VALUES"
+            String sql = "INSERT INTO pessoa VALUES"
                     + "(DEFAULT, "
-                    + "'" + endereco.getLogradouro() + "'"
-                    + "'" + endereco.getNumero()+ "'"
-                    + "'" + endereco.getComplemento() + "'"
-                    + "'" + endereco.getBairro()+ "'"
-                    + "'" + endereco.getCEP() + "'"
-                    + "'" + endereco.getCidade_Id()+ "')";
-            
+                    + "'" + medico.getCrm() + "',"
+                    + "'" + medico.getPessoa_id() + "') RETURNING id_medico";
             System.out.println("sql: " + sql);
 
-          //  int resultado = st.executeUpdate(sql);
-            return null;
+            ResultSet rs = st.executeQuery(sql);
+            int id = 0;
+            if (rs.next()) {
+                id = rs.getInt("id_medico");
+            }
+            return String.valueOf(id);
         } catch (Exception e) {
-            System.out.println("Erro salvar endereco = " + e);
+            System.out.println("Erro salvar Médico = " + e);
             return e.toString();
         }
+    
+    
     }
 
     @Override
@@ -65,4 +68,8 @@ public class EnderecoDAO implements IDAO{
     public Object consultarId(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    
+    
 }

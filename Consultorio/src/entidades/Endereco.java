@@ -11,6 +11,7 @@ package entidades;
  */
 public class Endereco {
     
+    private int id_endereco;
     private String Logradouro;
     private String Numero;
     private String Complemento;
@@ -100,6 +101,20 @@ public class Endereco {
      */
     public void setCidade_Id(int Cidade_Id) {
         this.Cidade_Id = Cidade_Id;
+    }
+
+    /**
+     * @return the id_endereco
+     */
+    public int getId_endereco() {
+        return id_endereco;
+    }
+
+    /**
+     * @param id_endereco the id_endereco to set
+     */
+    public void setId_endereco(int id_endereco) {
+        this.id_endereco = id_endereco;
     }
     
 }

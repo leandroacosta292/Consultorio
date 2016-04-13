@@ -25,6 +25,7 @@ public class Pessoa {
     private String Fone2;
     private int EnderecoId;
     private boolean ativo;
+    private boolean medico;
 
     /**
      * @return the Nome
@@ -192,6 +193,20 @@ public class Pessoa {
      */
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    /**
+     * @return the medico
+     */
+    public boolean isMedico() {
+        return medico;
+    }
+
+    /**
+     * @param medico the medico to set
+     */
+    public void setMedico(boolean medico) {
+        this.medico = medico;
     }
 
 }

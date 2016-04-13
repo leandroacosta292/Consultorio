@@ -5,7 +5,11 @@
  */
 package daos;
 
+import apoio.ConexaoBD;
+import entidades.Cidade;
 import interfaces.IDAO;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -41,7 +45,31 @@ public class CidadeDAO implements IDAO {
 
     @Override
     public Object consultarId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "SELECT * FROM cidade WHERE "
+                    + "id_cidade = " + id + "";
+
+           // System.out.println("sql: " + sql);
+
+            ResultSet resultado = st.executeQuery(sql);
+
+            if (resultado.next()) {
+                Cidade tmpCidade = new Cidade();
+                tmpCidade.setIdCidade(resultado.getInt("id_cidade"));
+                tmpCidade.setNome(resultado.getString("nome"));
+                tmpCidade.setCEP(resultado.getString("cep"));
+                tmpCidade.setEstadoID(resultado.getInt("estado_id"));
+
+                return tmpCidade;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro consultar cidade= " + e);
+            return e.toString();
+        }
     }
     
 }

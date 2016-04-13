@@ -6,6 +6,7 @@
 package apoio;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,5 +26,22 @@ public class Uteis {
         String formatted = format1.format(calendario.getTime());
         // System.out.println(formatted);
         return formatted;
+    }
+
+    public String FormatarDatayyyyMMdd(Date data) {
+
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        //      System.out.println(calendario.getTime());
+// Output "Wed Sep 26 14:23:28 EST 2012"
+
+        String formatted = format1.format(data);
+        System.out.println(formatted);
+        return formatted;
+    }
+
+    public Date FormatarDatayyyyMMdd(String data) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = sdf.parse(data);
+        return date;
     }
 }

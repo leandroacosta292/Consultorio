@@ -45,11 +45,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <Component id="jPanel3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -213,12 +213,29 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel4" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jPanel4" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="jScrollPane1" min="-2" pref="395" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
+                          <Component id="lblUltAtend" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -226,11 +243,20 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jPanel4" max="32767" attributes="0"/>
-                      <Component id="jPanel2" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jPanel2" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="lblUltAtend" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="107" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -248,12 +274,12 @@
                               <Component id="lblNome" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="tfdNome" min="-2" pref="362" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="1" attributes="0">
@@ -269,64 +295,52 @@
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="lblNomeMae" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="lblNomeMae" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblCRM" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="tfdCRM" min="-2" pref="140" max="-2" attributes="0"/>
+                                                  <Component id="tfdNomeMae" min="-2" pref="140" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace pref="54" max="32767" attributes="0"/>
+                                              <Component id="lblSexo" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="cmbSexo" min="-2" pref="130" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace pref="49" max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="1" attributes="0">
+                                                          <Component id="lblCPF" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="lblFone1" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Component id="lblFone3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="tfdFone" max="32767" attributes="0"/>
-                                                  <Component id="tfdNomeMae" pref="140" max="32767" attributes="0"/>
+                                                  <Component id="tfdCpf" pref="130" max="32767" attributes="0"/>
+                                                  <Component id="tfdFone1" max="32767" attributes="0"/>
+                                                  <Component id="tfdFone2" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblResponsavel" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                              <Component id="jCheckBox3" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                              <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="chkMedico" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="chkAtivo" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="5" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="chkAtivo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="lblFone3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblFone2" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="tfdFone3" max="32767" attributes="0"/>
-                                          <Component id="tfdFone2" pref="130" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="lblCPF" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblFone1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="tfdCpf" pref="130" max="32767" attributes="0"/>
-                                          <Component id="tfdFone1" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="lblSexo" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="cmbSexo" min="-2" pref="130" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -368,24 +382,20 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblNomeMae" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfdNomeMae" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdFone3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdFone2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblFone3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfdFone2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblFone2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdFone" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblResponsavel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCRM" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdCRM" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkMedico" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="chkAtivo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -406,17 +416,13 @@
                 <Property name="text" type="java.lang.String" value="Nome*"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblResponsavel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Responsavel"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JComboBox" name="cmbSexo">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="FEMININO"/>
-                    <StringItem index="1" value="MASCULINO"/>
+                  <StringArray count="3">
+                    <StringItem index="0" value="Selecione"/>
+                    <StringItem index="1" value="FEMININO"/>
+                    <StringItem index="2" value="MASCULINO"/>
                   </StringArray>
                 </Property>
                 <Property name="selectedIndex" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -428,18 +434,10 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="tfdCpf">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="1111"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblSexo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Sexo"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="tfdFone">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="1111"/>
+                <Property name="text" type="java.lang.String" value="Sexo*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblCPF">
@@ -453,35 +451,13 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfdRg">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="1111"/>
-              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdRgActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblFone2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Fone Resp"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="tfdFone2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="11111"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdFone2ActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JTextField" name="tfdNomeMae">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Puta"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfdNome">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nome"/>
-              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdNomeActionPerformed"/>
               </Events>
@@ -494,14 +470,8 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfdSus">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="1111"/>
-              </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfdFone3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="2323"/>
-              </Properties>
+            <Component class="javax.swing.JTextField" name="tfdFone2">
             </Component>
             <Component class="javax.swing.JLabel" name="lblFone3">
               <Properties>
@@ -509,33 +479,34 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfdFone1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="1111"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblFone1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Fone"/>
+                <Property name="text" type="java.lang.String" value="Fone*"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Paciente"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox3">
+            <Component class="javax.swing.JCheckBox" name="chkMedico">
               <Properties>
                 <Property name="text" type="java.lang.String" value="M&#xe9;dico"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkMedicoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkAtivo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ativo"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfdCRM">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblCRM">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="CRM"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -550,44 +521,34 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                          <Component id="lblRua" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="lblCompl" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="lblCEP" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                                  <Component id="lblRua" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="lblCompl" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="lblCEP" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfdRua" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="tfdCEP" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="tfdRua" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="tfdCEP" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lblBairro" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel10" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="tfdBairro" alignment="0" pref="130" max="32767" attributes="0"/>
-                                                  <Component id="tfdNum" alignment="0" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
-                                          <Component id="tfdCompl" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lblBairro" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel10" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tfdBairro" alignment="0" pref="130" max="32767" attributes="0"/>
+                                          <Component id="tfdNum" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="lblUltAtend" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="tfdCompl" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -617,113 +578,59 @@
                           </Group>
                           <Component id="lblUF" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfdNum" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="lblRua" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfdRua" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblCompl" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfdCompl" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfdNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="lblRua" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfdRua" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblCompl" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdCompl" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblCEP" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="tfdCEP" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lblUltAtend" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblBairro" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="tfdBairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblBairro" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="107" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="tfdBairro">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="bairro"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblBairro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Bairro"/>
+                <Property name="text" type="java.lang.String" value="Bairro*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfdNum">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="num"/>
-              </Properties>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-              <AuxValues>
-                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JTable" name="tblUltAtend">
-                  <Properties>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="5">
-                        <Column editable="true" title="Data" type="java.lang.Object"/>
-                        <Column editable="true" title="Motivo" type="java.lang.Object"/>
-                        <Column editable="true" title="Pago" type="java.lang.Object"/>
-                      </Table>
-                    </Property>
-                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                      <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                      </TableColumnModel>
-                    </Property>
-                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-                    </Property>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xba;"/>
+                <Property name="text" type="java.lang.String" value="N&#xba;*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfdCompl">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="compl"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbEstado">
               <Properties>
@@ -736,31 +643,20 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="tfdCEP">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="cep"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblUltAtend">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ultimos Atendimentos"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfdRua">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="rua"/>
-              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdRuaActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblRua">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Rua"/>
+                <Property name="text" type="java.lang.String" value="Rua*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblCEP">
               <Properties>
-                <Property name="text" type="java.lang.String" value="CEP"/>
+                <Property name="text" type="java.lang.String" value="CEP*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbCidade">
@@ -772,7 +668,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblCidade">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cidade"/>
+                <Property name="text" type="java.lang.String" value="Cidade*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblCompl">
@@ -782,11 +678,58 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblUF">
               <Properties>
-                <Property name="text" type="java.lang.String" value="UF"/>
+                <Property name="text" type="java.lang.String" value="UF*"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="tblUltAtend">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="3" rowCount="5">
+                    <Column editable="true" title="Data" type="java.lang.Object"/>
+                    <Column editable="true" title="Motivo" type="java.lang.Object"/>
+                    <Column editable="true" title="Pago" type="java.lang.Object"/>
+                  </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
+                </Property>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="lblUltAtend">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ultimos Atendimentos"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

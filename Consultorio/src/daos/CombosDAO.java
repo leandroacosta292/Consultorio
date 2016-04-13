@@ -80,4 +80,15 @@ public class CombosDAO {
         }
     }
 
+    public void definirItemCombo(JComboBox combo, int id) {
+        for (int i = 0; i < combo.getItemCount(); i++) {
+            if (((ComboItens) combo.getItemAt(i)).getCodigo() == (id)) {
+                combo.setSelectedIndex(i);
+                return;
+            }
+        }
+    }
+
 }
+
+

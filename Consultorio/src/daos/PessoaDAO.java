@@ -14,12 +14,15 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import apoio.Uteis;
 
 /**
  *
  * @author lacosta
  */
 public class PessoaDAO implements IDAO {
+
+    Uteis util = new Uteis();
 
     @Override
     public String salvar(Object o) {
@@ -38,7 +41,9 @@ public class PessoaDAO implements IDAO {
                     + "'" + pessoa.getNomeMae() + "',"
                     + "'" + pessoa.getFone() + "',"
                     + "'" + pessoa.getFone2() + "',"
-                    + "'" + pessoa.getEnderecoId() + "') RETURNING id_pessoa";
+                    + "'" + pessoa.getEnderecoId() + "',"
+                    + "'" + pessoa.isAtivo() + "',"
+                    + "'" + pessoa.isMedico() + "') RETURNING id_pessoa";
             System.out.println("sql: " + sql);
 
             ResultSet rs = st.executeQuery(sql);
@@ -56,7 +61,31 @@ public class PessoaDAO implements IDAO {
 
     @Override
     public String atualizar(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Pessoa pessoa = (Pessoa) o;
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "UPDATE pessoa SET "
+                    + "nome = '" + pessoa.getNome() + "', "
+                    + "data_nasc = '" + pessoa.getDataNasc() + "', "
+                    + "sexo = '" + pessoa.getSexo() + "', "
+                    + "rg = '" + pessoa.getRg() + "', "
+                    + "cpf = '" + pessoa.getCPF() + "', "
+                    + "sus = '" + pessoa.getSUS() + "', "
+                    + "nome_mae = '" + pessoa.getNomeMae() + "', "
+                    + "fone = '" + pessoa.getFone() + "', "
+                    + "fone2 = '" + pessoa.getFone2() + "', "
+                    + "endereco_id = '" + pessoa.getEnderecoId() + "', "
+                    + "ativo = '" + pessoa.isAtivo() + "', "
+                    + "medico = '" + pessoa.isMedico() + "' WHERE id_pessoa = " + pessoa.getID();
+            System.out.println("sql: " + sql);
+
+            st.executeUpdate(sql);;
+            return "";
+        } catch (Exception e) {
+            System.out.println("Erro Atualizar Pessoa = " + e);
+            return e.toString();
+        }
     }
 
     @Override
@@ -76,7 +105,40 @@ public class PessoaDAO implements IDAO {
 
     @Override
     public Object consultarId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "SELECT * FROM pessoa WHERE "
+                    + "id_pessoa = " + id + "";
+
+            //  System.out.println("sql: " + sql);
+            ResultSet resultado = st.executeQuery(sql);
+
+            if (resultado.next()) {
+                Pessoa tmpPessoa = new Pessoa();
+                tmpPessoa.setID(resultado.getInt("id_pessoa"));
+                tmpPessoa.setNome(resultado.getString("nome"));
+                tmpPessoa.setDataNasc(util.FormatarDatayyyyMMdd(resultado.getDate("data_nasc")));
+                tmpPessoa.setSexo(resultado.getString("sexo"));
+                tmpPessoa.setRg(resultado.getString("rg"));
+                tmpPessoa.setCPF(resultado.getString("cpf"));
+                tmpPessoa.setSUS(resultado.getString("sus"));
+                tmpPessoa.setNomeMae(resultado.getString("nome_mae"));
+                tmpPessoa.setFone(resultado.getString("fone"));
+                tmpPessoa.setFone2(resultado.getString("fone2"));
+                tmpPessoa.setEnderecoId(resultado.getInt("endereco_id"));
+                tmpPessoa.setAtivo(resultado.getBoolean("ativo"));
+                tmpPessoa.setMedico(resultado.getBoolean("medico"));
+
+                return tmpPessoa;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro consultar pessoa = " + e);
+            return e.toString();
+        }
+
     }
 
     public void popularTabela(JTable tabela, String criterio, String campo) {
@@ -94,7 +156,7 @@ public class PessoaDAO implements IDAO {
         // cria matriz de acordo com nº de registros da tabela
         try {
             String sql = "SELECT count(*) FROM pessoa WHERE " + campo + " ILIKE '%" + criterio + "%'";
-            System.out.println("sql1"+sql);
+            // System.out.println("sql1" + sql);
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql);
 
             resultadoQ.next();
@@ -110,7 +172,7 @@ public class PessoaDAO implements IDAO {
         // efetua consulta na tabela
         try {
             String sql1 = "SELECT * FROM pessoa WHERE " + campo + " ILIKE '%" + criterio + "%'";
-            System.out.println("sql1"+sql1);
+            // System.out.println("sql1" + sql1);
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql1);
 
             while (resultadoQ.next()) {
@@ -195,4 +257,36 @@ public class PessoaDAO implements IDAO {
 //        });
     }
 
+    /* public String atualizar(Pessoa pessoa) {
+
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "UPDATE pessoa SET "
+                    + "nome = '" + pessoa.getNome() + "', "
+                    + "data_nasc = '" + pessoa.getDataNasc() + "', "
+                    + "sexo = '" + pessoa.getSexo() + "', "
+                    + "rg = '" + pessoa.getRg() + "', "
+                    + "cpf = '" + pessoa.getCPF() + "', "
+                    + "sus = '" + pessoa.getSUS() + "', "
+                    + "nome_mae = '" + pessoa.getNomeMae() + "', "
+                    + "fone = '" + pessoa.getFone() + "', "
+                    + "fone2 = '" + pessoa.getFone2() + "', "
+                    + "endereco_id = '" + pessoa.getEnderecoId() + "', "
+                    + "ativo = '" + pessoa.isAtivo() + " WHERE id_pessoa = " + pessoa.getID();
+            System.out.println("sql: " + sql);
+
+            ResultSet rs = st.executeQuery(sql);
+            int id = 0;
+            if (rs.next()) {
+                id = rs.getInt("id_pessoa");
+            }
+            return String.valueOf(id);
+        } catch (Exception e) {
+            System.out.println("Erro salvar Pessoa = " + e);
+            return e.toString();
+        }
+
+    }
+     */
 }

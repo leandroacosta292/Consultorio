@@ -62,6 +62,7 @@ public class principal extends javax.swing.JFrame {
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Clinica Feliz");
 
         cadastrarPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/cadastrar64.png"))); // NOI18N
         cadastrarPaciente.setToolTipText("");

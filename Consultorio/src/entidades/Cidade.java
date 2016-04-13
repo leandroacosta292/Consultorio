@@ -11,6 +11,7 @@ package entidades;
  */
 public class Cidade {
     
+    private int IdCidade;
     private String Nome;
     private String CEP;
     private int EstadoID;
@@ -55,6 +56,20 @@ public class Cidade {
      */
     public void setEstadoID(int Estado) {
         this.EstadoID = Estado;
+    }
+
+    /**
+     * @return the IdCidade
+     */
+    public int getIdCidade() {
+        return IdCidade;
+    }
+
+    /**
+     * @param IdCidade the IdCidade to set
+     */
+    public void setIdCidade(int IdCidade) {
+        this.IdCidade = IdCidade;
     }
     
 }
