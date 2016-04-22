@@ -254,6 +254,7 @@ public class agendar extends javax.swing.JDialog {
         procuraPaciente procurar = new procuraPaciente(null, true);
         procurar.setVisible(true);
         tmpPessoa = procurar.retornarPessoa();
+        tfdPaciente.setText(tmpPessoa.getNome());
     }//GEN-LAST:event_btnPacienteActionPerformed
 
     private void btnMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicoActionPerformed

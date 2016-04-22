@@ -24,22 +24,22 @@ public class AgendaDAO implements IDAO {
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "INSERT INTO agendaEnt VALUES"
+            String sql = "INSERT INTO agenda VALUES"
                     + "(DEFAULT, "
                     + "'" + agendaEnt.getDataAtendimento() + "',"
                     + "'" + agendaEnt.getValor() + "',"
                     + "'" + agendaEnt.getPessoaId()+ "',"
-                    + "'" + agendaEnt.getMedicoId()  + "') RETURNING id_agendaEnt";
+                    + "'" + agendaEnt.getMedicoId()  + "') RETURNING id_atendimento";
             System.out.println("sql: " + sql);
 
             ResultSet rs = st.executeQuery(sql);
             int id = 0;
             if (rs.next()) {
-                id = rs.getInt("id_agendaEnt");
+                id = rs.getInt("id_atendimento");
             }
             return String.valueOf(id);
         } catch (Exception e) {
-            System.out.println("Erro salvar Pessoa = " + e);
+            System.out.println("Erro salvar atendimento na agenda = " + e);
             return e.toString();
         }
 

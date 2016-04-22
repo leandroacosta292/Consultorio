@@ -606,7 +606,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         limpaCampos.limparCampos(jPanel4);
         procuraPaciente procurar = new procuraPaciente(null, true);
         tmpPessoa = procurar.retornarPessoa();
-        System.out.println(tmpPessoa.isMedico());
         if (tmpPessoa.isMedico()) {
             tmpMedico = (Medico) medDAO.consultarId(tmpPessoa.getID());
             tfdCRM.setText(tmpMedico.getCrm());

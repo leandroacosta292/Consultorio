@@ -18,7 +18,7 @@ CREATE TABLE atendimento_doenca (
 
 -- Table: atendimento_medico
 CREATE TABLE atendimento_medico (
-    id_atendimento_medico serial  NOT NULL,
+    id_atendimento_medico integer NOT NULL,
     receituario_restrito_id integer  NOT NULL,
     atendimento varchar(700)  NOT NULL,
     procedimento_medico_id_procedimento_medico integer  NOT NULL,
@@ -26,11 +26,20 @@ CREATE TABLE atendimento_medico (
     valor_total money  NULL,
     planos_saude_id_plano integer  NOT NULL,
     pago boolean  NOT NULL,
-	medico_id_integer  NOT NULL,
-	pessoa_id integer  NOT NULL,
-    reconsulta boolean  NULL,
-	reconsulta_id integer NULL
+    medico_id integer  NOT NULL,
+    pessoa_id integer  NOT NULL,
     CONSTRAINT atendimento_medico_pk PRIMARY KEY (id_atendimento_medico)
+);
+
+
+-- Table: agenda
+CREATE TABLE agenda (
+	id_atendimento serial NOT NULL,
+	data_atendimento date NOT NULL,
+	valor money NOT NULL,
+	pessoa_id integer NOT NULL,
+	medico_id integer NOT NULL,
+	CONSTRAINT atendimento_pk PRIMARY KEY (id_atendimento)
 );
 
 
@@ -43,7 +52,6 @@ CREATE TABLE cidade (
     estado_id integer  NOT NULL,
     CONSTRAINT cidade_pk PRIMARY KEY (id_cidade)
 );
-
 
 
 
@@ -169,7 +177,7 @@ ALTER TABLE atendimento_doenca ADD CONSTRAINT fk_atendimento_doenca_doenca1
 -- Reference:  fk_atendimento_medico1 (table: atendimento_medico)
 
 
-ALTER TABLE atendimento ADD CONSTRAINT fk_atendimento_medico1 
+ALTER TABLE atendimento_medico ADD CONSTRAINT fk_atendimento_medico1 
     FOREIGN KEY (medico_id)
     REFERENCES medico (id_medico)
     NOT DEFERRABLE 
@@ -179,7 +187,7 @@ ALTER TABLE atendimento ADD CONSTRAINT fk_atendimento_medico1
 -- Reference:  fk_atendimento_paciente1 (table: atendimento_medico)
 
 
-ALTER TABLE atendimento ADD CONSTRAINT fk_atendimento_paciente1 
+ALTER TABLE atendimento_medico ADD CONSTRAINT fk_atendimento_paciente1 
     FOREIGN KEY (pessoa_id)
     REFERENCES pessoa (id_pessoa)
     NOT DEFERRABLE 
@@ -258,6 +266,36 @@ ALTER TABLE receituario ADD CONSTRAINT fk_receituario_comum_medicamentos1
     INITIALLY IMMEDIATE 
 ;
 
+-- Reference:  fk_agenda_pessoa_id_pessoa (table: agenda)
+
+
+ALTER TABLE agenda ADD CONSTRAINT fk_pessoa_id_pessoa_pessoa
+    FOREIGN KEY (pessoa_id)
+    REFERENCES pessoa (id_pessoa)
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE 
+;
+
+-- Reference:  fk_agenda_medico_id (table: agenda)
+
+
+ALTER TABLE agenda ADD CONSTRAINT fk_agenda_medico_id 
+    FOREIGN KEY (medico_id)
+    REFERENCES medico (id_medico)
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE 
+;
+
+-- Reference:  fk_atendimento_medico_id (table: atendimento_medico)
+
+
+ALTER TABLE atendimento_medico ADD CONSTRAINT fk_atendimento_medico_id 
+    FOREIGN KEY (id_atendimento_medico)
+    REFERENCES agenda (id_atendimento)
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE 
+;
+
 
 -- End Creates
 
@@ -272,8 +310,42 @@ INSERT INTO cidade VALUES
 	(default, 'Sampa', '344223', 2),
 	(default, 'Mato Leitão', '4323232', 1);
 	
-	
+INSERT INTO endereco VALUES
+	(DEFAULT, 'Emilio Selbach','1','ap 103','Centro','95800000','1'),
+	(DEFAULT, 'Osvaldo Aranha','2','','Vila C','95800000','1'),
+	(DEFAULT, 'Emilio Selbach','3','','Seita Maluca','95800000','1'),
+	(DEFAULT, 'Voluntarios da Patria','4','','Juca Otario','95800000','1'),
+	(DEFAULT, 'Carlos Wagner','5','ap 6969','Chupa Bala','95800000','1'),
+	(DEFAULT, 'Jacob Becker','6','','Centro','95800000','1'),
+	(DEFAULT, '7 Setembro','7','','Negroso','95800000','1'),
+	(DEFAULT, 'Terra Nova','8','','Coca Cola','95800000','1'),
+	(DEFAULT, 'Terra Velha','9','','Pepsi','95800000','1');							
 
+INSERT INTO pessoa VALUES
+--medico -ativos
+	(DEFAULT, 'Medico1','1993-02-10','MASCULINO','1101717583','01929843062','1111111','Mãe Medico1','5137416435','5180393518','1','true','true'),
+--medico -inativo
+	(DEFAULT, 'Medico2Inativo','1993-02-11','FEMININO','1101717584','01929843063','1111111','Mãe Medico2','5137416435','5180393518','2','false','true'),
+--medico -ativo
+	(DEFAULT, 'Medico3','1993-02-12','MASCULINO','1101717585','01929843064','1111111','Mãe Medico3','5537416435','5580393518','3','true','true'),
+--pessoa -ativo
+	(DEFAULT, 'Pessoa1','1993-02-13','MASCULINO','1101717585','01929843065','1111111','Mãe Pessoa1','5437416435','5480393518','4','true','true'),
+--pessoa -ativo
+	(DEFAULT, 'Pessoa2','1993-02-14','MASCULINO','1101717585','01929843066','1111111','Mãe Pessoa2','5137416435','5180393518','5','true','false'),
+--pessoa -ativo
+	(DEFAULT, 'Pessoa3','1993-02-15','MASCULINO','1101717585','01929843067','1111111','Mãe Pessoa3','5437416435','5480393518','6','true','false'),
+--pessoa -inativo
+	(DEFAULT, 'Pessoa4Inativo','1993-02-16','MASCULINO','1101717585','01929843068','1111111','Mãe Pessoa4','5537416435','5580393518','7','false','false'),
+--pessoa -ativo
+	(DEFAULT, 'Pessoa5','1993-02-17','MASCULINO','1101717585','01929843069','1111111','Mãe Pessoa5','5537416435','5580393518','8','true','false'),
+--medico -ativos
+	(DEFAULT, 'Medico4','1993-02-10','MASCULINO','1101717583','01929843062','1111111','Mãe Medico4','5137416435','5180393518','9','true','true');	
+	
+INSERT INTO medico VALUES
+	('111111','1'),
+	('222222','2'),
+	('333333','3'),
+	('444444','4');
 
 
 
