@@ -49,7 +49,7 @@ public class principal extends javax.swing.JFrame {
         cadastrarPaciente = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAgenda = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         fundo = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -97,13 +97,13 @@ public class principal extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/agenda64.png"))); // NOI18N
-        jButton4.setMaximumSize(new java.awt.Dimension(80, 80));
-        jButton4.setMinimumSize(new java.awt.Dimension(80, 80));
-        jButton4.setPreferredSize(new java.awt.Dimension(80, 80));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/agenda64.png"))); // NOI18N
+        btnAgenda.setMaximumSize(new java.awt.Dimension(80, 80));
+        btnAgenda.setMinimumSize(new java.awt.Dimension(80, 80));
+        btnAgenda.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnAgenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnAgendaActionPerformed(evt);
             }
         });
 
@@ -139,7 +139,7 @@ public class principal extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(cadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -158,7 +158,7 @@ public class principal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(fundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -202,9 +202,11 @@ public class principal extends javax.swing.JFrame {
         cadastroPaciente.setVisible(true);
     }//GEN-LAST:event_cadastrarPacienteActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btnAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendaActionPerformed
+        agenda Agenda = new agenda();
+        fundo.add(Agenda);
+        Agenda.setVisible(true);
+    }//GEN-LAST:event_btnAgendaActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        
@@ -256,11 +258,11 @@ public class principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgenda;
     private javax.swing.JButton cadastrarPaciente;
     private javax.swing.JPanel fundo;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

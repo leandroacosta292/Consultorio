@@ -6,6 +6,7 @@
 package telas;
 
 import daos.PessoaDAO;
+import daos.MedicoDAO;
 import javax.swing.JOptionPane;
 import entidades.Pessoa;
 import apoio.Uteis;
@@ -16,6 +17,7 @@ import entidades.Endereco;
 import apoio.limpaCampos;
 import daos.CidadeDAO;
 import entidades.Cidade;
+import entidades.Medico;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +35,8 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
     CidadeDAO cidDAO;
     int id = 0;
     Pessoa tmpPessoa;
+    Medico tmpMedico;
+    MedicoDAO medDAO;
 
     /**
      * Creates new form cadastrar_pessoa
@@ -44,6 +48,7 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         combo = new CombosDAO();
         endDAO = new EnderecoDao();
         cidDAO = new CidadeDAO();
+        medDAO = new MedicoDAO();
         new CombosDAO().popularCombo("estado", cmbEstado);
         ligarCampos(false);
     }
@@ -138,7 +143,8 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         tblUltAtend = new javax.swing.JTable();
         lblUltAtend = new javax.swing.JLabel();
 
-        setTitle("Cadastrar Paciente");
+        setResizable(true);
+        setTitle("Cadastrar Pessoa");
         setMaximumSize(new java.awt.Dimension(1152, 408));
         setMinimumSize(new java.awt.Dimension(1152, 408));
         setPreferredSize(new java.awt.Dimension(1152, 408));
@@ -322,14 +328,13 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(tfdCRM, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(tfdNomeMae, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(lblSexo)
                                         .addGap(18, 18, 18)
                                         .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel2Layout.createSequentialGroup()
                                                 .addGap(5, 5, 5)
@@ -343,7 +348,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                                             .addComponent(tfdFone1)
                                             .addComponent(tfdFone2)))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(chkMedico)
                                 .addGap(18, 18, 18)
                                 .addComponent(chkAtivo)))))
@@ -588,6 +592,8 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
             limpaCampos.limparCampos(jPanel4);
             ligarCampos(false);
             btnSair.setText("Sair");
+            btnNovo.setEnabled(true);
+            btnProcurar.setEnabled(true);
         }
     }//GEN-LAST:event_btnSairActionPerformed
 
@@ -596,8 +602,15 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfdNomeActionPerformed
 
     private void btnProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarActionPerformed
+        limpaCampos.limparCampos(jPanel2);
+        limpaCampos.limparCampos(jPanel4);
         procuraPaciente procurar = new procuraPaciente(null, true);
         tmpPessoa = procurar.retornarPessoa();
+        System.out.println(tmpPessoa.isMedico());
+        if (tmpPessoa.isMedico()) {
+            tmpMedico = (Medico) medDAO.consultarId(tmpPessoa.getID());
+            tfdCRM.setText(tmpMedico.getCrm());
+        }
         try {
             popular_tela(tmpPessoa);
         } catch (ParseException ex) {
@@ -640,13 +653,20 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                 tmpPessoa1.setAtivo(chkAtivo.isSelected());
                 tmpPessoa1.setMedico(chkMedico.isSelected());
                 retorno = pessoaDAO.salvar(tmpPessoa1);
+                if (chkMedico.isSelected()) {
+                    tmpMedico = new Medico();
+                    tmpMedico.setCrm(tfdCRM.getText());
+                    tmpMedico.setId_medico(Integer.valueOf(retorno));
+                    medDAO.salvar(tmpMedico);
+                }
                 if (retorno.length() > 6) {
                     JOptionPane.showMessageDialog(null, retorno);
                 } else {
-                    btnSalvar.setText("Sair");
+                    btnSair.setText("Sair");
                     JOptionPane.showMessageDialog(null, "Salvo");
                     btnProcurar.setEnabled(true);
                     btnSalvar.setEnabled(false);
+                    btnAlterar.setEnabled(false);
                     btnNovo.setEnabled(true);
                     ligarCampos(false);
                     tfdCRM.setEnabled(false);
@@ -654,13 +674,16 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                     btnProcurar.setEnabled(true);
                     limpaCampos.limparCampos(jPanel2);
                     limpaCampos.limparCampos(jPanel4);
+                    tmpMedico = null;
+                    tmpPessoa = null;
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Insira os Campos:\n " + TestarPreenchimento());
             }
 
         } else //alterando
-         if (TestarPreenchimento().equals("")) {
+        {
+            if (TestarPreenchimento().equals("")) {
                 Endereco tmpEndereco = new Endereco();
                 tmpEndereco.setId_endereco(tmpPessoa.getEnderecoId());
                 tmpEndereco.setLogradouro(tfdRua.getText());
@@ -686,6 +709,20 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                 tmpPessoa1.setMedico(chkMedico.isSelected());
                 tmpPessoa1.setEnderecoId(tmpEndereco.getId_endereco());
                 retorno = retorno + " " + pessoaDAO.atualizar(tmpPessoa1);
+                if (chkMedico.isSelected()) {
+                    //verifica se já tem medico cadastrado à pessoa
+                   tmpMedico = (Medico) medDAO.consultarId(tmpPessoa1.getID());
+                    if (tmpMedico == null) {
+                        Medico tmpMedico1 = new Medico();
+                        tmpMedico1.setCrm(tfdCRM.getText());
+                        tmpMedico1.setId_medico(tmpPessoa1.getID());
+                        medDAO.salvar(tmpMedico1);
+                    } else {
+                        tmpMedico.setCrm(tfdCRM.getText());
+                        tmpMedico.setId_medico(Integer.valueOf(tmpPessoa1.getID()));
+                        medDAO.atualizar(tmpMedico);
+                    }
+                }
                 if (retorno.length() > 6) {
                     JOptionPane.showMessageDialog(null, retorno);
                 } else {
@@ -700,11 +737,16 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                     limpaCampos.limparCampos(jPanel2);
                     limpaCampos.limparCampos(jPanel4);
                     id = 0;
+                    tmpMedico = null;
+                    tmpPessoa = null;
+                    btnSair.setText("Sair");
+                    btnAlterar.setEnabled(false);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Insira os Campos:\n " + TestarPreenchimento());
 
             }
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -727,6 +769,10 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         ligarCampos(true);
+        btnAlterar.setEnabled(false);
+        btnNovo.setEnabled(false);
+        btnProcurar.setEnabled(false);
+        btnSair.setText("Cancelar");
         if (chkMedico.isSelected()) {
             tfdCRM.setEnabled(true);
             lblCRM.setEnabled(true);

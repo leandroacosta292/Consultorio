@@ -49,7 +49,27 @@ public class EnderecoDao implements IDAO {
 
     @Override
     public String atualizar(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Endereco tmpEndereco = (Endereco) o;
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "UPDATE endereco SET "
+                    + "logradouro = '" + tmpEndereco.getLogradouro() + "', "
+                    + "numero = '" + tmpEndereco.getNumero() + "', "
+                    + "complemento = '" + tmpEndereco.getComplemento() + "', "
+                    + "bairro = '" + tmpEndereco.getBairro() + "', "
+                    + "cep = '" + tmpEndereco.getCEP() + "', "
+                    + "cidade_id = '" + tmpEndereco.getCidade_Id() + "' WHERE id_endereco = " + tmpEndereco.getId_endereco();
+            System.out.println("sql: " + sql);
+
+            st.executeUpdate(sql);;
+            return "";
+        } catch (Exception e) {
+            System.out.println("Erro Atualizar Endereco = " + e);
+            return e.toString();
+        }
+    
+    
     }
 
     @Override

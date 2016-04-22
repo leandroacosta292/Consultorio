@@ -13,8 +13,6 @@ public class Medico {
     
     private String crm;
     private int id_medico;
-    private int pessoa_id;
-
     /**
      * @return the crm
      */
@@ -43,19 +41,5 @@ public class Medico {
         this.id_medico = id_medico;
     }
 
-    /**
-     * @return the pessoa_id
-     */
-    public int getPessoa_id() {
-        return pessoa_id;
-    }
-
-    /**
-     * @param pessoa_id the pessoa_id to set
-     */
-    public void setPessoa_id(int pessoa_id) {
-        this.pessoa_id = pessoa_id;
-    }
-    
-    
+       
 }

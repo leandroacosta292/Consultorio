@@ -56,6 +56,7 @@ public class procuraPaciente extends javax.swing.JDialog {
         tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Procurar Pessoa");
 
         jPanel1.setBackground(java.awt.SystemColor.activeCaption);
 
