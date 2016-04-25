@@ -20,13 +20,26 @@ public class procuraPaciente extends javax.swing.JDialog {
      */
     PessoaDAO pessoaDAO;
     private Pessoa pessoaSelecionada;
+    String ativo;
+    String medico;
 
     public procuraPaciente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         pessoaDAO = new PessoaDAO();
         initComponents();
+        ativo = "";
+        medico = "";
         this.setVisible(true);
         // pessoaDAO.popularTabela(tabela, "", "");
+    }
+
+    public procuraPaciente(java.awt.Frame parent, boolean modal, String ativo, String medico) {
+        super(parent, modal);
+        pessoaDAO = new PessoaDAO();
+        initComponents();
+        this.ativo = ativo;
+        this.medico = medico;
+        this.setVisible(true);
     }
 
     public Pessoa retornarPessoa() {
@@ -247,14 +260,57 @@ public class procuraPaciente extends javax.swing.JDialog {
     }//GEN-LAST:event_tfdNomeMouseClicked
 
     private void btnProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarActionPerformed
-        if (tfdCPF.isEnabled()) {
-            pessoaDAO.popularTabela(tabela, tfdCPF.getText(), "cpf");
+        System.out.println("1");
+        if (medico.equals("true")) {
+            System.out.println("2");
+            //medico ativo
+            if (ativo.equals("true")) {
+                if (tfdCPF.isEnabled()) {
+                    pessoaDAO.popularTabela(tabela, tfdCPF.getText(), "cpf", "AND MEDICO = 'true' AND ATIVO = 'true'");
+                }
+                if (tfdNome.isEnabled()) {
+                    pessoaDAO.popularTabela(tabela, tfdNome.getText(), "nome", "AND MEDICO = 'true' AND ATIVO = 'true'");
+                }
+                //medico inativo
+            }
+            if (ativo.equals("false")) {
+                if (tfdCPF.isEnabled()) {
+                    pessoaDAO.popularTabela(tabela, tfdCPF.getText(), "cpf", "AND MEDICO = 'true' AND ATIVO = 'false'");
+                }
+                if (tfdNome.isEnabled()) {
+                    pessoaDAO.popularTabela(tabela, tfdNome.getText(), "nome", "AND MEDICO = 'true' AND ATIVO = 'false'");
+                }
+            }
 
-        }
-        if (tfdNome.isEnabled()) {
-            pessoaDAO.popularTabela(tabela, tfdNome.getText(), "nome");
-        }
+        } else if (medico.equals("false")) {
+            System.out.println("2");
+            if (ativo.equals("true")) {
+                if (tfdCPF.isEnabled()) {
+                    pessoaDAO.popularTabela(tabela, tfdCPF.getText(), "cpf", "AND MEDICO = 'false' AND ATIVO = 'true'");
+                }
+                if (tfdNome.isEnabled()) {
+                    pessoaDAO.popularTabela(tabela, tfdNome.getText(), "nome", "AND MEDICO = 'false' AND ATIVO = 'true'");
+                }
+                //medico inativo
+            }
+            if (ativo.equals("false")) {
+                if (tfdCPF.isEnabled()) {
+                    pessoaDAO.popularTabela(tabela, tfdCPF.getText(), "cpf", "AND MEDICO = 'false' AND ATIVO = 'false'");
+                }
+                if (tfdNome.isEnabled()) {
+                    pessoaDAO.popularTabela(tabela, tfdNome.getText(), "nome", "AND MEDICO = 'false' AND ATIVO = 'false'");
+                }
 
+            }
+        } else {
+            System.out.println("3");
+            if (tfdCPF.isEnabled()) {
+                pessoaDAO.popularTabela(tabela, tfdCPF.getText(), "cpf");
+            }
+            if (tfdNome.isEnabled()) {
+                pessoaDAO.popularTabela(tabela, tfdNome.getText(), "nome");
+            }
+        }
     }//GEN-LAST:event_btnProcurarActionPerformed
 
     private void tfdNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdNomeActionPerformed
@@ -264,7 +320,7 @@ public class procuraPaciente extends javax.swing.JDialog {
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         if (evt.getClickCount() == 2) {
             JTable dadosTabela = tabela;
-            pessoaSelecionada = (Pessoa) pessoaDAO.consultarId((int)dadosTabela.getValueAt(tabela.getSelectedRow(), 0));
+            pessoaSelecionada = (Pessoa) pessoaDAO.consultarId((int) dadosTabela.getValueAt(tabela.getSelectedRow(), 0));
             this.dispose();
         }
     }//GEN-LAST:event_tabelaMouseClicked
@@ -283,16 +339,24 @@ public class procuraPaciente extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(procuraPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(procuraPaciente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(procuraPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(procuraPaciente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(procuraPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(procuraPaciente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(procuraPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(procuraPaciente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

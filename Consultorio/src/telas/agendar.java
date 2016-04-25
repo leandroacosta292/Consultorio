@@ -5,8 +5,17 @@
  */
 package telas;
 
+import apoio.Uteis;
+import daos.AgendaDAO;
+import entidades.AgendaEnt;
 import entidades.Medico;
 import entidades.Pessoa;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import static java.util.Calendar.HOUR;
+import static java.util.Calendar.MINUTE;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,10 +28,16 @@ public class agendar extends javax.swing.JDialog {
      */
     Pessoa tmpPessoa;
     Pessoa tmpPessoaMedica;
+    AgendaEnt tmpAgenda;
+    Uteis uteis;
+    int idAtendimento = 0;
+    AgendaDAO agendaDAO;
+    String retorno;
 
     public agendar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        agendaDAO = new AgendaDAO();
     }
 
     /**
@@ -63,12 +78,22 @@ public class agendar extends javax.swing.JDialog {
         btnAlterar.setMaximumSize(new java.awt.Dimension(122, 50));
         btnAlterar.setMinimumSize(new java.awt.Dimension(122, 50));
         btnAlterar.setPreferredSize(new java.awt.Dimension(122, 50));
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar32.png"))); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setMaximumSize(new java.awt.Dimension(122, 50));
         btnSalvar.setMinimumSize(new java.awt.Dimension(122, 50));
         btnSalvar.setPreferredSize(new java.awt.Dimension(122, 50));
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair32.png"))); // NOI18N
         btnSair.setText("Sair");
@@ -112,6 +137,7 @@ public class agendar extends javax.swing.JDialog {
         jLabel15.setText("Hora");
 
         btnPaciente.setText("Paciente");
+        btnPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPacienteActionPerformed(evt);
@@ -120,10 +146,10 @@ public class agendar extends javax.swing.JDialog {
 
         lblValor.setText("Valor");
 
-        sfdHora.setMaximum(24);
+        sfdHora.setMaximum(23);
         sfdHora.setMinimum(0);
 
-        sfdMinutos.setMaximum(60);
+        sfdMinutos.setMaximum(59);
         sfdMinutos.setMinimum(0);
 
         jLabel2.setText(":");
@@ -250,18 +276,42 @@ public class agendar extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
+    private void btnMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicoActionPerformed
+        procuraPaciente procurar = new procuraPaciente(null, true,"true", "true");
+        tmpPessoaMedica = procurar.retornarPessoa();
+        System.out.println("MEDICOCODIGO:"+tmpPessoaMedica.getID());
+        tfdMedico.setText(tmpPessoaMedica.getNome());
+        procurar.dispose();
+    }//GEN-LAST:event_btnMedicoActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if (idAtendimento == 0) {
+            tmpAgenda = new AgendaEnt();
+            tmpAgenda.setPessoaId(tmpPessoa.getID());
+            tmpAgenda.setMedicoId(tmpPessoaMedica.getID());
+            tmpAgenda.setValor(Double.parseDouble(tfdValor.getText()));
+            Calendar calendario = clData.getCalendar();
+            calendario.set(HOUR, sfdHora.getValue());
+            calendario.set(MINUTE, sfdMinutos.getValue());
+            tmpAgenda.setDataAtendimento(calendario.getTime());
+            retorno = agendaDAO.salvar(tmpAgenda);
+            if (retorno.length() < 6) {
+                JOptionPane.showMessageDialog(null, "Salvo");
+            } else {
+                JOptionPane.showMessageDialog(null, retorno);
+            }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+    }
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
     private void btnPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacienteActionPerformed
-        procuraPaciente procurar = new procuraPaciente(null, true);
-        procurar.setVisible(true);
+        procuraPaciente procurar = new procuraPaciente(null, true, "true", "false");
         tmpPessoa = procurar.retornarPessoa();
         tfdPaciente.setText(tmpPessoa.getNome());
+        procurar.dispose();
     }//GEN-LAST:event_btnPacienteActionPerformed
-
-    private void btnMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicoActionPerformed
-        procuraPaciente procurar = new procuraPaciente(null, true);
-        procurar.setVisible(true);
-        tmpPessoaMedica = procurar.retornarPessoa();
-    }//GEN-LAST:event_btnMedicoActionPerformed
 
     /**
      * @param args the command line arguments

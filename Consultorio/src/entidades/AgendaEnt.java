@@ -5,6 +5,8 @@
  */
 package entidades;
 
+import java.util.Date;
+
 /**
  *
  * @author Leandro
@@ -12,7 +14,7 @@ package entidades;
 public class AgendaEnt {
     
     	private int idAtendimento;
-	private String dataAtendimento;
+	private Date dataAtendimento;
 	private Double valor;
 	private int pessoaId;
 	private int medicoId;
@@ -34,14 +36,14 @@ public class AgendaEnt {
     /**
      * @return the dataAtendimento
      */
-    public String getDataAtendimento() {
+    public Date getDataAtendimento() {
         return dataAtendimento;
     }
 
     /**
      * @param dataAtendimento the dataAtendimento to set
      */
-    public void setDataAtendimento(String dataAtendimento) {
+    public void setDataAtendimento(Date dataAtendimento) {
         this.dataAtendimento = dataAtendimento;
     }
 

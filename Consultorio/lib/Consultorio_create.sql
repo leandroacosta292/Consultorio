@@ -329,7 +329,7 @@ INSERT INTO pessoa VALUES
 --medico -ativo
 	(DEFAULT, 'Medico3','1993-02-12','MASCULINO','1101717585','01929843064','1111111','Mãe Medico3','5537416435','5580393518','3','true','true'),
 --pessoa -ativo
-	(DEFAULT, 'Pessoa1','1993-02-13','MASCULINO','1101717585','01929843065','1111111','Mãe Pessoa1','5437416435','5480393518','4','true','true'),
+	(DEFAULT, 'Pessoa1','1993-02-13','MASCULINO','1101717585','01929843065','1111111','Mãe Pessoa1','5437416435','5480393518','4','true','false'),
 --pessoa -ativo
 	(DEFAULT, 'Pessoa2','1993-02-14','MASCULINO','1101717585','01929843066','1111111','Mãe Pessoa2','5137416435','5180393518','5','true','false'),
 --pessoa -ativo
@@ -345,7 +345,7 @@ INSERT INTO medico VALUES
 	('111111','1'),
 	('222222','2'),
 	('333333','3'),
-	('444444','4');
+	('444444','9');
 
 
 
