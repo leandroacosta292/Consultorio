@@ -15,9 +15,10 @@ public class AgendaEnt {
     
     	private int idAtendimento;
 	private Date dataAtendimento;
-	private Double valor;
+	private String valor;
 	private int pessoaId;
 	private int medicoId;
+        private boolean atendido;
 
     /**
      * @return the idAtendimento
@@ -50,14 +51,14 @@ public class AgendaEnt {
     /**
      * @return the valor
      */
-    public Double getValor() {
+    public String getValor() {
         return valor;
     }
 
     /**
      * @param valor the valor to set
      */
-    public void setValor(Double valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
 
@@ -87,6 +88,20 @@ public class AgendaEnt {
      */
     public void setMedicoId(int medicoId) {
         this.medicoId = medicoId;
+    }
+
+    /**
+     * @return the atendido
+     */
+    public boolean isAtendido() {
+        return atendido;
+    }
+
+    /**
+     * @param atendido the atendido to set
+     */
+    public void setAtendido(boolean atendido) {
+        this.atendido = atendido;
     }
         
 }

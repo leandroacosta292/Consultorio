@@ -35,10 +35,11 @@ CREATE TABLE atendimento_medico (
 -- Table: agenda
 CREATE TABLE agenda (
 	id_atendimento serial NOT NULL,
-	data_atendimento date NOT NULL,
+	data_atendimento timestamp NOT NULL,
 	valor money NOT NULL,
 	pessoa_id integer NOT NULL,
 	medico_id integer NOT NULL,
+	atendido boolean NULL,
 	CONSTRAINT atendimento_pk PRIMARY KEY (id_atendimento)
 );
 

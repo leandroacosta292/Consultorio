@@ -260,9 +260,7 @@ public class procuraPaciente extends javax.swing.JDialog {
     }//GEN-LAST:event_tfdNomeMouseClicked
 
     private void btnProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarActionPerformed
-        System.out.println("1");
         if (medico.equals("true")) {
-            System.out.println("2");
             //medico ativo
             if (ativo.equals("true")) {
                 if (tfdCPF.isEnabled()) {

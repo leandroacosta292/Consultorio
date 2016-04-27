@@ -35,7 +35,7 @@ public class Uteis {
 // Output "Wed Sep 26 14:23:28 EST 2012"
 
         String formatted = format1.format(data);
-        System.out.println(formatted);
+     //   System.out.println(formatted);
         return formatted;
     }
 
@@ -44,4 +44,13 @@ public class Uteis {
         java.util.Date date = sdf.parse(data);
         return date;
     }
+
+    public String FormatarHora(String data) {
+        String dataHora[] = new String[2];
+        dataHora = data.split(" ");
+        String hora[] = new String[3];
+        hora = dataHora[1].split(":");
+        return hora[0]+":"+hora[1];
+    }
+
 }

@@ -279,7 +279,6 @@ public class agendar extends javax.swing.JDialog {
     private void btnMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicoActionPerformed
         procuraPaciente procurar = new procuraPaciente(null, true,"true", "true");
         tmpPessoaMedica = procurar.retornarPessoa();
-        System.out.println("MEDICOCODIGO:"+tmpPessoaMedica.getID());
         tfdMedico.setText(tmpPessoaMedica.getNome());
         procurar.dispose();
     }//GEN-LAST:event_btnMedicoActionPerformed
@@ -289,11 +288,12 @@ public class agendar extends javax.swing.JDialog {
             tmpAgenda = new AgendaEnt();
             tmpAgenda.setPessoaId(tmpPessoa.getID());
             tmpAgenda.setMedicoId(tmpPessoaMedica.getID());
-            tmpAgenda.setValor(Double.parseDouble(tfdValor.getText()));
+            tmpAgenda.setValor(tfdValor.getText());
             Calendar calendario = clData.getCalendar();
             calendario.set(HOUR, sfdHora.getValue());
             calendario.set(MINUTE, sfdMinutos.getValue());
             tmpAgenda.setDataAtendimento(calendario.getTime());
+            tmpAgenda.setAtendido(false);
             retorno = agendaDAO.salvar(tmpAgenda);
             if (retorno.length() < 6) {
                 JOptionPane.showMessageDialog(null, "Salvo");
