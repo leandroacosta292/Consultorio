@@ -5,27 +5,12 @@
 
 
 -- tables
--- Table: atendimento_doenca
-CREATE TABLE atendimento_doenca (
-    atend_doen_if serial  NOT NULL,
-    doenca_id_doenca integer  NOT NULL,
-    atendimento_medico_id integer  NOT NULL,
-    conduta varchar(500)  NULL,
-    CONSTRAINT atendimento_doenca_pk PRIMARY KEY (atend_doen_if)
-);
-
-
-
 -- Table: atendimento_medico
 CREATE TABLE atendimento_medico (
-    id_atendimento_medico integer NOT NULL,
-    receituario_restrito_id integer  NOT NULL,
+    id_atendimento_medico integer NOT NULL, 
     atendimento varchar(700)  NOT NULL,
-    procedimento_medico_id_procedimento_medico integer  NOT NULL,
-    data_atendimento date  NOT NULL,
-    valor_total money  NULL,
-    planos_saude_id_plano integer  NOT NULL,
-    pago boolean  NOT NULL,
+	conduta varchar(700)  NOT NULL,
+	receituario_id integer  NOT NULL,
     medico_id integer  NOT NULL,
     pessoa_id integer  NOT NULL,
     CONSTRAINT atendimento_medico_pk PRIMARY KEY (id_atendimento_medico)
@@ -40,6 +25,7 @@ CREATE TABLE agenda (
 	pessoa_id integer NOT NULL,
 	medico_id integer NOT NULL,
 	atendido boolean NULL,
+	pago boolean NULL;
 	CONSTRAINT atendimento_pk PRIMARY KEY (id_atendimento)
 );
 
@@ -155,25 +141,6 @@ CREATE TABLE receituario (
 
 
 -- foreign keys
--- Reference:  fk_atendimento_doenca_atendimento_medico1 (table: atendimento_doenca)
-
-
-ALTER TABLE atendimento_doenca ADD CONSTRAINT fk_atendimento_doenca_atendimento_medico1 
-    FOREIGN KEY (atendimento_medico_id)
-    REFERENCES atendimento_medico (id_atendimento_medico)
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE 
-;
-
--- Reference:  fk_atendimento_doenca_doenca1 (table: atendimento_doenca)
-
-
-ALTER TABLE atendimento_doenca ADD CONSTRAINT fk_atendimento_doenca_doenca1 
-    FOREIGN KEY (doenca_id_doenca)
-    REFERENCES doenca (id_doenca)
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE 
-;
 
 -- Reference:  fk_atendimento_medico1 (table: atendimento_medico)
 

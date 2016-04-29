@@ -26,6 +26,7 @@ public class AgendaDAO implements IDAO {
     Uteis uteis = new Uteis();
     PessoaDAO pessoaDAO = new PessoaDAO();
 
+    
     @Override
     public String salvar(Object o) {
         AgendaEnt agendaEnt = (AgendaEnt) o;
@@ -76,7 +77,30 @@ public class AgendaDAO implements IDAO {
 
     @Override
     public Object consultarId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "SELECT * FROM agenda WHERE "
+                    + "id_atendimento  = " + id + "";
+
+            //  System.out.println("sql: " + sql);
+            ResultSet resultado = st.executeQuery(sql);
+
+            if (resultado.next()) {
+                AgendaEnt tmpAgendamento = new AgendaEnt();
+                tmpAgendamento.setIdAtendimento(resultado.getInt("id_atendimento"));
+                tmpAgendamento.setDataAtendimento(resultado.getDate("data_atendimento"));
+                tmpAgendamento.setPessoaId(resultado.getInt("pessoa_id"));
+                tmpAgendamento.setMedicoId(resultado.getInt("medico_id"));
+                tmpAgendamento.setValor(resultado.getString("valor"));
+                return tmpAgendamento;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro consultar agendamento = " + e);
+            return e.toString();
+        }    
     }
 
     public void popularTabela(JTable tabela, String criterio, String campo) {

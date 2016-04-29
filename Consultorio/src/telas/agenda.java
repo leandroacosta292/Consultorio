@@ -7,6 +7,9 @@ package telas;
 
 import apoio.Uteis;
 import daos.AgendaDAO;
+import entidades.AgendaEnt;
+import entidades.Pessoa;
+import javax.swing.JTable;
 
 /**
  *
@@ -19,11 +22,12 @@ public class agenda extends javax.swing.JInternalFrame {
      */
     Uteis uteis = new Uteis();
     AgendaDAO agendaDAO = new AgendaDAO();
+    AgendaEnt agendamentoSelecionado = new AgendaEnt();
 
     public agenda() {
         initComponents();
-        System.out.println(uteis.FormatarDatayyyyMMdd(calendario.getCalendar()));
-        agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar()), "data_atendimento");
+        //System.out.println(uteis.FormatarDatayyyyMMdd(calendario.getCalendar()));
+        agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
 
     }
 
@@ -61,6 +65,11 @@ public class agenda extends javax.swing.JInternalFrame {
             }
         ));
         tabela.setToolTipText("");
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabela);
         if (tabela.getColumnModel().getColumnCount() > 0) {
             tabela.getColumnModel().getColumn(0).setPreferredWidth(1);
@@ -198,13 +207,20 @@ public class agenda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnProcurarActionPerformed
 
     private void calendarioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_calendarioPropertyChange
-        System.out.println("alfa: "+uteis.FormatarDatayyyyMMdd(calendario.getCalendar()));
-        agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar()), "data_atendimento");
+    //    System.out.println("alfa: "+uteis.FormatarDatayyyyMMdd(calendario.getCalendar()));
+        agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
     }//GEN-LAST:event_calendarioPropertyChange
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar()), "data_atendimento");
+       agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        if (evt.getClickCount() == 2) {
+            agendamentoSelecionado = (AgendaEnt) agendaDAO.consultarId((int) tabela.getValueAt(tabela.getSelectedRow(), 0));
+            System.out.println(agendamentoSelecionado.getValor());
+        }
+    }//GEN-LAST:event_tabelaMouseClicked
 
     /**
      * @param args the command line arguments
