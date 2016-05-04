@@ -9,6 +9,7 @@ import apoio.Uteis;
 import daos.AgendaDAO;
 import entidades.AgendaEnt;
 import entidades.Pessoa;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 
 /**
@@ -23,6 +24,7 @@ public class agenda extends javax.swing.JInternalFrame {
     Uteis uteis = new Uteis();
     AgendaDAO agendaDAO = new AgendaDAO();
     AgendaEnt agendamentoSelecionado = new AgendaEnt();
+    JPanel fundo;
 
     public agenda() {
         initComponents();
@@ -30,7 +32,12 @@ public class agenda extends javax.swing.JInternalFrame {
         agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
 
     }
-
+   public agenda(JPanel fundo) {
+        initComponents();
+        //System.out.println(uteis.FormatarDatayyyyMMdd(calendario.getCalendar()));
+        agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
+        this.fundo = fundo;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -207,17 +214,21 @@ public class agenda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnProcurarActionPerformed
 
     private void calendarioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_calendarioPropertyChange
-    //    System.out.println("alfa: "+uteis.FormatarDatayyyyMMdd(calendario.getCalendar()));
+        //    System.out.println("alfa: "+uteis.FormatarDatayyyyMMdd(calendario.getCalendar()));
         agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
     }//GEN-LAST:event_calendarioPropertyChange
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
+        agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         if (evt.getClickCount() == 2) {
             agendamentoSelecionado = (AgendaEnt) agendaDAO.consultarId((int) tabela.getValueAt(tabela.getSelectedRow(), 0));
+            atender atendimento = new atender();
+            this.dispose();
+            fundo.add(atendimento);
+            atendimento.setVisible(true);
             System.out.println(agendamentoSelecionado.getValor());
         }
     }//GEN-LAST:event_tabelaMouseClicked

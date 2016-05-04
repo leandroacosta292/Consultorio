@@ -5,8 +5,11 @@
  */
 package daos;
 
+import apoio.ConexaoBD;
 import entidades.Atendimento;
 import interfaces.IDAO;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -21,30 +24,23 @@ public class AtendimentoDAO implements IDAO{
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "INSERT INTO pessoa VALUES"
-                    + "(DEFAULT, "
-                    + "'" + pessoa.getNome() + "',"
-                    + "'" + pessoa.getDataNasc() + "',"
-                    + "'" + pessoa.getSexo() + "',"
-                    + "'" + pessoa.getRg() + "',"
-                    + "'" + pessoa.getCPF() + "',"
-                    + "'" + pessoa.getSUS() + "',"
-                    + "'" + pessoa.getNomeMae() + "',"
-                    + "'" + pessoa.getFone() + "',"
-                    + "'" + pessoa.getFone2() + "',"
-                    + "'" + pessoa.getEnderecoId() + "',"
-                    + "'" + pessoa.isAtivo() + "',"
-                    + "'" + pessoa.isMedico() + "') RETURNING id_pessoa";
+            String sql = "INSERT INTO atendimento_medico VALUES"
+                    + "'" + tmpAtendimento.getIdAtendimento() + "',"
+                    + "'" + tmpAtendimento.getAtendimento() + "',"
+                    + "'" + tmpAtendimento.getConduta() + "',"
+                    + "'" + tmpAtendimento.getReceituarioId() + "',"
+                    + "'" + tmpAtendimento.getMedicoId() + "',"
+                    + "'" + tmpAtendimento.getPessoaId() + "') RETURNING id_atendimento_medico";
             System.out.println("sql: " + sql);
 
             ResultSet rs = st.executeQuery(sql);
             int id = 0;
             if (rs.next()) {
-                id = rs.getInt("id_pessoa");
+                id = rs.getInt("id_atendimento_medico");
             }
             return String.valueOf(id);
         } catch (Exception e) {
-            System.out.println("Erro salvar Pessoa = " + e);
+            System.out.println("Erro salvar atendimento = " + e);
             return e.toString();
         }
     }
