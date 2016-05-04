@@ -7,11 +7,9 @@ package daos;
 
 import apoio.ConexaoBD;
 import apoio.Uteis;
-import entidades.AgendaEnt;
 import entidades.Pessoa;
 import interfaces.IDAO;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -21,38 +19,13 @@ import javax.swing.table.TableColumn;
  *
  * @author Leandro
  */
-public class AgendaDAO implements IDAO {
+public class DoencaDAO implements IDAO{
 
     Uteis uteis = new Uteis();
-    PessoaDAO pessoaDAO = new PessoaDAO();
-
     
     @Override
     public String salvar(Object o) {
-        AgendaEnt agendaEnt = (AgendaEnt) o;
-        try {
-            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
-
-            String sql = "INSERT INTO agenda VALUES"
-                    + "(DEFAULT, "
-                    + "'" + agendaEnt.getDataAtendimento() + "',"
-                    + "'" + agendaEnt.getValor() + "',"
-                    + "'" + agendaEnt.getPessoaId() + "',"
-                    + "'" + agendaEnt.getMedicoId() + "',"
-                    + "'" + agendaEnt.isAtendido() + "') RETURNING id_atendimento";
-            System.out.println("sql: " + sql);
-
-            ResultSet rs = st.executeQuery(sql);
-            int id = 0;
-            if (rs.next()) {
-                id = rs.getInt("id_atendimento");
-            }
-            return String.valueOf(id);
-        } catch (Exception e) {
-            System.out.println("Erro salvar atendimento na agenda = " + e);
-            return e.toString();
-        }
-
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -77,78 +50,47 @@ public class AgendaDAO implements IDAO {
 
     @Override
     public Object consultarId(int id) {
-    try {
-            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
-
-            String sql = "SELECT * FROM agenda WHERE "
-                    + "id_atendimento  = " + id + "";
-
-            //  System.out.println("sql: " + sql);
-            ResultSet resultado = st.executeQuery(sql);
-
-            if (resultado.next()) {
-                AgendaEnt tmpAgendamento = new AgendaEnt();
-                tmpAgendamento.setIdAtendimento(resultado.getInt("id_atendimento"));
-                tmpAgendamento.setDataAtendimento(resultado.getDate("data_atendimento"));
-                tmpAgendamento.setPessoaId(resultado.getInt("pessoa_id"));
-                tmpAgendamento.setMedicoId(resultado.getInt("medico_id"));
-                tmpAgendamento.setValor(resultado.getString("valor"));
-                return tmpAgendamento;
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            System.out.println("Erro consultar agendamento = " + e);
-            return e.toString();
-        }    
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public void popularTabela(JTable tabela, String criterio, String campo) {
+    
+    public void popularTabela(JTable tabela) {
         // dados da tabela
         Object[][] dadosTabela = null;
 
         // cabecalho da tabela
-        Object[] cabecalho = new Object[5];
+        Object[] cabecalho = new Object[3];
         cabecalho[0] = "ID";
-        cabecalho[1] = "Hora";
-        cabecalho[2] = "Paciente";
-        cabecalho[3] = "Medico";
-        cabecalho[4] = "Valor";
+        cabecalho[1] = "Nome";
+        cabecalho[2] = "CID";
         ResultSet resultadoQ;
 
         // cria matriz de acordo com nº de registros da tabela
         try {
-            String sql = "SELECT count(*) FROM agenda WHERE " + campo + " BETWEEN '" + criterio + " 00:00:00' AND '" + criterio + " 23:59:59';";
+            String sql = "SELECT count(*) FROM doenca;";
             System.out.println("sql1" + sql);
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql);
 
             resultadoQ.next();
 
-            dadosTabela = new Object[resultadoQ.getInt(1)][5];
+            dadosTabela = new Object[resultadoQ.getInt(1)][3];
 
         } catch (Exception e) {
-            System.out.println("Erro ao consultar agenda: " + e);
+            System.out.println("Erro ao consultar doenca: " + e);
         }
 
         int lin = 0;
 
         // efetua consulta na tabela
         try {
-            String sql1 = "SELECT * FROM agenda WHERE " + campo + " BETWEEN '" + criterio + " 00:00:00' AND '" + criterio + " 23:59:59' ORDER BY 2;";
+            String sql1 = "SELECT * FROM doenca;";
             System.out.println("sql1" + sql1);
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql1);
 
             while (resultadoQ.next()) {
 
-                dadosTabela[lin][0] = resultadoQ.getInt("id_atendimento");
-                dadosTabela[lin][1] = uteis.FormatarHora(resultadoQ.getString("data_atendimento"));
-                Pessoa tmpPessoa = (Pessoa) pessoaDAO.consultarId(resultadoQ.getInt("pessoa_id"));
-                String tmpPessoaConca = tmpPessoa.getID()+"-"+tmpPessoa.getNome();
-                dadosTabela[lin][2] = tmpPessoaConca;
-                Pessoa tmpMedico = (Pessoa) pessoaDAO.consultarId(resultadoQ.getInt("medico_id"));
-                String tmpMedicoConca = tmpMedico.getID()+"-"+tmpMedico.getNome();
-                dadosTabela[lin][3] = tmpMedicoConca;
-                dadosTabela[lin][4] = resultadoQ.getString("valor");
+                dadosTabela[lin][0] = resultadoQ.getInt("id_doenca");
+                dadosTabela[lin][1] = resultadoQ.getString("nome");
+                dadosTabela[lin][2] = resultadoQ.getString("cid");
 
                 // caso a coluna precise exibir uma imagem
 //                if (resultadoQ.getBoolean("Situacao")) {
@@ -225,5 +167,5 @@ public class AgendaDAO implements IDAO {
 //            }
 //        });
     }
-
+    
 }

@@ -5,17 +5,46 @@
  */
 package telas;
 
+import daos.AtendimentoDAO;
+import daos.DoencaDAO;
+import daos.PessoaDAO;
+import daos.ReceituarioDAO;
+import entidades.AgendaEnt;
+import entidades.Atendimento;
+import entidades.Pessoa;
+import entidades.Receituario;
+
 /**
  *
  * @author leandro
  */
 public class atender extends javax.swing.JInternalFrame {
+    
+    DoencaDAO doencaDAO = new DoencaDAO();
+    PessoaDAO pessoaDAO = new PessoaDAO();
+    AtendimentoDAO atendDAO = new AtendimentoDAO();
+    ReceituarioDAO receiDAO = new ReceituarioDAO();
+    Pessoa tmpPessoa;
+    Pessoa tmpMedico;
+    AgendaEnt agendamento;
 
     /**
      * Creates new form atender
      */
     public atender() {
         initComponents();
+        doencaDAO.popularTabela(tabelaDoenca);
+        
+    }
+    
+    public atender(AgendaEnt agendamento) {
+        initComponents();
+        doencaDAO.popularTabela(tabelaDoenca);
+        tmpPessoa = (Pessoa) pessoaDAO.consultarId(agendamento.getPessoaId());
+        tmpMedico = (Pessoa) pessoaDAO.consultarId(agendamento.getMedicoId());
+        tfdMedico.setText(tmpMedico.getNome());
+        tfdPaciente.setText(tmpPessoa.getNome());
+        this.agendamento = agendamento;
     }
 
     /**
@@ -36,7 +65,7 @@ public class atender extends javax.swing.JInternalFrame {
         FichaPaciente = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblUltAtend = new javax.swing.JTable();
-        tfdNome = new javax.swing.JTextField();
+        tfdMedico = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         lblNome1 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -45,46 +74,38 @@ public class atender extends javax.swing.JInternalFrame {
         jLabel23 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
-        tfdNome1 = new javax.swing.JTextField();
+        tfdPaciente = new javax.swing.JTextField();
         Atendimento = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        tfdQueixas = new javax.swing.JTextArea();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        tfdConduta = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaDoenca = new javax.swing.JTable();
         Prescricao = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox();
+        cmbTipoMed = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        tfdNomeMed = new javax.swing.JTextField();
+        tfdPrincipioAtivo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        tfdViaAdm = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        tfdConcentracao = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
-        jLabel18 = new javax.swing.JLabel();
-        jSpinField1 = new com.toedter.components.JSpinField();
-        jLabel19 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        txtPosso = new javax.swing.JTextArea();
         jLabel20 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox();
         jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jSpinField2 = new com.toedter.components.JSpinField();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        tfdApresent = new javax.swing.JTextField();
+        tfdLaboratorio = new javax.swing.JTextField();
         Exames = new javax.swing.JPanel();
         Encaminhamentos = new javax.swing.JPanel();
         Arquivos = new javax.swing.JPanel();
@@ -99,12 +120,22 @@ public class atender extends javax.swing.JInternalFrame {
         btnSalvar.setMaximumSize(new java.awt.Dimension(122, 50));
         btnSalvar.setMinimumSize(new java.awt.Dimension(122, 50));
         btnSalvar.setPreferredSize(new java.awt.Dimension(122, 50));
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair32.png"))); // NOI18N
-        btnSair.setText("Sair");
+        btnSair.setText("Fechar");
         btnSair.setMaximumSize(new java.awt.Dimension(122, 50));
         btnSair.setMinimumSize(new java.awt.Dimension(122, 50));
         btnSair.setPreferredSize(new java.awt.Dimension(122, 50));
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/imprimir32.png"))); // NOI18N
         btnImprimir.setText("Imprimir");
@@ -173,6 +204,8 @@ public class atender extends javax.swing.JInternalFrame {
         ));
         jScrollPane4.setViewportView(tblUltAtend);
 
+        tfdMedico.setEditable(false);
+
         lblNome.setText("Paciente");
 
         lblNome1.setText("Ultimos Atendimentos");
@@ -203,6 +236,8 @@ public class atender extends javax.swing.JInternalFrame {
         jTextArea4.setText("Atenção:\n* Não é possível editar um atendimento finalizado\n* É possível efetuar a \"correção de atendimento\"\n");
         jScrollPane8.setViewportView(jTextArea4);
 
+        tfdPaciente.setEditable(false);
+
         javax.swing.GroupLayout FichaPacienteLayout = new javax.swing.GroupLayout(FichaPaciente);
         FichaPaciente.setLayout(FichaPacienteLayout);
         FichaPacienteLayout.setHorizontalGroup(
@@ -212,109 +247,106 @@ public class atender extends javax.swing.JInternalFrame {
                 .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FichaPacienteLayout.createSequentialGroup()
                         .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNome)
-                            .addComponent(jLabel23))
-                        .addGap(18, 18, 18)
-                        .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfdNome1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                            .addComponent(tfdNome)))
-                    .addGroup(FichaPacienteLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNome2)
-                            .addComponent(lblNome1))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(709, Short.MAX_VALUE))
+                    .addGroup(FichaPacienteLayout.createSequentialGroup()
+                        .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(FichaPacienteLayout.createSequentialGroup()
+                                .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNome)
+                                    .addComponent(jLabel23))
+                                .addGap(18, 18, 18)
+                                .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfdPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                                    .addComponent(tfdMedico)))
+                            .addComponent(lblNome1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(189, 189, 189))))
         );
         FichaPacienteLayout.setVerticalGroup(
             FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FichaPacienteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FichaPacienteLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addGap(17, 17, 17)
                         .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel23)
-                            .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfdMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21)
                         .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfdNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNome))
-                        .addGap(18, 18, 18)
-                        .addComponent(lblNome1))
-                    .addComponent(jScrollPane8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(26, 26, 26)
+                        .addComponent(lblNome1)
+                        .addGap(3, 3, 3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FichaPacienteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblNome2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                .addGap(56, 56, 56))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         Ficha.addTab("Ficha Paciente", FichaPaciente);
 
         Atendimento.setBackground(java.awt.SystemColor.activeCaption);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        tfdQueixas.setColumns(20);
+        tfdQueixas.setRows(5);
+        jScrollPane1.setViewportView(tfdQueixas);
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel1.setText("Queixas - Motivo do Atendimento");
 
-        jLabel2.setText("CID-10");
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/procurar16.png"))); // NOI18N
-        jButton1.setToolTipText("");
+        jLabel2.setText("Doença Presumida");
 
         jLabel3.setText("Conduta");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        tfdConduta.setColumns(20);
+        tfdConduta.setRows(5);
+        jScrollPane2.setViewportView(tfdConduta);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaDoenca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "CID-10", "CID - Descrição"
+                "ID", "Nome", "CID"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(jTable1);
+        tabelaDoenca.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tabelaDoenca);
 
         javax.swing.GroupLayout AtendimentoLayout = new javax.swing.GroupLayout(Atendimento);
         Atendimento.setLayout(AtendimentoLayout);
         AtendimentoLayout.setHorizontalGroup(
             AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AtendimentoLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(33, 33, 33)
                 .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AtendimentoLayout.createSequentialGroup()
-                        .addComponent(jTextField1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
                     .addGroup(AtendimentoLayout.createSequentialGroup()
                         .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -340,61 +372,57 @@ public class atender extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AtendimentoLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AtendimentoLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(AtendimentoLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         Ficha.addTab("Atendimento", Atendimento);
 
         Prescricao.setBackground(java.awt.SystemColor.activeCaption);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTipoMed.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Restrito" }));
+        cmbTipoMed.setSelectedItem(null);
 
         jLabel12.setText("Tipo do Medicamento");
 
-        jLabel13.setText("Nome do Medicamento");
+        jLabel13.setText("Nome do Medicamento*");
 
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        tfdNomeMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                tfdNomeMedActionPerformed(evt);
             }
         });
 
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        tfdPrincipioAtivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                tfdPrincipioAtivoActionPerformed(evt);
             }
         });
 
         jLabel14.setText("Laboratório");
 
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        tfdViaAdm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
+                tfdViaAdmActionPerformed(evt);
             }
         });
 
         jLabel15.setText("Principio Ativo");
 
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+        tfdConcentracao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
+                tfdConcentracaoActionPerformed(evt);
             }
         });
 
@@ -402,25 +430,13 @@ public class atender extends javax.swing.JInternalFrame {
 
         jLabel17.setText("Apresentação");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtPosso.setColumns(20);
+        txtPosso.setRows(5);
+        jScrollPane6.setViewportView(txtPosso);
 
-        jLabel18.setText("Quantidade");
-
-        jLabel19.setText("Possologias Pré-definidas");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane6.setViewportView(jTextArea3);
-
-        jLabel20.setText("Possologia/Orientações");
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel20.setText("Possologia/Orientações*");
 
         jLabel21.setText("Via de Administração");
-
-        jLabel22.setText("Receituário");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -436,125 +452,101 @@ public class atender extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Receituário", "Nome Medicamento", "P. Ativo", "Laboratório", "Apresentação", "Concentração"
+                "Nome Medicamento", "P. Ativo", "Laboratório", "Apresentação", "Concentração", "Possologia"
             }
         ));
         jScrollPane7.setViewportView(jTable2);
+
+        tfdApresent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdApresentActionPerformed(evt);
+            }
+        });
+
+        tfdLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdLaboratorioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PrescricaoLayout = new javax.swing.GroupLayout(Prescricao);
         Prescricao.setLayout(PrescricaoLayout);
         PrescricaoLayout.setHorizontalGroup(
             PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PrescricaoLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrescricaoLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PrescricaoLayout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PrescricaoLayout.createSequentialGroup()
-                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane7)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrescricaoLayout.createSequentialGroup()
+                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
                             .addGroup(PrescricaoLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel19))
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel12)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField10)
-                            .addComponent(jScrollPane6)
-                            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrescricaoLayout.createSequentialGroup()
                                 .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrescricaoLayout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(PrescricaoLayout.createSequentialGroup()
-                                                .addComponent(jLabel21)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE))
-                                            .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addComponent(jTextField11, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField13, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(18, 18, 18)
-                                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(PrescricaoLayout.createSequentialGroup()
-                                            .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(PrescricaoLayout.createSequentialGroup()
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel14)
-                                                        .addComponent(jLabel17)))
-                                                .addGroup(PrescricaoLayout.createSequentialGroup()
-                                                    .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel18)
-                                                        .addComponent(jSpinField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGap(18, 18, 18)
-                                                    .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel22)
-                                                        .addComponent(jSpinField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                            .addGap(12, 12, 12)))
-                                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(86, 86, 86))))
+                                    .addComponent(tfdPrincipioAtivo)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbTipoMed, 0, 202, Short.MAX_VALUE)
+                                    .addComponent(tfdNomeMed, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfdConcentracao))
+                                .addGap(40, 40, 40)
+                                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel21)
+                                    .addComponent(tfdLaboratorio, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jLabel14)
+                                    .addComponent(tfdViaAdm)
+                                    .addComponent(jLabel17)
+                                    .addComponent(tfdApresent))))
+                        .addGap(40, 40, 40)
+                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PrescricaoLayout.createSequentialGroup()
+                                .addComponent(jLabel20)
+                                .addGap(0, 367, Short.MAX_VALUE))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE))))
+                .addGap(108, 108, 108))
         );
         PrescricaoLayout.setVerticalGroup(
             PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PrescricaoLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PrescricaoLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbTipoMed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel13)
+                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrescricaoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel20)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PrescricaoLayout.createSequentialGroup()
+                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfdLaboratorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdNomeMed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel21))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfdPrincipioAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdViaAdm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(PrescricaoLayout.createSequentialGroup()
-                                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel14))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel17)
-                                    .addComponent(jLabel16))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PrescricaoLayout.createSequentialGroup()
-                                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel18)
-                                            .addComponent(jLabel21))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(PrescricaoLayout.createSequentialGroup()
-                                            .addComponent(jLabel22)
-                                            .addGap(26, 26, 26))
-                                        .addComponent(jSpinField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jSpinField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel19)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfdConcentracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdApresent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         Ficha.addTab("Prescrição", Prescricao);
@@ -567,7 +559,7 @@ public class atender extends javax.swing.JInternalFrame {
         );
         ExamesLayout.setVerticalGroup(
             ExamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
 
         Ficha.addTab("Exames", Exames);
@@ -580,7 +572,7 @@ public class atender extends javax.swing.JInternalFrame {
         );
         EncaminhamentosLayout.setVerticalGroup(
             EncaminhamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
 
         Ficha.addTab("Encaminhamentos", Encaminhamentos);
@@ -593,7 +585,7 @@ public class atender extends javax.swing.JInternalFrame {
         );
         ArquivosLayout.setVerticalGroup(
             ArquivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
 
         Ficha.addTab("Arquivos", Arquivos);
@@ -606,7 +598,7 @@ public class atender extends javax.swing.JInternalFrame {
         );
         ImpressoesLayout.setVerticalGroup(
             ImpressoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
 
         Ficha.addTab("Impressões", Impressoes);
@@ -634,21 +626,60 @@ public class atender extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
 
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+//        Atendimento atendimento = new Atendimento();
+//        atendimento.setIdAtendimento(agendamento.getIdAtendimento());
+//        atendimento.setAtendimento(tfdQueixas.getText());
+//        atendimento.setConduta(tfdConduta.getText());
+//        atendimento.setMedicoId(tmpMedico.getID());
+//        atendimento.setPessoaId(tmpPessoa.getID());
+//        atendimento.setDoencaId(tabelaDoenca.getSelectedRow());
+//        atendDAO.salvar(atendimento);
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
+        ///presc
+        Receituario receita = new Receituario();
+        receita.setTipoMedicamento((String) cmbTipoMed.getSelectedItem());
+        receita.setNome(tfdNomeMed.getText());
+        receita.setLaboratorio(tfdLaboratorio.getText());
+        receita.setPrincipioAtivo(tfdPrincipioAtivo.getText());
+        receita.setViaAdm(tfdViaAdm.getText());
+        receita.setConcentracao(tfdConcentracao.getText());
+        receita.setApresentacao(tfdApresent.getText());
+        receita.setPossologia(txtPosso.getText());
+        receita.setAtendimentoMedId(agendamento.getIdAtendimento());
+        receiDAO.salvar(receita);
+        
+                                                
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void tfdLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdLaboratorioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_tfdLaboratorioActionPerformed
+
+    private void tfdApresentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdApresentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdApresentActionPerformed
+
+    private void tfdConcentracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdConcentracaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdConcentracaoActionPerformed
+
+    private void tfdViaAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdViaAdmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdViaAdmActionPerformed
+
+    private void tfdPrincipioAtivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdPrincipioAtivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdPrincipioAtivoActionPerformed
+
+    private void tfdNomeMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdNomeMedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdNomeMedActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -664,11 +695,7 @@ public class atender extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnProcurar;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JComboBox cmbTipoMed;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -676,12 +703,9 @@ public class atender extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
@@ -694,25 +718,24 @@ public class atender extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
-    private com.toedter.components.JSpinField jSpinField1;
-    private com.toedter.components.JSpinField jSpinField2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNome1;
     private javax.swing.JLabel lblNome2;
+    private javax.swing.JTable tabelaDoenca;
     private javax.swing.JTable tblUltAtend;
     private javax.swing.JTable tblUltAtend1;
-    private javax.swing.JTextField tfdNome;
-    private javax.swing.JTextField tfdNome1;
+    private javax.swing.JTextField tfdApresent;
+    private javax.swing.JTextField tfdConcentracao;
+    private javax.swing.JTextArea tfdConduta;
+    private javax.swing.JTextField tfdLaboratorio;
+    private javax.swing.JTextField tfdMedico;
+    private javax.swing.JTextField tfdNomeMed;
+    private javax.swing.JTextField tfdPaciente;
+    private javax.swing.JTextField tfdPrincipioAtivo;
+    private javax.swing.JTextArea tfdQueixas;
+    private javax.swing.JTextField tfdViaAdm;
+    private javax.swing.JTextArea txtPosso;
     // End of variables declaration//GEN-END:variables
 }

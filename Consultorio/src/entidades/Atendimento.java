@@ -14,9 +14,9 @@ public class Atendimento {
     private int idAtendimento;
     private String atendimento;
     private String conduta;
-    private int receituarioId;
     private int medicoId;
     private int pessoaId;
+    private int doencaId;
 
     /**
      * @return the idAtendimento
@@ -61,20 +61,6 @@ public class Atendimento {
     }
 
     /**
-     * @return the receituarioId
-     */
-    public int getReceituarioId() {
-        return receituarioId;
-    }
-
-    /**
-     * @param receituarioId the receituarioId to set
-     */
-    public void setReceituarioId(int receituarioId) {
-        this.receituarioId = receituarioId;
-    }
-
-    /**
      * @return the medicoId
      */
     public int getMedicoId() {
@@ -100,6 +86,20 @@ public class Atendimento {
      */
     public void setPessoaId(int pessoaId) {
         this.pessoaId = pessoaId;
+    }
+
+    /**
+     * @return the doencaId
+     */
+    public int getDoencaId() {
+        return doencaId;
+    }
+
+    /**
+     * @param doencaId the doencaId to set
+     */
+    public void setDoencaId(int doencaId) {
+        this.doencaId = doencaId;
     }
 
     

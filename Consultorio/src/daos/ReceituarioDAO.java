@@ -6,7 +6,7 @@
 package daos;
 
 import apoio.ConexaoBD;
-import entidades.Atendimento;
+import entidades.Receituario;
 import interfaces.IDAO;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -16,33 +16,39 @@ import java.util.ArrayList;
  *
  * @author Leandro
  */
-public class AtendimentoDAO implements IDAO{
+public class ReceituarioDAO implements IDAO{
 
     @Override
     public String salvar(Object o) {
-        Atendimento tmpAtendimento = (Atendimento) o;
+      
+         Receituario receita = (Receituario) o;
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "INSERT INTO atendimento_medico VALUES ("
-                    + "" + tmpAtendimento.getIdAtendimento() + ","
-                    + "'" + tmpAtendimento.getAtendimento() + "',"
-                    + "'" + tmpAtendimento.getConduta() + "',"
-                    + "'" + tmpAtendimento.getMedicoId() + "',"
-                    + "'" + tmpAtendimento.getPessoaId() + "',"
-                    + "'" + tmpAtendimento.getDoencaId() + "') RETURNING id_atendimento_medico";
+            String sql = "INSERT INTO receituario VALUES"
+                    + "(DEFAULT, "
+                    + "'" + receita.getTipoMedicamento() + "',"
+                    + "'" + receita.getNome() + "',"
+                    + "'" + receita.getPrincipioAtivo() + "',"
+                    + "'" + receita.getLaboratorio() + "',"
+                    + "'" + receita.getConcentracao() + "',"
+                    + "'" + receita.getApresentacao()+ "',"
+                    + "'" + receita.getViaAdm() + "',"
+                    + "'" + receita.getPossologia() + "',"
+                    + "'" + receita.getAtendimentoMedId()+ "') RETURNING id_receituario";
             System.out.println("sql: " + sql);
 
             ResultSet rs = st.executeQuery(sql);
             int id = 0;
             if (rs.next()) {
-                id = rs.getInt("id_atendimento_medico");
+                id = rs.getInt("id_receituario");
             }
             return String.valueOf(id);
         } catch (Exception e) {
-            System.out.println("Erro salvar atendimento = " + e);
+            System.out.println("Erro salvar receituario = " + e);
             return e.toString();
         }
+
     }
 
     @Override

@@ -10,9 +10,9 @@ CREATE TABLE atendimento_medico (
     id_atendimento_medico integer NOT NULL, 
     atendimento varchar(700)  NOT NULL,
 	conduta varchar(700)  NOT NULL,
-	receituario_id integer  NOT NULL,
     medico_id integer  NOT NULL,
     pessoa_id integer  NOT NULL,
+	doenca_id integer NOT NULL,
     CONSTRAINT atendimento_medico_pk PRIMARY KEY (id_atendimento_medico)
 );
 
@@ -25,7 +25,7 @@ CREATE TABLE agenda (
 	pessoa_id integer NOT NULL,
 	medico_id integer NOT NULL,
 	atendido boolean NULL,
-	pago boolean NULL;
+	pago boolean NULL,
 	CONSTRAINT atendimento_pk PRIMARY KEY (id_atendimento)
 );
 
@@ -88,17 +88,6 @@ CREATE TABLE exames (
 
 
 
--- Table: medicamento
-CREATE TABLE medicamento (
-    id_medicamento serial  NOT NULL,
-    nome_popular varchar(70)  NOT NULL,
-    principio_ativo varchar(100)  NOT NULL,
-    nome_fantasia varchar(100)  NOT NULL,
-    dosagem varchar(45)  NOT NULL,
-    restrito boolean  NOT NULL,
-    CONSTRAINT medicamento_pk PRIMARY KEY (id_medicamento)
-);
-
 
 -- Table: medico
 CREATE TABLE medico (
@@ -130,10 +119,15 @@ CREATE TABLE pessoa (
 -- Table: receituario
 CREATE TABLE receituario (
     id_receituario serial  NOT NULL,
-    posologia varchar(200)  NOT NULL,
-    medicamentos_id integer  NOT NULL,
-    atendimento_medico_id_atendimento_medico integer  NOT NULL,
-    atendimento_medico_id_medicos integer  NOT NULL,
+	tipo_medicamento varchar(100) NULL,
+	nome_medicamento varchar(200) NOT NULL,
+	principio_ativo varchar(100) NULL,
+	laboratorio varchar(100) NULL,
+	concetracao varchar(100) NULL,
+	apresentacao varchar(100) NULL,
+	via_adm varchar(100) NULL,
+	posologia varchar(200) NOT NULL,
+    atendimento_medico_id integer  NOT NULL,
     CONSTRAINT receituario_pk PRIMARY KEY (id_receituario)
 );
 
@@ -143,8 +137,6 @@ CREATE TABLE receituario (
 -- foreign keys
 
 -- Reference:  fk_atendimento_medico1 (table: atendimento_medico)
-
-
 ALTER TABLE atendimento_medico ADD CONSTRAINT fk_atendimento_medico1 
     FOREIGN KEY (medico_id)
     REFERENCES medico (id_medico)
@@ -153,8 +145,6 @@ ALTER TABLE atendimento_medico ADD CONSTRAINT fk_atendimento_medico1
 ;
 
 -- Reference:  fk_atendimento_paciente1 (table: atendimento_medico)
-
-
 ALTER TABLE atendimento_medico ADD CONSTRAINT fk_atendimento_paciente1 
     FOREIGN KEY (pessoa_id)
     REFERENCES pessoa (id_pessoa)
@@ -164,8 +154,6 @@ ALTER TABLE atendimento_medico ADD CONSTRAINT fk_atendimento_paciente1
 
 
 -- Reference:  fk_cidade_estado (table: cidade)
-
-
 ALTER TABLE cidade ADD CONSTRAINT fk_cidade_estado 
     FOREIGN KEY (estado_id)
     REFERENCES estado (id_estado)
@@ -175,8 +163,6 @@ ALTER TABLE cidade ADD CONSTRAINT fk_cidade_estado
 
 
 -- Reference:  fk_endereco_cidade1 (table: endereco)
-
-
 ALTER TABLE endereco ADD CONSTRAINT fk_endereco_cidade1 
     FOREIGN KEY (cidade_ID)
     REFERENCES cidade (id_cidade)
@@ -185,8 +171,6 @@ ALTER TABLE endereco ADD CONSTRAINT fk_endereco_cidade1
 ;
 
 -- Reference:  fk_exames_atendimento_medico1 (table: exames)
-
-
 ALTER TABLE exames ADD CONSTRAINT fk_exames_atendimento_medico1 
     FOREIGN KEY (atendimento_medico_id_atendimento_medico)
     REFERENCES atendimento_medico (id_atendimento_medico)
@@ -195,8 +179,6 @@ ALTER TABLE exames ADD CONSTRAINT fk_exames_atendimento_medico1
 ;
 
 -- Reference:  fk_pessoa_endereco1 (table: pessoa)
-
-
 ALTER TABLE pessoa ADD CONSTRAINT fk_pessoa_endereco1 
     FOREIGN KEY (endereco_id)
     REFERENCES endereco (id_endereco)
@@ -205,8 +187,6 @@ ALTER TABLE pessoa ADD CONSTRAINT fk_pessoa_endereco1
 ;
 
 -- Reference:  fk_profissional_pessoa1 (table: medico)
-
-
 ALTER TABLE medico ADD CONSTRAINT fk_medico_pessoa1 
     FOREIGN KEY (id_medico)
     REFERENCES pessoa (id_pessoa)
@@ -215,28 +195,15 @@ ALTER TABLE medico ADD CONSTRAINT fk_medico_pessoa1
 ;
 
 -- Reference:  fk_receituario_atendimento_medico1 (table: receituario)
-
-
 ALTER TABLE receituario ADD CONSTRAINT fk_receituario_atendimento_medico1 
-    FOREIGN KEY (atendimento_medico_id_atendimento_medico)
+    FOREIGN KEY (atendimento_medico_id)
     REFERENCES atendimento_medico (id_atendimento_medico)
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE 
 ;
 
--- Reference:  fk_receituario_comum_medicamentos1 (table: receituario)
-
-
-ALTER TABLE receituario ADD CONSTRAINT fk_receituario_comum_medicamentos1 
-    FOREIGN KEY (medicamentos_id)
-    REFERENCES medicamento (id_medicamento)
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE 
-;
 
 -- Reference:  fk_agenda_pessoa_id_pessoa (table: agenda)
-
-
 ALTER TABLE agenda ADD CONSTRAINT fk_pessoa_id_pessoa_pessoa
     FOREIGN KEY (pessoa_id)
     REFERENCES pessoa (id_pessoa)
@@ -245,8 +212,6 @@ ALTER TABLE agenda ADD CONSTRAINT fk_pessoa_id_pessoa_pessoa
 ;
 
 -- Reference:  fk_agenda_medico_id (table: agenda)
-
-
 ALTER TABLE agenda ADD CONSTRAINT fk_agenda_medico_id 
     FOREIGN KEY (medico_id)
     REFERENCES medico (id_medico)
@@ -255,11 +220,17 @@ ALTER TABLE agenda ADD CONSTRAINT fk_agenda_medico_id
 ;
 
 -- Reference:  fk_atendimento_medico_id (table: atendimento_medico)
-
-
 ALTER TABLE atendimento_medico ADD CONSTRAINT fk_atendimento_medico_id 
     FOREIGN KEY (id_atendimento_medico)
     REFERENCES agenda (id_atendimento)
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE 
+;
+
+-- Reference:  fk_doenca_id (table: atendimento_medico)
+ALTER TABLE atendimento_medico ADD CONSTRAINT fk_doenca_id
+    FOREIGN KEY (doenca_id)
+    REFERENCES doenca (id_doenca)
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE 
 ;
@@ -315,10 +286,43 @@ INSERT INTO medico VALUES
 	('333333','3'),
 	('444444','9');
 
+INSERT INTO doenca VALUES 
+	(DEFAULT,'Doença1', 'D25251'),
+	(DEFAULT,'Doença2', 'D25252'),
+	(DEFAULT,'Doença3', 'D25253'),
+	(DEFAULT,'Doença4', 'D25254'),
+	(DEFAULT,'Doença5', 'D25255'),
+	(DEFAULT,'Doença6', 'D25256'),
+	(DEFAULT,'Doença7', 'D25257'),
+	(DEFAULT,'Doença8', 'D25258'),
+	(DEFAULT,'Doença9', 'D25259');
 
-
-
-
-
+INSERT INTO agenda VALUES
+	(DEFAULT, 'Thu May 04 03:04:00 BRT 2016','226','4','1','false'),
+	(DEFAULT, 'Thu May 04 07:04:00 BRT 2016','255','5','3','false'),
+	(DEFAULT, 'Thu May 04 15:04:00 BRT 2016','281','6','9','false'),
+	(DEFAULT, 'Thu May 05 05:04:00 BRT 2016','221','8','1','false'),
+	(DEFAULT, 'Thu May 05 19:04:00 BRT 2016','121','4','3','false'),
+	(DEFAULT, 'Thu May 05 21:04:00 BRT 2016','521','5','9','false'),
+	(DEFAULT, 'Thu May 06 04:04:00 BRT 2016','321','6','1','false'),
+	(DEFAULT, 'Thu May 06 09:04:00 BRT 2016','721','8','3','false'),	
+	(DEFAULT, 'Thu May 06 12:04:00 BRT 2016','321','4','9','false');	
+	
+	
+INSERT INTO receituario VALUES 	
+	(DEFAULT, 'Normal','Medicamento1','prin1','Lab1','conc1','aprese1','via1','poss1','1'),
+	(DEFAULT, 'Normal','Medicamento1','prin1','Lab1','conc1','aprese1','via1','poss1','1'),
+	(DEFAULT, 'Normal','Medicamento1','prin1','Lab1','conc1','aprese1','via1','poss1','1'),
+	(DEFAULT, 'Normal','Medicamento2','prin2','Lab2','conc2','aprese2','via2','poss2','2'),
+	(DEFAULT, 'Normal','Medicamento2','prin2','Lab2','conc2','aprese2','via2','poss2','2'),
+	(DEFAULT, 'Normal','Medicamento3','prin3','Lab3','conc3','aprese3','via3','poss3','3'),
+	(DEFAULT, 'Normal','Medicamento4','prin4','Lab4','conc4','aprese4','via4','poss4','4'),
+	(DEFAULT, 'Normal','Medicamento5','prin5','Lab5','conc5','aprese5','via5','poss5','5'),
+	(DEFAULT, 'Normal','Medicamento5','prin5','Lab5','conc5','aprese5','via5','poss5','5'),
+	(DEFAULT, 'Normal','Medicamento5','prin5','Lab5','conc5','aprese5','via5','poss5','5'),
+	(DEFAULT, 'Normal','Medicamento6','prin6','Lab6','conc6','aprese6','via6','poss6','6'),
+	(DEFAULT, 'Normal','Medicamento7','prin7','Lab7','conc7','aprese7','via7','poss7','7'),
+	(DEFAULT, 'Normal','Medicamento8','prin8','Lab8','conc8','aprese8','via8','poss8','8'),
+	(DEFAULT, 'Normal','Medicamento9','prin9','Lab9','conc9','aprese9','via9','poss9','9');
 -- End of file.
 

@@ -225,7 +225,8 @@ public class agenda extends javax.swing.JInternalFrame {
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         if (evt.getClickCount() == 2) {
             agendamentoSelecionado = (AgendaEnt) agendaDAO.consultarId((int) tabela.getValueAt(tabela.getSelectedRow(), 0));
-            atender atendimento = new atender();
+            
+            atender atendimento = new atender(agendamentoSelecionado);
             this.dispose();
             fundo.add(atendimento);
             atendimento.setVisible(true);
