@@ -9,6 +9,7 @@ import apoio.Uteis;
 import daos.AgendaDAO;
 import entidades.AgendaEnt;
 import entidades.Pessoa;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
@@ -56,7 +57,7 @@ public class agenda extends javax.swing.JInternalFrame {
         btnFechar = new javax.swing.JButton();
         btnProcurar = new javax.swing.JButton();
         calendario = new com.toedter.calendar.JCalendar();
-        jButton1 = new javax.swing.JButton();
+        btnPagar = new javax.swing.JButton();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -68,7 +69,7 @@ public class agenda extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "Hora", "Nome", "Medico", "Valor"
+                "ID", "Hora", "Nome", "Medico", "Valor", "Atendido", "Pago"
             }
         ));
         tabela.setToolTipText("");
@@ -82,7 +83,6 @@ public class agenda extends javax.swing.JInternalFrame {
             tabela.getColumnModel().getColumn(0).setPreferredWidth(1);
             tabela.getColumnModel().getColumn(1).setPreferredWidth(1);
             tabela.getColumnModel().getColumn(2).setPreferredWidth(5);
-            tabela.getColumnModel().getColumn(3).setResizable(false);
             tabela.getColumnModel().getColumn(3).setPreferredWidth(5);
             tabela.getColumnModel().getColumn(4).setPreferredWidth(4);
         }
@@ -161,10 +161,10 @@ public class agenda extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPagar.setText("Pagar");
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPagarActionPerformed(evt);
             }
         });
 
@@ -175,7 +175,7 @@ public class agenda extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(btnPagar)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -193,7 +193,7 @@ public class agenda extends javax.swing.JInternalFrame {
                     .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnPagar)
                 .addContainerGap(61, Short.MAX_VALUE))
         );
 
@@ -218,19 +218,23 @@ public class agenda extends javax.swing.JInternalFrame {
         agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
     }//GEN-LAST:event_calendarioPropertyChange
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+      agendaDAO.pagar((int) tabela.getValueAt(tabela.getSelectedRow(), 0), true);
+    }//GEN-LAST:event_btnPagarActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         if (evt.getClickCount() == 2) {
+            if(tabela.getValueAt(tabela.getSelectedRow(), 5).equals("Não")){
             agendamentoSelecionado = (AgendaEnt) agendaDAO.consultarId((int) tabela.getValueAt(tabela.getSelectedRow(), 0));
             
             atender atendimento = new atender(agendamentoSelecionado);
             this.dispose();
             fundo.add(atendimento);
             atendimento.setVisible(true);
-            System.out.println(agendamentoSelecionado.getValor());
+           
+        }else{
+                JOptionPane.showMessageDialog(this, "Atendimento já efetuado");
+            }
         }
     }//GEN-LAST:event_tabelaMouseClicked
 
@@ -273,9 +277,9 @@ public class agenda extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAgendar;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnProcurar;
     private com.toedter.calendar.JCalendar calendario;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;

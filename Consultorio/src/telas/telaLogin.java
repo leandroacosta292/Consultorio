@@ -10,19 +10,19 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author leandro
+ * @author Leandro
  */
-public class login extends javax.swing.JFrame {
+public class telaLogin extends javax.swing.JDialog {
 
     /**
-     * Creates new form login
+     * Creates new form telaLogin
      */
-    public login() {
-        initComponents();        
+    public telaLogin(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
     }
-    
     UsuarioDAO usuDAO = new UsuarioDAO();
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,18 +32,20 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblUsuario = new javax.swing.JLabel();
-        lblSenha = new javax.swing.JLabel();
-        tfdSenha = new javax.swing.JPasswordField();
         tfdUsuario = new javax.swing.JTextField();
         btnEntrar = new javax.swing.JButton();
         btnFechar1 = new javax.swing.JButton();
+        lblUsuario = new javax.swing.JLabel();
+        lblSenha = new javax.swing.JLabel();
+        tfdSenha = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        lblUsuario.setText("Usuário:");
-
-        lblSenha.setText("Senha:");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Login");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         btnEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar32.png"))); // NOI18N
         btnEntrar.setText("Entrar");
@@ -61,6 +63,15 @@ public class login extends javax.swing.JFrame {
         btnFechar1.setMaximumSize(new java.awt.Dimension(122, 50));
         btnFechar1.setMinimumSize(new java.awt.Dimension(122, 50));
         btnFechar1.setPreferredSize(new java.awt.Dimension(122, 50));
+        btnFechar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFechar1ActionPerformed(evt);
+            }
+        });
+
+        lblUsuario.setText("Usuário:");
+
+        lblSenha.setText("Senha:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,14 +90,14 @@ public class login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addComponent(btnFechar1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+                .addContainerGap(140, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsuario)
                     .addComponent(tfdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -105,13 +116,22 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if(usuDAO.login(tfdUsuario.getText(), tfdSenha.getText())){
-        this.dispose();
-        }else{
+        System.out.println(usuDAO.login(tfdUsuario.getText(), tfdSenha.getText()));
+        if (usuDAO.login(tfdUsuario.getText(), tfdSenha.getText())) {
+            this.dispose();
+        } else {
             JOptionPane.showMessageDialog(this, "Problemas ao logar");
         }
-        
+
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+    }//GEN-LAST:event_formWindowClosed
+
+    private void btnFechar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechar1ActionPerformed
+        System.exit(1);
+    }//GEN-LAST:event_btnFechar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,20 +150,27 @@ public class login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new login().setVisible(true);
+                telaLogin dialog = new telaLogin(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

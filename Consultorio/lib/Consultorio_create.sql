@@ -123,12 +123,20 @@ CREATE TABLE receituario (
 	nome_medicamento varchar(200) NOT NULL,
 	principio_ativo varchar(100) NULL,
 	laboratorio varchar(100) NULL,
-	concetracao varchar(100) NULL,
+	concentracao varchar(100) NULL,
 	apresentacao varchar(100) NULL,
 	via_adm varchar(100) NULL,
-	posologia varchar(200) NOT NULL,
+	possologia varchar(200) NOT NULL,
     atendimento_medico_id integer  NOT NULL,
     CONSTRAINT receituario_pk PRIMARY KEY (id_receituario)
+);
+
+-- Table: receituario
+CREATE TABLE usuario (
+    id_usuario serial NOT NULL,
+	login varchar(40) NULL,
+    senha varchar(40)  NOT NULL,
+    CONSTRAINT usuario_pk PRIMARY KEY (id_usuario)
 );
 
 
@@ -285,6 +293,9 @@ INSERT INTO medico VALUES
 	('222222','2'),
 	('333333','3'),
 	('444444','9');
+	
+INSERT INTO usuario VALUES
+	(DEFAULT, 'adm', 'adm');
 
 INSERT INTO doenca VALUES 
 	(DEFAULT,'Doença1', 'D25251'),
@@ -298,15 +309,15 @@ INSERT INTO doenca VALUES
 	(DEFAULT,'Doença9', 'D25259');
 
 INSERT INTO agenda VALUES
-	(DEFAULT, 'Thu May 04 03:04:00 BRT 2016','226','4','1','false'),
-	(DEFAULT, 'Thu May 04 07:04:00 BRT 2016','255','5','3','false'),
-	(DEFAULT, 'Thu May 04 15:04:00 BRT 2016','281','6','9','false'),
-	(DEFAULT, 'Thu May 05 05:04:00 BRT 2016','221','8','1','false'),
-	(DEFAULT, 'Thu May 05 19:04:00 BRT 2016','121','4','3','false'),
-	(DEFAULT, 'Thu May 05 21:04:00 BRT 2016','521','5','9','false'),
-	(DEFAULT, 'Thu May 06 04:04:00 BRT 2016','321','6','1','false'),
-	(DEFAULT, 'Thu May 06 09:04:00 BRT 2016','721','8','3','false'),	
-	(DEFAULT, 'Thu May 06 12:04:00 BRT 2016','321','4','9','false');	
+	(DEFAULT, 'Thu May 07 03:04:00 BRT 2016','226','4','1','false'),
+	(DEFAULT, 'Thu May 07 07:04:00 BRT 2016','255','5','3','false'),
+	(DEFAULT, 'Thu May 07 15:04:00 BRT 2016','281','6','9','false'),
+	(DEFAULT, 'Thu May 06 05:04:00 BRT 2016','221','8','1','false'),
+	(DEFAULT, 'Thu May 06 19:04:00 BRT 2016','121','4','3','false'),
+	(DEFAULT, 'Thu May 06 21:04:00 BRT 2016','521','5','9','false'),
+	(DEFAULT, 'Thu May 08 04:04:00 BRT 2016','321','6','1','false'),
+	(DEFAULT, 'Thu May 08 09:04:00 BRT 2016','721','8','3','false'),	
+	(DEFAULT, 'Thu May 08 12:04:00 BRT 2016','321','4','9','false');	
 	
 	
 INSERT INTO receituario VALUES 	

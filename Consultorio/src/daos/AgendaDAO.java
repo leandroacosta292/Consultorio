@@ -10,10 +10,16 @@ import apoio.Uteis;
 import entidades.AgendaEnt;
 import entidades.Pessoa;
 import interfaces.IDAO;
+import java.awt.Color;
+import java.awt.Component;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -26,7 +32,6 @@ public class AgendaDAO implements IDAO {
     Uteis uteis = new Uteis();
     PessoaDAO pessoaDAO = new PessoaDAO();
 
-    
     @Override
     public String salvar(Object o) {
         AgendaEnt agendaEnt = (AgendaEnt) o;
@@ -77,7 +82,7 @@ public class AgendaDAO implements IDAO {
 
     @Override
     public Object consultarId(int id) {
-    try {
+        try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
             String sql = "SELECT * FROM agenda WHERE "
@@ -100,7 +105,7 @@ public class AgendaDAO implements IDAO {
         } catch (Exception e) {
             System.out.println("Erro consultar agendamento = " + e);
             return e.toString();
-        }    
+        }
     }
 
     public void popularTabela(JTable tabela, String criterio, String campo) {
@@ -108,23 +113,25 @@ public class AgendaDAO implements IDAO {
         Object[][] dadosTabela = null;
 
         // cabecalho da tabela
-        Object[] cabecalho = new Object[5];
+        Object[] cabecalho = new Object[7];
         cabecalho[0] = "ID";
         cabecalho[1] = "Hora";
         cabecalho[2] = "Paciente";
         cabecalho[3] = "Medico";
         cabecalho[4] = "Valor";
+        cabecalho[5] = "Atendido";
+        cabecalho[6] = "Pago";
         ResultSet resultadoQ;
 
         // cria matriz de acordo com nº de registros da tabela
         try {
             String sql = "SELECT count(*) FROM agenda WHERE " + campo + " BETWEEN '" + criterio + " 00:00:00' AND '" + criterio + " 23:59:59';";
-            System.out.println("sql1" + sql);
+            // System.out.println("sql1" + sql);
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql);
 
             resultadoQ.next();
 
-            dadosTabela = new Object[resultadoQ.getInt(1)][5];
+            dadosTabela = new Object[resultadoQ.getInt(1)][7];
 
         } catch (Exception e) {
             System.out.println("Erro ao consultar agenda: " + e);
@@ -135,7 +142,7 @@ public class AgendaDAO implements IDAO {
         // efetua consulta na tabela
         try {
             String sql1 = "SELECT * FROM agenda WHERE " + campo + " BETWEEN '" + criterio + " 00:00:00' AND '" + criterio + " 23:59:59' ORDER BY 2;";
-            System.out.println("sql1" + sql1);
+            //System.out.println("sql1" + sql1);
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql1);
 
             while (resultadoQ.next()) {
@@ -143,12 +150,22 @@ public class AgendaDAO implements IDAO {
                 dadosTabela[lin][0] = resultadoQ.getInt("id_atendimento");
                 dadosTabela[lin][1] = uteis.FormatarHora(resultadoQ.getString("data_atendimento"));
                 Pessoa tmpPessoa = (Pessoa) pessoaDAO.consultarId(resultadoQ.getInt("pessoa_id"));
-                String tmpPessoaConca = tmpPessoa.getID()+"-"+tmpPessoa.getNome();
+                String tmpPessoaConca = tmpPessoa.getID() + "-" + tmpPessoa.getNome();
                 dadosTabela[lin][2] = tmpPessoaConca;
                 Pessoa tmpMedico = (Pessoa) pessoaDAO.consultarId(resultadoQ.getInt("medico_id"));
-                String tmpMedicoConca = tmpMedico.getID()+"-"+tmpMedico.getNome();
+                String tmpMedicoConca = tmpMedico.getID() + "-" + tmpMedico.getNome();
                 dadosTabela[lin][3] = tmpMedicoConca;
                 dadosTabela[lin][4] = resultadoQ.getString("valor");
+                if (resultadoQ.getBoolean("atendido")) {
+                    dadosTabela[lin][5] = "Sim";
+                } else {
+                    dadosTabela[lin][5] = "Não";
+                }
+                if (resultadoQ.getBoolean("pago")) {
+                    dadosTabela[lin][6] = "Sim";
+                } else {
+                    dadosTabela[lin][6] = "Não";
+                }
 
                 // caso a coluna precise exibir uma imagem
 //                if (resultadoQ.getBoolean("Situacao")) {
@@ -209,7 +226,7 @@ public class AgendaDAO implements IDAO {
             }
         }
         // renderizacao das linhas da tabela = mudar a cor
-//        jTable1.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+//        tabela.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 //
 //            @Override
 //            public Component getTableCellRendererComponent(JTable table, Object value,
@@ -224,6 +241,36 @@ public class AgendaDAO implements IDAO {
 //                return this;
 //            }
 //        });
+    }
+
+    public void atender(int id, boolean atendido) {
+
+        Statement st;
+        try {
+            st = ConexaoBD.getInstance().getConnection().createStatement();
+            String sql = "UPDATE agenda SET atendido = " + atendido + " WHERE id_atendimento = " + id;
+            System.out.println("sql: " + sql);
+            st.execute(sql);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AgendaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void pagar(int id, boolean pago) {
+
+        Statement st;
+        try {
+            st = ConexaoBD.getInstance().getConnection().createStatement();
+            String sql = "UPDATE agenda SET pago = " + pago + " WHERE id_atendimento = " + id;
+//  System.out.println("sql: " + sql);
+            st.execute(sql);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AgendaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }
