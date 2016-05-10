@@ -5,6 +5,16 @@
  */
 package telas;
 
+import apoio.ConexaoBD;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author Leandro
@@ -29,31 +39,36 @@ public class relatorios extends javax.swing.JInternalFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         lista = new javax.swing.JList<>();
-        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        fundo = new javax.swing.JPanel();
 
         setTitle("Relatórios");
 
         lista.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Lista Cidades", "Lista Estados" };
+            String[] strings = { "Lista Cidades", "Lista Estados", "Relatorio Pessoa" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        lista.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listaMouseClicked(evt);
-            }
-        });
         jScrollPane2.setViewportView(lista);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 543, Short.MAX_VALUE)
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        fundo.setBackground(new java.awt.Color(204, 255, 153));
+
+        javax.swing.GroupLayout fundoLayout = new javax.swing.GroupLayout(fundo);
+        fundo.setLayout(fundoLayout);
+        fundoLayout.setHorizontalGroup(
+            fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 365, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
+        fundoLayout.setVerticalGroup(
+            fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 245, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -62,39 +77,86 @@ public class relatorios extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(92, 92, 92)
+                .addComponent(fundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(223, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(fundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(145, 145, 145))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButton1)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaMouseClicked
-        if (evt.getClickCount() == 2) {
-            if (lista.getSelectedValue().equals("Lista Cidades")) {
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.out.println(lista.getSelectedValue());
+        if (lista.getSelectedValue().equalsIgnoreCase("Lista Cidades")) {
+            try {
+                // Compila o relatorio
+                JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("/relatorios/Lista Cidades.jrxml"));
 
-            }
-            if (lista.getSelectedValue().equals("Lista Estados")) {
+                // Mapeia campos de parametros para o relatorio, mesmo que nao existam
+                Map parametros = new HashMap();
 
+                // adiciona parametros
+                //parametros.put("codigoN", Integer.parseInt(tfdCodigoNivel.getText()));
+                // Executa relatoio
+                JasperPrint impressao = JasperFillManager.fillReport(relatorio, parametros, ConexaoBD.getInstance().getConnection());
+
+                // Exibe resultado em video
+                JasperViewer.viewReport(impressao, false);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + e);
             }
+        }
+        if (lista.getSelectedValue().equalsIgnoreCase("Lista Estados")) {
+            System.out.println("entrou");
+            try {
+                // Compila o relatorio
+                JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("/relatorios/Lista Estados.jrxml"));
+
+                // Mapeia campos de parametros para o relatorio, mesmo que nao existam
+                Map parametros = new HashMap();
+
+                // adiciona parametros
+                //parametros.put("codigoN", Integer.parseInt(tfdCodigoNivel.getText()));
+                // Executa relatoio
+                JasperPrint impressao = JasperFillManager.fillReport(relatorio, parametros, ConexaoBD.getInstance().getConnection());
+
+                // Exibe resultado em video
+                JasperViewer.viewReport(impressao, false);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + e);
+            }
+        }
+        if (lista.getSelectedValue().equalsIgnoreCase("Relatorio Pessoa")) {
+            System.out.println("pauu");
+            relPessoa relatPessoa = new relPessoa(null, true);
+            relatPessoa.setVisible(true);
 
         }
-    }//GEN-LAST:event_listaMouseClicked
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel fundo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> lista;
     // End of variables declaration//GEN-END:variables

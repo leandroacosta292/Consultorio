@@ -10,6 +10,9 @@
 	<field name="nome" class="java.lang.String"/>
 	<field name="cep" class="java.lang.String"/>
 	<field name="estado_id" class="java.lang.Integer"/>
+	<variable name="id_cidade_1" class="java.lang.Integer" resetType="Column" calculation="StandardDeviation">
+		<variableExpression><![CDATA[$F{id_cidade}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
