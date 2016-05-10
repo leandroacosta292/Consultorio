@@ -40,36 +40,22 @@ public class relatorios extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         lista = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
-        fundo = new javax.swing.JPanel();
 
         setTitle("Relatórios");
 
         lista.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Lista Cidades", "Lista Estados", "Relatorio Pessoa" };
+            String[] strings = { "Lista Cidades", "Lista Estados", "Relatorio Pessoa", "Atendimentos Data" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane2.setViewportView(lista);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Gerar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        fundo.setBackground(new java.awt.Color(204, 255, 153));
-
-        javax.swing.GroupLayout fundoLayout = new javax.swing.GroupLayout(fundo);
-        fundo.setLayout(fundoLayout);
-        fundoLayout.setHorizontalGroup(
-            fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
-        );
-        fundoLayout.setVerticalGroup(
-            fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 245, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,23 +66,16 @@ public class relatorios extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(92, 92, 92)
-                .addComponent(fundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(fundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(145, 145, 145))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(jButton1)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(291, Short.MAX_VALUE))
         );
 
         pack();
@@ -144,9 +123,13 @@ public class relatorios extends javax.swing.JInternalFrame {
             }
         }
         if (lista.getSelectedValue().equalsIgnoreCase("Relatorio Pessoa")) {
-            System.out.println("pauu");
             relPessoa relatPessoa = new relPessoa(null, true);
             relatPessoa.setVisible(true);
+
+        }
+        if (lista.getSelectedValue().equalsIgnoreCase("Atendimentos Data")) {
+            relAtendimentoData relatAtend = new relAtendimentoData(null, true);
+            relatAtend.setVisible(true);
 
         }
 
@@ -155,7 +138,6 @@ public class relatorios extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel fundo;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> lista;

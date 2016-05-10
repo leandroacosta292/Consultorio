@@ -309,15 +309,15 @@ INSERT INTO doenca VALUES
 	(DEFAULT,'Doença9', 'D25259');
 
 INSERT INTO agenda VALUES
-	(DEFAULT, 'Thu May 07 03:04:00 BRT 2016','226','4','1','false'),
-	(DEFAULT, 'Thu May 07 07:04:00 BRT 2016','255','5','3','false'),
-	(DEFAULT, 'Thu May 07 15:04:00 BRT 2016','281','6','9','false'),
-	(DEFAULT, 'Thu May 06 05:04:00 BRT 2016','221','8','1','false'),
-	(DEFAULT, 'Thu May 06 19:04:00 BRT 2016','121','4','3','false'),
-	(DEFAULT, 'Thu May 06 21:04:00 BRT 2016','521','5','9','false'),
-	(DEFAULT, 'Thu May 08 04:04:00 BRT 2016','321','6','1','false'),
-	(DEFAULT, 'Thu May 08 09:04:00 BRT 2016','721','8','3','false'),	
-	(DEFAULT, 'Thu May 08 12:04:00 BRT 2016','321','4','9','false');	
+	(DEFAULT, 'Thu May 10 03:04:00 BRT 2016','226','4','1','false'),
+	(DEFAULT, 'Thu May 10 07:04:00 BRT 2016','255','5','3','false'),
+	(DEFAULT, 'Thu May 10 15:04:00 BRT 2016','281','6','9','false'),
+	(DEFAULT, 'Thu May 10 05:04:00 BRT 2016','221','8','1','false'),
+	(DEFAULT, 'Thu May 10 19:04:00 BRT 2016','121','4','3','false'),
+	(DEFAULT, 'Thu May 10 21:04:00 BRT 2016','521','5','9','false'),
+	(DEFAULT, 'Thu May 10 04:04:00 BRT 2016','321','6','1','false'),
+	(DEFAULT, 'Thu May 10 09:04:00 BRT 2016','721','8','3','false'),	
+	(DEFAULT, 'Thu May 10 12:04:00 BRT 2016','321','4','9','false');	
 	
 	
 INSERT INTO receituario VALUES 	

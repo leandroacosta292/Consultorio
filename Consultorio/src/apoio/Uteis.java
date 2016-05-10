@@ -21,7 +21,7 @@ public class Uteis {
         calendario.add(Calendar.DATE, 1);
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
         //      System.out.println(calendario.getTime());
-// Output "Wed Sep 26 14:23:28 EST 2012"
+        // Output "Wed Sep 26 14:23:28 EST 2012"
 
         String formatted = format1.format(calendario.getTime());
         // System.out.println(formatted);
@@ -32,10 +32,21 @@ public class Uteis {
 
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
         //      System.out.println(calendario.getTime());
-// Output "Wed Sep 26 14:23:28 EST 2012"
+        // Output "Wed Sep 26 14:23:28 EST 2012"
 
         String formatted = format1.format(data);
-     //   System.out.println(formatted);
+        //   System.out.println(formatted);
+        return formatted;
+    }
+
+    public String FormatarDatayyyyMMddString(String data) {
+
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        //      System.out.println(calendario.getTime());
+        // Output "Wed Sep 26 14:23:28 EST 2012"
+
+        String formatted = format1.format(data);
+        //   System.out.println(formatted);
         return formatted;
     }
 
@@ -50,7 +61,7 @@ public class Uteis {
         dataHora = data.split(" ");
         String hora[] = new String[3];
         hora = dataHora[1].split(":");
-        return hora[0]+":"+hora[1];
+        return hora[0] + ":" + hora[1];
     }
 
 }

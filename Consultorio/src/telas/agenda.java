@@ -90,6 +90,7 @@ public class agenda extends javax.swing.JInternalFrame {
         jPanel1.setBackground(java.awt.SystemColor.activeCaption);
 
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/alterar32.png"))); // NOI18N
+        btnAlterar.setEnabled(false);
         btnAlterar.setLabel("Alterar");
         btnAlterar.setMaximumSize(new java.awt.Dimension(122, 50));
         btnAlterar.setMinimumSize(new java.awt.Dimension(122, 50));
@@ -119,6 +120,7 @@ public class agenda extends javax.swing.JInternalFrame {
 
         btnProcurar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/procurarPessoa32.png"))); // NOI18N
         btnProcurar.setText("Procurar");
+        btnProcurar.setEnabled(false);
         btnProcurar.setMaximumSize(new java.awt.Dimension(122, 50));
         btnProcurar.setMinimumSize(new java.awt.Dimension(122, 50));
         btnProcurar.setPreferredSize(new java.awt.Dimension(122, 50));

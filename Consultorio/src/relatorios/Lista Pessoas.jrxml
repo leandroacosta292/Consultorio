@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Lista Pessoas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d2c2e2f2-5268-46b3-892b-d587f04be67a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PARAMETRO_WHERE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{PARAMETRO_WHERE}]]>
+	</queryString>
+	<field name="id_pessoa" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="data_nasc" class="java.sql.Date"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="rg" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="sus" class="java.lang.String"/>
+	<field name="nome_mae" class="java.lang.String"/>
+	<field name="fone" class="java.lang.String"/>
+	<field name="fone2" class="java.lang.String"/>
+	<field name="endereco_id" class="java.lang.Integer"/>
+	<field name="ativo" class="java.lang.Boolean"/>
+	<field name="medico" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="27" width="555" height="52" uuid="20669c38-b9f2-40d5-a65a-052717a06d87"/>
+				<textElement textAlignment="Center">
+					<font size="28"/>
+				</textElement>
+				<text><![CDATA[Lista Pessoas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="120" y="2" width="100" height="20" uuid="8e441a25-fe1c-4b80-a931-0bffdce5f1a9"/>
+				<text><![CDATA[nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="0" width="100" height="20" uuid="eacc29f9-b5a6-4526-8a4c-02e3fd503693"/>
+				<text><![CDATA[cpf]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="2" width="39" height="20" uuid="abf06780-9ddc-40a0-8f8a-26399cc4fc43"/>
+				<text><![CDATA[medico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="adb08085-aa03-4845-b5cf-d71b6116437e"/>
+				<text><![CDATA[id_pessoa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="469" y="0" width="55" height="20" uuid="604c0bde-2c2a-439b-92bb-b90e177b5aab"/>
+				<text><![CDATA[ativo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="120" y="0" width="130" height="20" uuid="7b032b88-cd2e-4ebb-8833-4e70dea3db5d"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="266" y="0" width="100" height="20" uuid="953698ba-72c7-43ed-9037-d90653c1c8ca"/>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="0" width="39" height="20" uuid="2bcbea91-49a7-43d5-8166-c5a3b0e51ab7"/>
+				<textFieldExpression><![CDATA[$F{medico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="79029aeb-0040-4c67-8cb5-dfed8725398e"/>
+				<textFieldExpression><![CDATA[$F{id_pessoa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="469" y="0" width="55" height="20" uuid="c9e9468a-ab0b-4e34-89a8-f1d3b22568b2"/>
+				<textFieldExpression><![CDATA[$F{ativo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
