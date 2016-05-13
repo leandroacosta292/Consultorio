@@ -12,6 +12,7 @@ import entidades.Pessoa;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
 
 /**
  *
@@ -24,6 +25,7 @@ public class agenda extends javax.swing.JInternalFrame {
      */
     Uteis uteis = new Uteis();
     AgendaDAO agendaDAO = new AgendaDAO();
+    AgendaEnt tmpAgenda = new AgendaEnt();
     AgendaEnt agendamentoSelecionado = new AgendaEnt();
     JPanel fundo;
 
@@ -33,12 +35,14 @@ public class agenda extends javax.swing.JInternalFrame {
         agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
 
     }
-   public agenda(JPanel fundo) {
+
+    public agenda(JPanel fundo) {
         initComponents();
         //System.out.println(uteis.FormatarDatayyyyMMdd(calendario.getCalendar()));
         agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
         this.fundo = fundo;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,6 +99,11 @@ public class agenda extends javax.swing.JInternalFrame {
         btnAlterar.setMaximumSize(new java.awt.Dimension(122, 50));
         btnAlterar.setMinimumSize(new java.awt.Dimension(122, 50));
         btnAlterar.setPreferredSize(new java.awt.Dimension(122, 50));
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnAgendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/novaFicha32.png"))); // NOI18N
         btnAgendar.setText("Agendar");
@@ -221,24 +230,32 @@ public class agenda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_calendarioPropertyChange
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-      agendaDAO.pagar((int) tabela.getValueAt(tabela.getSelectedRow(), 0), true);
+        agendaDAO.pagar((int) tabela.getValueAt(tabela.getSelectedRow(), 0), true);
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        if (evt.getClickCount() == 1) {
+            tmpAgenda = (AgendaEnt) agendaDAO.consultarId((int) tabela.getValueAt(tabela.getSelectedRow(), 0));
+            btnAlterar.setEnabled(true);
+        }    
         if (evt.getClickCount() == 2) {
-            if(tabela.getValueAt(tabela.getSelectedRow(), 5).equals("Não")){
-            agendamentoSelecionado = (AgendaEnt) agendaDAO.consultarId((int) tabela.getValueAt(tabela.getSelectedRow(), 0));
-            
-            atender atendimento = new atender(agendamentoSelecionado);
-            this.dispose();
-            fundo.add(atendimento);
-            atendimento.setVisible(true);
-           
-        }else{
+            if (tabela.getValueAt(tabela.getSelectedRow(), 5).equals("Não")) {
+                agendamentoSelecionado = (AgendaEnt) agendaDAO.consultarId((int) tabela.getValueAt(tabela.getSelectedRow(), 0));
+                atender atendimento = new atender(agendamentoSelecionado);
+                this.dispose();
+                fundo.add(atendimento);
+                atendimento.setVisible(true);
+            } else {
                 JOptionPane.showMessageDialog(this, "Atendimento já efetuado");
             }
         }
     }//GEN-LAST:event_tabelaMouseClicked
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        agendar Agendar = new agendar(null, true, (AgendaEnt) agendaDAO.consultarId((int) tabela.getValueAt(tabela.getSelectedRow(), 0)));
+        Agendar.setVisible(true);        
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
 
     /**
      * @param args the command line arguments

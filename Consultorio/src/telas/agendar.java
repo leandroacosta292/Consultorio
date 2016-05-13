@@ -7,6 +7,7 @@ package telas;
 
 import apoio.Uteis;
 import daos.AgendaDAO;
+import daos.PessoaDAO;
 import entidades.AgendaEnt;
 import entidades.Medico;
 import entidades.Pessoa;
@@ -33,11 +34,32 @@ public class agendar extends javax.swing.JDialog {
     int idAtendimento = 0;
     AgendaDAO agendaDAO;
     String retorno;
+    PessoaDAO pessoaDAO;
+    boolean alterando;
 
     public agendar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         agendaDAO = new AgendaDAO();
+        alterando = false;
+    }
+
+    public agendar(java.awt.Frame parent, boolean modal, AgendaEnt tmpAgenda) {
+        super(parent, modal);
+        initComponents();
+        agendaDAO = new AgendaDAO();
+        pessoaDAO = new PessoaDAO();
+        tmpPessoa = (Pessoa) pessoaDAO.consultarId(tmpAgenda.getPessoaId());
+        tmpPessoaMedica = (Pessoa) pessoaDAO.consultarId(tmpAgenda.getMedicoId());
+        tfdPaciente.setText(tmpPessoa.getNome());
+        tfdMedico.setText(tmpPessoaMedica.getNome());
+        tfdValor.setText(tmpAgenda.getValor());
+        clData.setDate(tmpAgenda.getDataAtendimento());
+        String horaMin[] = new String[2];
+        horaMin = tmpAgenda.getHoraMin().split(":");
+        sfdHora.setValue(Integer.valueOf(horaMin[0]));
+        sfdMinutos.setValue(Integer.valueOf(horaMin[1]));
+        alterando = true;
     }
 
     /**
@@ -50,7 +72,6 @@ public class agendar extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnAlterar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -72,17 +93,6 @@ public class agendar extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(java.awt.SystemColor.activeCaption);
-
-        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/alterar32.png"))); // NOI18N
-        btnAlterar.setLabel("Alterar");
-        btnAlterar.setMaximumSize(new java.awt.Dimension(122, 50));
-        btnAlterar.setMinimumSize(new java.awt.Dimension(122, 50));
-        btnAlterar.setPreferredSize(new java.awt.Dimension(122, 50));
-        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarActionPerformed(evt);
-            }
-        });
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar32.png"))); // NOI18N
         btnSalvar.setText("Salvar");
@@ -112,22 +122,19 @@ public class agendar extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         jPanel3.setBorder(new javax.swing.border.MatteBorder(null));
@@ -155,6 +162,12 @@ public class agendar extends javax.swing.JDialog {
         jLabel2.setText(":");
 
         jLabel3.setText("min");
+
+        tfdMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdMedicoActionPerformed(evt);
+            }
+        });
 
         btnMedico.setText("Médico");
         btnMedico.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +258,7 @@ public class agendar extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -263,10 +276,10 @@ public class agendar extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -277,7 +290,7 @@ public class agendar extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicoActionPerformed
-        procuraPaciente procurar = new procuraPaciente(null, true,"true", "true");
+        procuraPaciente procurar = new procuraPaciente(null, true, "true", "true");
         tmpPessoaMedica = procurar.retornarPessoa();
         tfdMedico.setText(tmpPessoaMedica.getNome());
         procurar.dispose();
@@ -302,16 +315,16 @@ public class agendar extends javax.swing.JDialog {
             }
     }//GEN-LAST:event_btnSalvarActionPerformed
     }
-    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAlterarActionPerformed
-
     private void btnPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacienteActionPerformed
         procuraPaciente procurar = new procuraPaciente(null, true, "true", "false");
         tmpPessoa = procurar.retornarPessoa();
         tfdPaciente.setText(tmpPessoa.getNome());
         procurar.dispose();
     }//GEN-LAST:event_btnPacienteActionPerformed
+
+    private void tfdMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdMedicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdMedicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,7 +369,6 @@ public class agendar extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnMedico;
     private javax.swing.JButton btnPaciente;
     private javax.swing.JButton btnSair;

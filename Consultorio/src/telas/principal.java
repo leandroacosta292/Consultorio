@@ -31,9 +31,9 @@ public class principal extends javax.swing.JFrame {
         } catch (Exception e) {
             //JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        telaLogin login = new telaLogin(this, true);
-        login.setVisible(true);
-        login.setAlwaysOnTop(true);
+       // telaLogin login = new telaLogin(this, true);
+       // login.setVisible(true);
+       // login.setAlwaysOnTop(true);
     }
 
     /**

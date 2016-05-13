@@ -95,6 +95,7 @@ public class AgendaDAO implements IDAO {
                 AgendaEnt tmpAgendamento = new AgendaEnt();
                 tmpAgendamento.setIdAtendimento(resultado.getInt("id_atendimento"));
                 tmpAgendamento.setDataAtendimento(resultado.getDate("data_atendimento"));
+                tmpAgendamento.setHoraMin(uteis.FormatarHora(resultado.getString("data_atendimento")));
                 tmpAgendamento.setPessoaId(resultado.getInt("pessoa_id"));
                 tmpAgendamento.setMedicoId(resultado.getInt("medico_id"));
                 tmpAgendamento.setValor(resultado.getString("valor"));

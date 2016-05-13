@@ -19,6 +19,7 @@ public class AgendaEnt {
 	private int pessoaId;
 	private int medicoId;
         private boolean atendido;
+        private String HoraMin;
 
     /**
      * @return the idAtendimento
@@ -102,6 +103,20 @@ public class AgendaEnt {
      */
     public void setAtendido(boolean atendido) {
         this.atendido = atendido;
+    }
+
+    /**
+     * @return the HoraMin
+     */
+    public String getHoraMin() {
+        return HoraMin;
+    }
+
+    /**
+     * @param HoraMin the HoraMin to set
+     */
+    public void setHoraMin(String HoraMin) {
+        this.HoraMin = HoraMin;
     }
         
 }
