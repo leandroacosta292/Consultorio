@@ -241,7 +241,7 @@ public class agenda extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 2) {
             if (tabela.getValueAt(tabela.getSelectedRow(), 5).equals("Não")) {
                 agendamentoSelecionado = (AgendaEnt) agendaDAO.consultarId((int) tabela.getValueAt(tabela.getSelectedRow(), 0));
-                atender atendimento = new atender(agendamentoSelecionado);
+                atender atendimento = new atender(agendamentoSelecionado);                
                 this.dispose();
                 fundo.add(atendimento);
                 atendimento.setVisible(true);

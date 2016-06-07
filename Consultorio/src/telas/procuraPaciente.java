@@ -64,7 +64,6 @@ public class procuraPaciente extends javax.swing.JDialog {
         tfdCPF = new javax.swing.JTextField();
         lblCPF = new javax.swing.JLabel();
         tfdNome = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
 
@@ -86,7 +85,6 @@ public class procuraPaciente extends javax.swing.JDialog {
 
         btnProcurar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/procurar32.png"))); // NOI18N
         btnProcurar.setText("Procurar");
-        btnProcurar.setEnabled(false);
         btnProcurar.setMaximumSize(new java.awt.Dimension(122, 50));
         btnProcurar.setMinimumSize(new java.awt.Dimension(122, 50));
         btnProcurar.setPreferredSize(new java.awt.Dimension(122, 50));
@@ -121,7 +119,6 @@ public class procuraPaciente extends javax.swing.JDialog {
 
         lblNome.setText("Nome");
 
-        tfdCPF.setEnabled(false);
         tfdCPF.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tfdCPFMouseClicked(evt);
@@ -130,7 +127,6 @@ public class procuraPaciente extends javax.swing.JDialog {
 
         lblCPF.setText("CPF");
 
-        tfdNome.setEnabled(false);
         tfdNome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tfdNomeMouseClicked(evt);
@@ -171,8 +167,6 @@ public class procuraPaciente extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("*Clique para habilitar");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -181,16 +175,11 @@ public class procuraPaciente extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
@@ -246,68 +235,81 @@ public class procuraPaciente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void tfdCPFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfdCPFMouseClicked
-        tfdCPF.setEnabled(true);
-        tfdNome.setEnabled(false);
+       // tfdCPF.setEnabled(true);
+        //tfdNome.setEnabled(false);
         tfdNome.setText("");
-        btnProcurar.setEnabled(true);
+       // btnProcurar.setEnabled(true);
     }//GEN-LAST:event_tfdCPFMouseClicked
 
     private void tfdNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfdNomeMouseClicked
-        tfdCPF.setEnabled(false);
-        tfdNome.setEnabled(true);
+      //  tfdCPF.setEnabled(false);
+      //  tfdNome.setEnabled(true);
         tfdCPF.setText("");
-        btnProcurar.setEnabled(true);
+       // btnProcurar.setEnabled(true);
     }//GEN-LAST:event_tfdNomeMouseClicked
 
     private void btnProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarActionPerformed
         if (medico.equals("true")) {
             //medico ativo
             if (ativo.equals("true")) {
-                if (tfdCPF.isEnabled()) {
+                if (!tfdCPF.getText().equals("")) {
                     pessoaDAO.popularTabela(tabela, tfdCPF.getText(), "cpf", "AND MEDICO = 'true' AND ATIVO = 'true'");
                 }
-                if (tfdNome.isEnabled()) {
+                if (!tfdNome.getText().equals("")) {
                     pessoaDAO.popularTabela(tabela, tfdNome.getText(), "nome", "AND MEDICO = 'true' AND ATIVO = 'true'");
+                }else{
+                    System.out.println("2323");
+                    pessoaDAO.popularTabela(tabela, "MEDICO = 'true' AND ATIVO = 'true'");
                 }
                 //medico inativo
             }
             if (ativo.equals("false")) {
-                if (tfdCPF.isEnabled()) {
+                if (!tfdCPF.getText().equals("")) {
                     pessoaDAO.popularTabela(tabela, tfdCPF.getText(), "cpf", "AND MEDICO = 'true' AND ATIVO = 'false'");
                 }
-                if (tfdNome.isEnabled()) {
+                if (!tfdNome.getText().equals("")) {
                     pessoaDAO.popularTabela(tabela, tfdNome.getText(), "nome", "AND MEDICO = 'true' AND ATIVO = 'false'");
-                }
+                }else{
+                    System.out.println("232323");
+                    pessoaDAO.popularTabela(tabela, "MEDICO = 'true' AND ATIVO = 'false'");
+                }               
             }
 
         } else if (medico.equals("false")) {
-            System.out.println("2");
+          // System.out.println("2");
             if (ativo.equals("true")) {
-                if (tfdCPF.isEnabled()) {
+                if (!tfdCPF.getText().equals("")) {
                     pessoaDAO.popularTabela(tabela, tfdCPF.getText(), "cpf", "AND MEDICO = 'false' AND ATIVO = 'true'");
                 }
-                if (tfdNome.isEnabled()) {
+                if (!tfdNome.getText().equals("")) {
                     pessoaDAO.popularTabela(tabela, tfdNome.getText(), "nome", "AND MEDICO = 'false' AND ATIVO = 'true'");
+                }else{
+                    pessoaDAO.popularTabela(tabela, "MEDICO = 'false' AND ATIVO = 'true'");
                 }
                 //medico inativo
             }
             if (ativo.equals("false")) {
-                if (tfdCPF.isEnabled()) {
+                if (!tfdCPF.getText().equals("")) {
                     pessoaDAO.popularTabela(tabela, tfdCPF.getText(), "cpf", "AND MEDICO = 'false' AND ATIVO = 'false'");
                 }
-                if (tfdNome.isEnabled()) {
+                if (!tfdNome.getText().equals("")) {
                     pessoaDAO.popularTabela(tabela, tfdNome.getText(), "nome", "AND MEDICO = 'false' AND ATIVO = 'false'");
+                }else{
+                   pessoaDAO.popularTabela(tabela, "MEDICO = 'false' AND ATIVO = 'false'"); 
                 }
 
             }
         } else {
             System.out.println("3");
-            if (tfdCPF.isEnabled()) {
+            if (!tfdCPF.getText().equals("")) {
                 pessoaDAO.popularTabela(tabela, tfdCPF.getText(), "cpf");
             }
-            if (tfdNome.isEnabled()) {
+            if (!tfdNome.getText().equals("")) {
                 pessoaDAO.popularTabela(tabela, tfdNome.getText(), "nome");
+            }else{
+                pessoaDAO.popularTabela(tabela);
             }
+            
         }
     }//GEN-LAST:event_btnProcurarActionPerformed
 
@@ -376,7 +378,6 @@ public class procuraPaciente extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnProcurar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

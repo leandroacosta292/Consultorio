@@ -60,6 +60,7 @@ public class agendar extends javax.swing.JDialog {
         sfdHora.setValue(Integer.valueOf(horaMin[0]));
         sfdMinutos.setValue(Integer.valueOf(horaMin[1]));
         alterando = true;
+        idAtendimento = tmpAgenda.getIdAtendimento();
     }
 
     /**
@@ -297,7 +298,7 @@ public class agendar extends javax.swing.JDialog {
     }//GEN-LAST:event_btnMedicoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if (idAtendimento == 0) {
+        if (!alterando) {
             tmpAgenda = new AgendaEnt();
             tmpAgenda.setPessoaId(tmpPessoa.getID());
             tmpAgenda.setMedicoId(tmpPessoaMedica.getID());
@@ -313,8 +314,28 @@ public class agendar extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(null, retorno);
             }
+        } else {
+            tmpAgenda = new AgendaEnt();
+            tmpAgenda.setIdAtendimento(idAtendimento);
+            tmpAgenda.setPessoaId(tmpPessoa.getID());
+            tmpAgenda.setMedicoId(tmpPessoaMedica.getID());
+            tmpAgenda.setValor(tfdValor.getText());
+            Calendar calendario = clData.getCalendar();
+            calendario.set(HOUR, sfdHora.getValue());
+            calendario.set(MINUTE, sfdMinutos.getValue());
+            tmpAgenda.setDataAtendimento(calendario.getTime());
+            tmpAgenda.setAtendido(false);
+            tmpAgenda.setIdAtendimento(idAtendimento);
+            retorno = agendaDAO.atualizar(tmpAgenda);
+            if (retorno.length() < 6) {
+                JOptionPane.showMessageDialog(null, "Alterado");
+            } else {
+                JOptionPane.showMessageDialog(null, retorno);
+            }
+        }
+        this.dispose();
     }//GEN-LAST:event_btnSalvarActionPerformed
-    }
+
     private void btnPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacienteActionPerformed
         procuraPaciente procurar = new procuraPaciente(null, true, "true", "false");
         tmpPessoa = procurar.retornarPessoa();

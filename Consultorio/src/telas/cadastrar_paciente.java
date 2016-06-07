@@ -13,6 +13,8 @@ import apoio.Uteis;
 import daos.CombosDAO;
 import daos.EnderecoDao;
 import apoio.ComboItens;
+import apoio.Validacao;
+import apoio.Formatacao;
 import entidades.Endereco;
 import apoio.limpaCampos;
 import daos.CidadeDAO;
@@ -37,6 +39,7 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
     Pessoa tmpPessoa;
     Medico tmpMedico;
     MedicoDAO medDAO;
+    Validacao validar;
 
     /**
      * Creates new form cadastrar_pessoa
@@ -49,17 +52,24 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         endDAO = new EnderecoDao();
         cidDAO = new CidadeDAO();
         medDAO = new MedicoDAO();
+        validar = new Validacao();
         new CombosDAO().popularCombo("estado", cmbEstado);
         ligarCampos(false);
+        Formatacao.reformatarTelefone(tfdFone);
+        Formatacao.reformatarTelefone(tfdFone2);
+        Formatacao.reformatarCpf(tfdCpf);
+        Formatacao.reformatarCep(tfdCEP);
     }
 
     private void popular_tela(Pessoa tmpPessoa) throws ParseException {
 
         tfdCpf.setText(tmpPessoa.getCPF());
-        tfdFone1.setText(tmpPessoa.getFone());
+        tfdCEP.setText(tmpPessoa.getFone());
+        tfdFone.setText(tmpPessoa.getFone());
         tfdFone2.setText(tmpPessoa.getFone2());
         tfdNome.setText(tmpPessoa.getNome());
         tfdNomeMae.setText(tmpPessoa.getNomeMae());
+        tfdCpf.setText(tmpPessoa.getCPF());
         tfdRg.setText(tmpPessoa.getRg());
         tfdSus.setText(tmpPessoa.getSUS());
         jdateDataNasc.setDate(uteis.FormatarDatayyyyMMdd(tmpPessoa.getDataNasc()));
@@ -106,24 +116,24 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         lblRG = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         cmbSexo = new javax.swing.JComboBox();
-        tfdCpf = new javax.swing.JTextField();
         lblSexo = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
         lblDataNasc = new javax.swing.JLabel();
-        tfdRg = new javax.swing.JTextField();
         tfdNomeMae = new javax.swing.JTextField();
         tfdNome = new javax.swing.JTextField();
         jdateDataNasc = new com.toedter.calendar.JDateChooser();
         lblSus = new javax.swing.JLabel();
         tfdSus = new javax.swing.JTextField();
-        tfdFone2 = new javax.swing.JTextField();
         lblFone3 = new javax.swing.JLabel();
-        tfdFone1 = new javax.swing.JTextField();
         lblFone1 = new javax.swing.JLabel();
         chkMedico = new javax.swing.JCheckBox();
         chkAtivo = new javax.swing.JCheckBox();
         tfdCRM = new javax.swing.JTextField();
         lblCRM = new javax.swing.JLabel();
+        tfdFone2 = new javax.swing.JFormattedTextField();
+        tfdCpf = new javax.swing.JFormattedTextField();
+        tfdRg = new javax.swing.JFormattedTextField();
+        tfdFone = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
         tfdBairro = new javax.swing.JTextField();
         lblBairro = new javax.swing.JLabel();
@@ -131,7 +141,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         tfdCompl = new javax.swing.JTextField();
         cmbEstado = new javax.swing.JComboBox();
-        tfdCEP = new javax.swing.JTextField();
         tfdRua = new javax.swing.JTextField();
         lblRua = new javax.swing.JLabel();
         lblCEP = new javax.swing.JLabel();
@@ -139,9 +148,7 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         lblCidade = new javax.swing.JLabel();
         lblCompl = new javax.swing.JLabel();
         lblUF = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblUltAtend = new javax.swing.JTable();
-        lblUltAtend = new javax.swing.JLabel();
+        tfdCEP = new javax.swing.JFormattedTextField();
 
         setResizable(true);
         setTitle("Cadastrar Pessoa");
@@ -261,12 +268,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
 
         lblDataNasc.setText("Data Nasc*");
 
-        tfdRg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdRgActionPerformed(evt);
-            }
-        });
-
         tfdNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfdNomeActionPerformed(evt);
@@ -293,6 +294,30 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         lblCRM.setText("CRM");
         lblCRM.setEnabled(false);
 
+        tfdFone2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfdFone2FocusLost(evt);
+            }
+        });
+
+        tfdCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfdCpfFocusLost(evt);
+            }
+        });
+
+        tfdRg.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfdRgFocusLost(evt);
+            }
+        });
+
+        tfdFone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfdFoneFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -317,9 +342,9 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                                             .addComponent(lblRG))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(tfdRg, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(tfdSus, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jdateDataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)))
+                                            .addComponent(jdateDataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                            .addComponent(tfdRg, javax.swing.GroupLayout.Alignment.LEADING)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(lblNomeMae)
@@ -344,9 +369,9 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                                             .addComponent(lblFone3))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfdCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                            .addComponent(tfdFone1)
-                                            .addComponent(tfdFone2)))))
+                                            .addComponent(tfdFone2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                            .addComponent(tfdCpf)
+                                            .addComponent(tfdFone, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(chkMedico)
                                 .addGap(18, 18, 18)
@@ -369,22 +394,22 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                     .addComponent(jdateDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfdRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRG)
                     .addComponent(lblCPF)
-                    .addComponent(tfdCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfdSus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSus)
-                    .addComponent(tfdFone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFone1))
+                    .addComponent(lblFone1)
+                    .addComponent(tfdFone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNomeMae)
                     .addComponent(tfdNomeMae, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfdFone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFone3))
+                    .addComponent(lblFone3)
+                    .addComponent(tfdFone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCRM)
@@ -422,6 +447,12 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
 
         lblUF.setText("UF*");
 
+        tfdCEP.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfdCEPFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -441,9 +472,12 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfdRua)
-                                    .addComponent(tfdCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(27, 27, 27)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(tfdRua)
+                                        .addGap(27, 27, 27))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(tfdCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblBairro, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -499,22 +533,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        tblUltAtend.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Data", "Motivo", "Pago"
-            }
-        ));
-        jScrollPane1.setViewportView(tblUltAtend);
-
-        lblUltAtend.setText("Ultimos Atendimentos");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -522,36 +540,20 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(24, 24, 24))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(lblUltAtend)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGap(10, 10, 10)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblUltAtend)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -572,7 +574,7 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -628,7 +630,7 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                 tmpEndereco.setNumero(tfdNum.getText());
                 tmpEndereco.setComplemento(tfdCompl.getText());
                 tmpEndereco.setBairro(tfdBairro.getText());
-                tmpEndereco.setCEP(tfdCEP.getText());
+                tmpEndereco.setCEP(Formatacao.removerFormatacao(tfdCEP.getText()));
                 ComboItens cmbCid = (ComboItens) cmbCidade.getSelectedItem();
                 tmpEndereco.setCidade_Id(cmbCid.getCodigo());
                 String retorno = endDAO.salvar(tmpEndereco);
@@ -643,11 +645,11 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                 tmpPessoa1.setDataNasc(uteis.FormatarDatayyyyMMdd(jdateDataNasc.getCalendar()));
                 tmpPessoa1.setSexo((String) cmbSexo.getSelectedItem());
                 tmpPessoa1.setRg(tfdRg.getText());
-                tmpPessoa1.setCPF(tfdCpf.getText());
+                tmpPessoa1.setCPF(Formatacao.removerFormatacao(tfdCpf.getText()));
                 tmpPessoa1.setSUS(tfdSus.getText());
                 tmpPessoa1.setNomeMae(tfdNomeMae.getText());
-                tmpPessoa1.setFone(tfdFone1.getText());
-                tmpPessoa1.setFone2(tfdFone2.getText());
+                tmpPessoa1.setFone(Formatacao.removerFormatacao(tfdFone.getText()));
+                tmpPessoa1.setFone2(Formatacao.removerFormatacao(tfdFone2.getText()));
                 tmpPessoa1.setEnderecoId(IdEndereco);
                 tmpPessoa1.setAtivo(chkAtivo.isSelected());
                 tmpPessoa1.setMedico(chkMedico.isSelected());
@@ -689,7 +691,7 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                 tmpEndereco.setNumero(tfdNum.getText());
                 tmpEndereco.setComplemento(tfdCompl.getText());
                 tmpEndereco.setBairro(tfdBairro.getText());
-                tmpEndereco.setCEP(tfdCEP.getText());
+                tmpEndereco.setCEP(Formatacao.removerFormatacao(tfdCEP.getText()));
                 ComboItens cmbCid = (ComboItens) cmbCidade.getSelectedItem();
                 tmpEndereco.setCidade_Id(cmbCid.getCodigo());
                 String retorno = endDAO.atualizar(tmpEndereco);
@@ -698,19 +700,19 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
                 tmpPessoa1.setNome(tfdNome.getText());
                 tmpPessoa1.setDataNasc(uteis.FormatarDatayyyyMMdd(jdateDataNasc.getCalendar()));
                 tmpPessoa1.setSexo((String) cmbSexo.getSelectedItem());
-                tmpPessoa1.setRg(tfdRg.getText());
-                tmpPessoa1.setCPF(tfdCpf.getText());
+                tmpPessoa1.setRg(tfdCpf.getText());
+                tmpPessoa1.setCPF(Formatacao.removerFormatacao(tfdCpf.getText()));
                 tmpPessoa1.setSUS(tfdSus.getText());
                 tmpPessoa1.setNomeMae(tfdNomeMae.getText());
-                tmpPessoa1.setFone(tfdFone1.getText());
-                tmpPessoa1.setFone2(tfdFone2.getText());
+                tmpPessoa1.setFone(Formatacao.removerFormatacao(tfdFone.getText()));
+                tmpPessoa1.setFone2(Formatacao.removerFormatacao(tfdFone2.getText()));
                 tmpPessoa1.setAtivo(chkAtivo.isSelected());
                 tmpPessoa1.setMedico(chkMedico.isSelected());
                 tmpPessoa1.setEnderecoId(tmpEndereco.getId_endereco());
                 retorno = retorno + " " + pessoaDAO.atualizar(tmpPessoa1);
                 if (chkMedico.isSelected()) {
                     //verifica se já tem medico cadastrado à pessoa
-                   tmpMedico = (Medico) medDAO.consultarId(tmpPessoa1.getID());
+                    tmpMedico = (Medico) medDAO.consultarId(tmpPessoa1.getID());
                     if (tmpMedico == null) {
                         Medico tmpMedico1 = new Medico();
                         tmpMedico1.setCrm(tfdCRM.getText());
@@ -762,10 +764,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         btnSair.setText("Cancelar");
     }//GEN-LAST:event_btnNovoActionPerformed
 
-    private void tfdRgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdRgActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdRgActionPerformed
-
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         ligarCampos(true);
         btnAlterar.setEnabled(false);
@@ -803,6 +801,26 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_chkMedicoActionPerformed
 
+    private void tfdCEPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdCEPFocusLost
+
+    }//GEN-LAST:event_tfdCEPFocusLost
+
+    private void tfdCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdCpfFocusLost
+
+    }//GEN-LAST:event_tfdCpfFocusLost
+
+    private void tfdRgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdRgFocusLost
+
+    }//GEN-LAST:event_tfdRgFocusLost
+
+    private void tfdFone2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdFone2FocusLost
+
+    }//GEN-LAST:event_tfdFone2FocusLost
+
+    private void tfdFoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdFoneFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdFoneFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -820,7 +838,6 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser jdateDataNasc;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCEP;
@@ -838,19 +855,17 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSexo;
     private javax.swing.JLabel lblSus;
     private javax.swing.JLabel lblUF;
-    private javax.swing.JLabel lblUltAtend;
-    private javax.swing.JTable tblUltAtend;
     private javax.swing.JTextField tfdBairro;
-    private javax.swing.JTextField tfdCEP;
+    private javax.swing.JFormattedTextField tfdCEP;
     private javax.swing.JTextField tfdCRM;
     private javax.swing.JTextField tfdCompl;
-    private javax.swing.JTextField tfdCpf;
-    private javax.swing.JTextField tfdFone1;
-    private javax.swing.JTextField tfdFone2;
+    private javax.swing.JFormattedTextField tfdCpf;
+    private javax.swing.JFormattedTextField tfdFone;
+    private javax.swing.JFormattedTextField tfdFone2;
     private javax.swing.JTextField tfdNome;
     private javax.swing.JTextField tfdNomeMae;
     private javax.swing.JTextField tfdNum;
-    private javax.swing.JTextField tfdRg;
+    private javax.swing.JFormattedTextField tfdRg;
     private javax.swing.JTextField tfdRua;
     private javax.swing.JTextField tfdSus;
     // End of variables declaration//GEN-END:variables
@@ -866,11 +881,10 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         if (tfdCpf.getText().equals("")) {
             Erro = Erro + "CPF \n";
         }
-
         if (tfdNomeMae.getText().equals("")) {
             Erro = Erro + "Nome Mãe \n";
         }
-        if (tfdFone1.getText().equals("")) {
+        if (tfdCEP.getText().equals("")) {
             Erro = Erro + "Fone \n";
         }
         if (tfdRua.getText().equals("")) {
@@ -894,6 +908,10 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         if (cmbSexo.getSelectedIndex() == 0) {
             Erro = Erro + "Sexo \n";
         }
+        if (!Validacao.validarCPF(Formatacao.removerFormatacao(tfdCpf.getText()))) {
+            Erro = Erro + "CPF Inválido \n";
+        }
+
         return Erro;
     }
 
@@ -902,12 +920,14 @@ public class cadastrar_paciente extends javax.swing.JInternalFrame {
         tfdCEP.setEnabled(estado);
         tfdCompl.setEnabled(estado);
         tfdCpf.setEnabled(estado);
-        tfdFone1.setEnabled(estado);
+        tfdCEP.setEnabled(estado);
+        tfdRg.setEnabled(estado);
+        tfdFone.setEnabled(estado);
         tfdFone2.setEnabled(estado);
         tfdNome.setEnabled(estado);
         tfdNomeMae.setEnabled(estado);
         tfdNum.setEnabled(estado);
-        tfdRg.setEnabled(estado);
+        tfdCpf.setEnabled(estado);
         tfdRua.setEnabled(estado);
         tfdSus.setEnabled(estado);
         cmbCidade.setEnabled(estado);

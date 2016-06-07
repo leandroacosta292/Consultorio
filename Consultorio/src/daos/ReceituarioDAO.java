@@ -61,7 +61,20 @@ public class ReceituarioDAO implements IDAO {
 
     @Override
     public String excluir(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "DELETE FROM receituario WHERE id_receituario = " +id;
+                   
+            System.out.println("sql: " + sql);
+
+            st.executeQuery(sql);
+           
+            return "Ok";
+        } catch (Exception e) {
+            System.out.println("Erro salvar receituario = " + e);
+            return e.toString();
+        }
     }
 
     @Override

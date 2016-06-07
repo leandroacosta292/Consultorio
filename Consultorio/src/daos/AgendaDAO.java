@@ -62,7 +62,24 @@ public class AgendaDAO implements IDAO {
 
     @Override
     public String atualizar(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        AgendaEnt agendaEnt = (AgendaEnt) o;
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "UPDATE agenda SET "
+                    + "data_atendimento = '" + agendaEnt.getDataAtendimento() + "', "
+                    + "valor = '" + agendaEnt.getValor() + "', "
+                    + "pessoa_id = '" + agendaEnt.getPessoaId() + "', "
+                    + "medico_id = '" + agendaEnt.getMedicoId() + "', "
+                    + "atendido = '" + agendaEnt.isAtendido() + "' WHERE id_atendimento = " + agendaEnt.getIdAtendimento();
+            System.out.println("sql: " + sql);
+
+            st.executeUpdate(sql);;
+            return "";
+        } catch (Exception e) {
+            System.out.println("Erro Atualizar Pessoa = " + e);
+            return e.toString();
+        }
     }
 
     @Override
