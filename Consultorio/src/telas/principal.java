@@ -31,9 +31,9 @@ public class principal extends javax.swing.JFrame {
         } catch (Exception e) {
             //JOptionPane.showMessageDialog(null, e.getMessage());
         }
-       // telaLogin login = new telaLogin(this, true);
-       // login.setVisible(true);
-       // login.setAlwaysOnTop(true);
+        // telaLogin login = new telaLogin(this, true);
+        // login.setVisible(true);
+        // login.setAlwaysOnTop(true);
     }
 
     /**
@@ -45,7 +45,6 @@ public class principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
         cadastrarPaciente = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -57,9 +56,8 @@ public class principal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
+        Cadastrar = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clinica Feliz");
@@ -117,7 +115,7 @@ public class principal extends javax.swing.JFrame {
         );
         fundoLayout.setVerticalGroup(
             fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 636, Short.MAX_VALUE)
+            .addGap(0, 617, Short.MAX_VALUE)
         );
 
         jLabel1.setText("Cadastrar");
@@ -179,6 +177,18 @@ public class principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        Cadastrar.setText("Cadastrar");
+
+        jMenuItem1.setText("Doença");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Cadastrar.add(jMenuItem1);
+
+        jMenuBar1.add(Cadastrar);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -218,6 +228,12 @@ public class principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRelatoriosActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        cadastrar_doenca cadDoenca = new cadastrar_doenca();
+        fundo.add(cadDoenca);
+        cadDoenca.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -256,6 +272,7 @@ public class principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Cadastrar;
     private javax.swing.JButton btnAgenda;
     private javax.swing.JButton btnRelatorios;
     private javax.swing.JButton cadastrarPaciente;
@@ -266,7 +283,7 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

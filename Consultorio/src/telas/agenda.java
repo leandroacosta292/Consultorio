@@ -129,7 +129,6 @@ public class agenda extends javax.swing.JInternalFrame {
 
         btnProcurar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/procurarPessoa32.png"))); // NOI18N
         btnProcurar.setText("Procurar");
-        btnProcurar.setEnabled(false);
         btnProcurar.setMaximumSize(new java.awt.Dimension(122, 50));
         btnProcurar.setMinimumSize(new java.awt.Dimension(122, 50));
         btnProcurar.setPreferredSize(new java.awt.Dimension(122, 50));
@@ -221,7 +220,8 @@ public class agenda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarActionPerformed
-        // TODO add your handling code here:
+        procurarAgendamento procurar = new procurarAgendamento(null, true);
+        tmpAgenda = procurar.retornarAgenda();
     }//GEN-LAST:event_btnProcurarActionPerformed
 
     private void calendarioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_calendarioPropertyChange

@@ -63,5 +63,30 @@ public class Uteis {
         hora = dataHora[1].split(":");
         return hora[0] + ":" + hora[1];
     }
+    
+        public String FormatarData(String data) {
+        String dataHora[] = new String[2];
+        dataHora = data.split(" ");
+        return dataHora[0];
+    }
+
+    public String FormatarDataddMMyyyy(String data) {
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+        //      System.out.println(calendario.getTime());
+        // Output "Wed Sep 26 14:23:28 EST 2012"
+
+        String formatted = format1.format(data);
+        //   System.out.println(formatted);
+        return formatted;
+    }
+
+    public String FormatarDataddMMyyyy(Date data) {
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+        //      System.out.println(calendario.getTime());
+        // Output "Wed Sep 26 14:23:28 EST 2012"
+        String formatted = format1.format(data);
+        //   System.out.println(formatted);
+        return formatted;
+    }
 
 }
