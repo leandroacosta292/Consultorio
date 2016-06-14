@@ -12,9 +12,11 @@ import daos.PessoaDAO;
 import daos.ReceituarioDAO;
 import entidades.AgendaEnt;
 import entidades.Atendimento;
+import entidades.Doenca;
 import entidades.Pessoa;
 import entidades.Receituario;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -30,6 +32,7 @@ public class atender extends javax.swing.JInternalFrame {
     Pessoa tmpPessoa;
     Pessoa tmpMedico;
     AgendaEnt agendamento;
+    Doenca tmpDoenca = new Doenca();
 
     /**
      * Creates new form atender
@@ -37,7 +40,7 @@ public class atender extends javax.swing.JInternalFrame {
     public atender() {
         initComponents();
         doencaDAO.popularTabela(tabelaDoenca);
-
+        ativarPrescricao(false);
     }
 
     public atender(AgendaEnt agendamento) {
@@ -48,6 +51,7 @@ public class atender extends javax.swing.JInternalFrame {
         tfdMedico.setText(tmpMedico.getNome());
         tfdPaciente.setText(tmpPessoa.getNome());
         this.agendamento = agendamento;
+        ativarPrescricao(false);
     }
 
     private String testarPreenchAtendimento() {
@@ -83,7 +87,7 @@ public class atender extends javax.swing.JInternalFrame {
         tabelaDoenca.setEnabled(bloquear);
     }
 
-    private void limparPrescricao(){
+    private void limparPrescricao() {
         cmbTipoMed.setSelectedIndex(0);
         tfdNomeMed.setText("");
         tfdPrincipioAtivo.setText("");
@@ -93,7 +97,7 @@ public class atender extends javax.swing.JInternalFrame {
         tfdApresent.setText("");
         txtPosso.setText("");
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,16 +107,10 @@ public class atender extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
-        btnSalvar = new javax.swing.JButton();
-        btnSair = new javax.swing.JButton();
         Ficha = new javax.swing.JTabbedPane();
         FichaPaciente = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tblUltAtend = new javax.swing.JTable();
         tfdMedico = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
-        lblNome1 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         tfdPaciente = new javax.swing.JTextField();
         Atendimento = new javax.swing.JPanel();
@@ -126,6 +124,9 @@ public class atender extends javax.swing.JInternalFrame {
         tfdConduta = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabelaDoenca = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
         Prescricao = new javax.swing.JPanel();
         cmbTipoMed = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
@@ -148,53 +149,9 @@ public class atender extends javax.swing.JInternalFrame {
         tfdLaboratorio = new javax.swing.JTextField();
         btnInserir = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
+        btnSair1 = new javax.swing.JButton();
 
         setTitle("Atendimento");
-
-        jPanel3.setBackground(java.awt.SystemColor.activeCaption);
-
-        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar32.png"))); // NOI18N
-        btnSalvar.setText("Salvar");
-        btnSalvar.setMaximumSize(new java.awt.Dimension(122, 50));
-        btnSalvar.setMinimumSize(new java.awt.Dimension(122, 50));
-        btnSalvar.setPreferredSize(new java.awt.Dimension(122, 50));
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
-            }
-        });
-
-        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair32.png"))); // NOI18N
-        btnSair.setText("Fechar");
-        btnSair.setMaximumSize(new java.awt.Dimension(122, 50));
-        btnSair.setMinimumSize(new java.awt.Dimension(122, 50));
-        btnSair.setPreferredSize(new java.awt.Dimension(122, 50));
-        btnSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSairActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
 
         Ficha.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Ficha.setToolTipText("");
@@ -206,28 +163,9 @@ public class atender extends javax.swing.JInternalFrame {
 
         FichaPaciente.setBackground(java.awt.SystemColor.activeCaption);
 
-        tblUltAtend.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Data", "Motivo", "Pago"
-            }
-        ));
-        jScrollPane4.setViewportView(tblUltAtend);
-
         tfdMedico.setEditable(false);
 
         lblNome.setText("Paciente");
-
-        lblNome1.setText("Ultimos Atendimentos");
 
         jLabel23.setText("Médico");
 
@@ -240,17 +178,13 @@ public class atender extends javax.swing.JInternalFrame {
             .addGroup(FichaPacienteLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(FichaPacienteLayout.createSequentialGroup()
-                        .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNome)
-                            .addComponent(jLabel23))
-                        .addGap(18, 18, 18)
-                        .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfdPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                            .addComponent(tfdMedico)))
-                    .addComponent(lblNome1))
-                .addContainerGap(151, Short.MAX_VALUE))
+                    .addComponent(lblNome)
+                    .addComponent(jLabel23))
+                .addGap(18, 18, 18)
+                .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfdPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                    .addComponent(tfdMedico))
+                .addContainerGap(587, Short.MAX_VALUE))
         );
         FichaPacienteLayout.setVerticalGroup(
             FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,11 +197,7 @@ public class atender extends javax.swing.JInternalFrame {
                 .addGroup(FichaPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNome))
-                .addGap(26, 26, 26)
-                .addComponent(lblNome1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(380, Short.MAX_VALUE))
         );
 
         Ficha.addTab("Ficha Paciente", FichaPaciente);
@@ -314,57 +244,101 @@ public class atender extends javax.swing.JInternalFrame {
         tabelaDoenca.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tabelaDoenca);
 
+        jButton1.setText("Pesquisar Doença");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar32.png"))); // NOI18N
+        btnSalvar.setText("Salvar");
+        btnSalvar.setMaximumSize(new java.awt.Dimension(122, 50));
+        btnSalvar.setMinimumSize(new java.awt.Dimension(122, 50));
+        btnSalvar.setPreferredSize(new java.awt.Dimension(122, 50));
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair32.png"))); // NOI18N
+        btnSair.setText("Fechar");
+        btnSair.setMaximumSize(new java.awt.Dimension(122, 50));
+        btnSair.setMinimumSize(new java.awt.Dimension(122, 50));
+        btnSair.setPreferredSize(new java.awt.Dimension(122, 50));
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout AtendimentoLayout = new javax.swing.GroupLayout(Atendimento);
         Atendimento.setLayout(AtendimentoLayout);
         AtendimentoLayout.setHorizontalGroup(
             AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AtendimentoLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(25, 25, 25)
                 .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3)
                     .addGroup(AtendimentoLayout.createSequentialGroup()
                         .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addGroup(AtendimentoLayout.createSequentialGroup()
-                                .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel2)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton1))
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(AtendimentoLayout.createSequentialGroup()
-                                .addGap(18, 36, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addGap(239, 239, 239))
+                                .addGap(15, 15, 15)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(AtendimentoLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2)))))
-                .addGap(46, 46, 46))
+                                .addComponent(jLabel3))))
+                    .addGroup(AtendimentoLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
+                        .addGap(18, 18, 18)
+                        .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(24, 24, 24))
         );
         AtendimentoLayout.setVerticalGroup(
             AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AtendimentoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(AtendimentoLayout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))
+                        .addGroup(AtendimentoLayout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane1)))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(AtendimentoLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2))
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AtendimentoLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(9, 9, 9)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(AtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jButton1))
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         Ficha.addTab("Atendimento", Atendimento);
 
         Prescricao.setBackground(java.awt.SystemColor.activeCaption);
+        Prescricao.setEnabled(false);
 
         cmbTipoMed.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Restrito" }));
 
@@ -408,7 +382,7 @@ public class atender extends javax.swing.JInternalFrame {
         txtPosso.setRows(5);
         jScrollPane6.setViewportView(txtPosso);
 
-        jLabel20.setText("Possologia/Orientações*");
+        jLabel20.setText("Posologia/Orientações*");
 
         jLabel21.setText("Via de Administração");
 
@@ -457,43 +431,57 @@ public class atender extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSair1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair32.png"))); // NOI18N
+        btnSair1.setText("Fechar");
+        btnSair1.setMaximumSize(new java.awt.Dimension(122, 50));
+        btnSair1.setMinimumSize(new java.awt.Dimension(122, 50));
+        btnSair1.setPreferredSize(new java.awt.Dimension(122, 50));
+        btnSair1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSair1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PrescricaoLayout = new javax.swing.GroupLayout(Prescricao);
         Prescricao.setLayout(PrescricaoLayout);
         PrescricaoLayout.setHorizontalGroup(
             PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PrescricaoLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane7)
+                .addGap(25, 25, 25)
+                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PrescricaoLayout.createSequentialGroup()
                         .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PrescricaoLayout.createSequentialGroup()
-                                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(tfdPrincipioAtivo)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbTipoMed, 0, 202, Short.MAX_VALUE)
-                                    .addComponent(tfdNomeMed, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfdConcentracao))
-                                .addGap(30, 30, 30)
-                                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel21)
-                                    .addComponent(tfdLaboratorio)
-                                    .addComponent(jLabel14)
-                                    .addComponent(tfdViaAdm)
-                                    .addComponent(jLabel17)
-                                    .addComponent(tfdApresent, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(PrescricaoLayout.createSequentialGroup()
-                                        .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(tfdPrincipioAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cmbTipoMed, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfdNomeMed, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfdConcentracao, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel16))
+                        .addGap(30, 30, 30)
+                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel17)
+                            .addComponent(tfdApresent, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                            .addComponent(tfdViaAdm)
+                            .addComponent(tfdLaboratorio))
+                        .addGap(14, 14, 14)
+                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PrescricaoLayout.createSequentialGroup()
+                                .addComponent(jLabel20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane6)))
+                    .addGroup(PrescricaoLayout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel20))))
-                .addContainerGap(64, Short.MAX_VALUE))
+                            .addComponent(btnSair1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(25, 25, 25))
         );
         PrescricaoLayout.setVerticalGroup(
             PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -515,10 +503,7 @@ public class atender extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfdConcentracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnInserir)
-                            .addComponent(btnRemover)))
+                        .addComponent(tfdConcentracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PrescricaoLayout.createSequentialGroup()
                         .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
@@ -535,10 +520,17 @@ public class atender extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tfdApresent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(PrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(PrescricaoLayout.createSequentialGroup()
+                        .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addComponent(btnSair1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         Ficha.addTab("Prescrição", Prescricao);
@@ -547,28 +539,32 @@ public class atender extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addComponent(Ficha)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addComponent(Ficha)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        this.dispose();
+        if (tblMedicamento.getValueAt(0, 0) == null) {
+            int resposta;
+            resposta = JOptionPane.showConfirmDialog(null, "Deseja sair sem prescrever?");
+            if (resposta == JOptionPane.YES_OPTION) {
+                this.dispose();
+            }
+        }else{
+            this.dispose();
+        }
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -579,10 +575,14 @@ public class atender extends javax.swing.JInternalFrame {
             atendimento.setConduta(tfdConduta.getText());
             atendimento.setMedicoId(tmpMedico.getID());
             atendimento.setPessoaId(tmpPessoa.getID());
-            atendimento.setDoencaId(tabelaDoenca.getSelectedRow());
+            atendimento.setDoencaId(tabelaDoenca.getSelectedRow() + 1);
             atendDAO.salvar(atendimento);
             bloquearAtendimento(false);
             agenDAO.atender(agendamento.getIdAtendimento(), true);
+            ativarPrescricao(true);
+            jButton1.setEnabled(false);
+            btnSalvar.setEnabled(false);
+            Ficha.setSelectedIndex(2);
         } else {
             JOptionPane.showMessageDialog(this, testarPreenchAtendimento());
         }
@@ -631,7 +631,7 @@ public class atender extends javax.swing.JInternalFrame {
             receiDAO.salvar(receita);
             limparPrescricao();
             receiDAO.popularTabela(tblMedicamento, agendamento.getIdAtendimento());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, testarPreenchPrescricao());
         }
     }//GEN-LAST:event_btnInserirActionPerformed
@@ -639,9 +639,33 @@ public class atender extends javax.swing.JInternalFrame {
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         receiDAO.excluir((Integer) tblMedicamento.getValueAt(tblMedicamento.getSelectedRow(), 0));
         receiDAO.popularTabela(tblMedicamento, agendamento.getIdAtendimento());
-        
+
     }//GEN-LAST:event_btnRemoverActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        procurarDoenca procurar = new procurarDoenca(null, true);
+        tmpDoenca = procurar.retornarDoenca();
+        tabelaDoenca.setRowSelectionInterval(tmpDoenca.getId() - 1, tmpDoenca.getId() - 1);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSair1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSair1ActionPerformed
+
+    private void ativarPrescricao(boolean ativo) {
+        cmbTipoMed.setEnabled(ativo);
+        tfdNomeMed.setEnabled(ativo);
+        tfdPrincipioAtivo.setEnabled(ativo);
+        tfdConcentracao.setEnabled(ativo);
+        tfdLaboratorio.setEnabled(ativo);
+        tfdViaAdm.setEnabled(ativo);
+        tfdApresent.setEnabled(ativo);
+        txtPosso.setEnabled(ativo);
+        tblMedicamento.setEnabled(ativo);
+        btnInserir.setEnabled(ativo);
+        btnRemover.setEnabled(ativo);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Atendimento;
@@ -651,8 +675,10 @@ public class atender extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnSair1;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox cmbTipoMed;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -665,19 +691,15 @@ public class atender extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblNome1;
     private javax.swing.JTable tabelaDoenca;
     private javax.swing.JTable tblMedicamento;
-    private javax.swing.JTable tblUltAtend;
     private javax.swing.JTextField tfdApresent;
     private javax.swing.JTextField tfdConcentracao;
     private javax.swing.JTextArea tfdConduta;

@@ -41,6 +41,7 @@ public class relatorios extends javax.swing.JInternalFrame {
         lista = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
 
+        setClosable(true);
         setTitle("Relatórios");
 
         lista.setModel(new javax.swing.AbstractListModel<String>() {

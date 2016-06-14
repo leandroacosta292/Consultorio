@@ -48,9 +48,7 @@ public class procurarAgendamento extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
-        lblCPF = new javax.swing.JLabel();
         tfdPaciente = new javax.swing.JTextField();
-        tfdData = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -121,8 +119,6 @@ public class procurarAgendamento extends javax.swing.JDialog {
 
         lblNome.setText("Paciente");
 
-        lblCPF.setText("Data");
-
         tfdPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tfdPacienteMouseClicked(evt);
@@ -140,13 +136,9 @@ public class procurarAgendamento extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblNome)
-                    .addComponent(lblCPF))
+                .addComponent(lblNome)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfdData, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tfdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -156,10 +148,6 @@ public class procurarAgendamento extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
                     .addComponent(tfdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCPF)
-                    .addComponent(tfdData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -228,7 +216,7 @@ public class procurarAgendamento extends javax.swing.JDialog {
         //    DoenDAO.popularTabela(tabela, tfdCID.getText(), "cid");
        // }
         if (!tfdPaciente.getText().equals("")) {
-            agendaDAO.popularTabela(tabela, tfdPaciente.getText(), "nome");
+            agendaDAO.popularTabelaDiag(tabela, tfdPaciente.getText());
         } else {
             agendaDAO.popularTabelaDiag(tabela);
         }
@@ -294,10 +282,8 @@ public class procurarAgendamento extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblNome;
     private javax.swing.JTable tabela;
-    private com.toedter.calendar.JDateChooser tfdData;
     private javax.swing.JTextField tfdPaciente;
     // End of variables declaration//GEN-END:variables
 }

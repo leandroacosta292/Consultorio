@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Atendimento Data" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="36c6e4e8-0413-4ee9-9135-22a134f1a3c7">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.771561000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="31"/>
 	<parameter name="SQL1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -11,8 +11,8 @@
 	</queryString>
 	<field name="id_atendimento" class="java.lang.Integer"/>
 	<field name="data_atendimento" class="java.sql.Timestamp"/>
-	<field name="pessoa_id" class="java.lang.Integer"/>
-	<field name="medico_id" class="java.lang.Integer"/>
+	<field name="paciente" class="java.lang.String"/>
+	<field name="medico" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -33,40 +33,43 @@
 	<columnHeader>
 		<band height="34" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="138" height="20" uuid="18b649fa-6860-4348-9efb-410f844604ba"/>
-				<text><![CDATA[id_atendimento]]></text>
+				<reportElement x="30" y="2" width="100" height="20" uuid="3c1f26bd-7683-4a4b-89d5-7db3fa35d310"/>
+				<text><![CDATA[Id]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="138" y="0" width="138" height="20" uuid="b0613b74-a9b1-42fc-ac9a-d85058f214af"/>
-				<text><![CDATA[data_atendimento]]></text>
+				<reportElement x="165" y="2" width="100" height="20" uuid="2b94387e-728f-49bd-86ea-95d6c0527a7c"/>
+				<text><![CDATA[Data Atendimento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="276" y="0" width="138" height="20" uuid="ecadd707-89ee-4cf2-9c62-20252f4a9bf5"/>
-				<text><![CDATA[pessoa_id]]></text>
+				<reportElement x="318" y="2" width="100" height="20" uuid="7a50ddaf-03b5-4fcd-b0d6-0f85fc23c578"/>
+				<text><![CDATA[paciente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="414" y="0" width="138" height="20" uuid="58a17e61-13f5-4e9d-b8c2-a73d0cabbf65"/>
-				<text><![CDATA[medico_id]]></text>
+				<reportElement x="455" y="2" width="100" height="20" uuid="0d741f78-7762-4b7d-9c10-34fa627e354c"/>
+				<text><![CDATA[medico]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="22" width="555" height="1" uuid="ff5aea86-577e-45e3-b1f0-50ec4e9b6232"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="27" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="138" height="20" uuid="7f6645a9-ff54-4614-902d-99b0f432ff7b"/>
+				<reportElement x="30" y="0" width="100" height="20" uuid="c717cb88-fde3-495d-9c2e-1abb65ec4f38"/>
 				<textFieldExpression><![CDATA[$F{id_atendimento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="138" y="0" width="138" height="20" uuid="4da095ed-a213-4382-a9b5-825c26a5e0e0"/>
+				<reportElement x="165" y="0" width="100" height="20" uuid="f3f67708-22de-40a7-b432-867ad052f3d1"/>
 				<textFieldExpression><![CDATA[$F{data_atendimento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="276" y="0" width="138" height="20" uuid="1042ab8a-286f-41c6-b26f-9cac8100b702"/>
-				<textFieldExpression><![CDATA[$F{pessoa_id}]]></textFieldExpression>
+				<reportElement x="318" y="0" width="100" height="20" uuid="bab2e5fe-a7c0-4f6c-bcae-7790248ac4e8"/>
+				<textFieldExpression><![CDATA[$F{paciente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="414" y="0" width="138" height="20" uuid="c8c0f038-d684-46fa-8137-cdef94278620"/>
-				<textFieldExpression><![CDATA[$F{medico_id}]]></textFieldExpression>
+				<reportElement x="455" y="0" width="100" height="20" uuid="da621bbf-9cda-4980-a424-0b689b14e97a"/>
+				<textFieldExpression><![CDATA[$F{medico}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

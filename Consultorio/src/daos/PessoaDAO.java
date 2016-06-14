@@ -44,7 +44,7 @@ public class PessoaDAO implements IDAO {
                     + "'" + pessoa.getEnderecoId() + "',"
                     + "'" + pessoa.isAtivo() + "',"
                     + "'" + pessoa.isMedico() + "') RETURNING id_pessoa";
-            System.out.println("sql: " + sql);
+          // System.out.println("sql: " + sql);
 
             ResultSet rs = st.executeQuery(sql);
             int id = 0;
@@ -78,7 +78,7 @@ public class PessoaDAO implements IDAO {
                     + "endereco_id = '" + pessoa.getEnderecoId() + "', "
                     + "ativo = '" + pessoa.isAtivo() + "', "
                     + "medico = '" + pessoa.isMedico() + "' WHERE id_pessoa = " + pessoa.getID();
-            System.out.println("sql: " + sql);
+        //    System.out.println("sql: " + sql);
 
             st.executeUpdate(sql);;
             return "";
@@ -272,7 +272,7 @@ public class PessoaDAO implements IDAO {
         // cria matriz de acordo com nº de registros da tabela
         try {
             String sql = "SELECT count(*) FROM pessoa WHERE " + criterio;
-             System.out.println("sql1" + sql);
+       //      System.out.println("sql1" + sql);
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql);
 
             resultadoQ.next();
@@ -505,7 +505,7 @@ public class PessoaDAO implements IDAO {
         // cria matriz de acordo com nº de registros da tabela
         try {
             String sql = "SELECT count(*) FROM pessoa WHERE " + campo + " ILIKE '%" + criterio + "%'" + avancado;
-            System.out.println("sql1" + sql);
+      //      System.out.println("sql1" + sql);
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql);
 
             resultadoQ.next();

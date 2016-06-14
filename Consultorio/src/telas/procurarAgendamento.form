@@ -192,15 +192,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblNome" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCPF" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="lblNome" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tfdPaciente" min="-2" pref="338" max="-2" attributes="0"/>
-                          <Component id="tfdData" min="-2" pref="148" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="tfdPaciente" min="-2" pref="338" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -213,11 +207,6 @@
                           <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfdPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblCPF" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdData" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -229,18 +218,11 @@
                 <Property name="text" type="java.lang.String" value="Paciente"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblCPF">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Data"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="tfdPaciente">
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tfdPacienteMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdPacienteActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="tfdData">
             </Component>
           </SubComponents>
         </Container>

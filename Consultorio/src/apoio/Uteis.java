@@ -18,8 +18,8 @@ import java.util.Date;
 public class Uteis {
 
     public String FormatarDatayyyyMMdd(Calendar calendario) {
-        calendario.add(Calendar.DATE, 1);
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        //calendario.add(Calendar.DATE, 1);
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         //      System.out.println(calendario.getTime());
         // Output "Wed Sep 26 14:23:28 EST 2012"
 

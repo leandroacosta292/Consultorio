@@ -53,6 +53,7 @@ public class procurarDoenca extends javax.swing.JDialog {
         tfdNome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Procurar Doença");
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -233,7 +234,7 @@ public class procurarDoenca extends javax.swing.JDialog {
         if (!tfdCID.getText().equals("")) {
             DoenDAO.popularTabela(tabela, tfdCID.getText(), "cid");
         }
-        if (!tfdNome.getText().equals("")) {
+        else if (!tfdNome.getText().equals("")) {
             DoenDAO.popularTabela(tabela, tfdNome.getText(), "nome");
         } else {
             DoenDAO.popularTabela(tabela);

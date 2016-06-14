@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
@@ -84,7 +85,20 @@ public class AgendaDAO implements IDAO {
 
     @Override
     public String excluir(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "DELETE FROM agenda WHERE "
+                    + "id_atendimento  = " + id + "";
+
+            //  System.out.println("sql: " + sql);
+            st.execute(sql);
+
+        } catch (Exception e) {
+            System.out.println("Erro ao excliuir agendamento = " + e);
+            return e.toString();
+        }
+        return "";
     }
 
     @Override
@@ -233,14 +247,26 @@ public class AgendaDAO implements IDAO {
             column = tabela.getColumnModel().getColumn(i);
             switch (i) {
                 case 0:
-                    column.setPreferredWidth(17);
+                    column.setPreferredWidth(5);
                     break;
                 case 1:
-                    column.setPreferredWidth(140);
+                    column.setPreferredWidth(25);
                     break;
-//                case 2:
-//                    column.setPreferredWidth(14);
-//                    break;
+                case 2:
+                    column.setPreferredWidth(50);
+                    break;
+                case 3:
+                    column.setPreferredWidth(50);
+                    break;
+                case 4:
+                    column.setPreferredWidth(50);
+                    break;
+                case 5:
+                    column.setPreferredWidth(15);
+                    break;
+                case 6:
+                    column.setPreferredWidth(15);
+                    break;
             }
         }
         // renderizacao das linhas da tabela = mudar a cor
@@ -260,7 +286,7 @@ public class AgendaDAO implements IDAO {
 //            }
 //        });
     }
-    
+
     public void popularTabelaDiag(JTable tabela) {
         // dados da tabela
         Object[][] dadosTabela = null;
@@ -307,6 +333,127 @@ public class AgendaDAO implements IDAO {
                 String tmpMedicoConca = tmpMedico.getID() + "-" + tmpMedico.getNome();
                 dadosTabela[lin][3] = tmpMedicoConca;
 
+                // caso a coluna precise exibir uma imagem
+//                if (resultadoQ.getBoolean("Situacao")) {
+//                    dadosTabela[lin][2] = new ImageIcon(getClass().getClassLoader().getResource("Interface/imagens/status_ativo.png"));
+//                } else {
+//                    dadosTabela[lin][2] = new ImageIcon(getClass().getClassLoader().getResource("Interface/imagens/status_inativo.png"));
+//                }
+                lin++;
+            }
+        } catch (Exception e) {
+            System.out.println("problemas para popular tabela...");
+            System.out.println(e);
+        }
+
+        // configuracoes adicionais no componente tabela
+        tabela.setModel(new DefaultTableModel(dadosTabela, cabecalho) {
+            @Override
+            // quando retorno for FALSE, a tabela nao é editavel
+            public boolean isCellEditable(int row, int column) {
+                return false;
+                /*  
+                 if (column == 3) {  // apenas a coluna 3 sera editavel
+                 return true;
+                 } else {
+                 return false;
+                 }
+                 */
+            }
+
+            // alteracao no metodo que determina a coluna em que o objeto ImageIcon devera aparecer
+            @Override
+            public Class getColumnClass(int column) {
+
+                if (column == 2) {
+                    //   return ImageIcon.class;
+                }
+                return Object.class;
+            }
+        });
+
+        // permite seleção de apenas uma linha da tabela
+        tabela.setSelectionMode(0);
+
+        // redimensiona as colunas de uma tabela
+        TableColumn column = null;
+        for (int i = 0; i < tabela.getColumnCount(); i++) {
+            column = tabela.getColumnModel().getColumn(i);
+            switch (i) {
+                case 0:
+                    column.setPreferredWidth(17);
+                    break;
+                case 1:
+                    column.setPreferredWidth(140);
+                    break;
+//                case 2:
+//                    column.setPreferredWidth(14);
+//                    break;
+            }
+        }
+        // renderizacao das linhas da tabela = mudar a cor
+//        tabela.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+//
+//            @Override
+//            public Component getTableCellRendererComponent(JTable table, Object value,
+//                    boolean isSelected, boolean hasFocus, int row, int column) {
+//                super.getTableCellRendererComponent(table, value, isSelected,
+//                        hasFocus, row, column);
+//                if (row % 2 == 0) {
+//                    setBackground(Color.GREEN);
+//                } else {
+//                    setBackground(Color.LIGHT_GRAY);
+//                }
+//                return this;
+//            }
+//        });
+    }
+
+    public void popularTabelaDiag(JTable tabela, String paciente) {
+        // dados da tabela
+        Object[][] dadosTabela = null;
+
+        // cabecalho da tabela
+        Object[] cabecalho = new Object[4];
+        cabecalho[0] = "ID";
+        cabecalho[1] = "Hora";
+        cabecalho[2] = "Paciente";
+        cabecalho[3] = "Medico";
+
+        ResultSet resultadoQ;
+
+        // cria matriz de acordo com nº de registros da tabela
+        try {
+            String sql = "SELECT COUNT(*) FROM agenda a, pessoa p WHERE a.pessoa_id = p.id_pessoa AND p.nome ILIKE '%" + paciente + "%';";
+             System.out.println("sql1" + sql);
+            resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql);
+
+            resultadoQ.next();
+
+            dadosTabela = new Object[resultadoQ.getInt(1)][4];
+
+        } catch (Exception e) {
+            System.out.println("Erro ao consultar agenda: " + e);
+        }
+
+        int lin = 0;
+
+        // efetua consulta na tabela
+        try {
+            String sql1 = "SELECT a.id_atendimento, a.data_atendimento, a.pessoa_id, a.medico_id FROM agenda a, pessoa p WHERE a.pessoa_id = p.id_pessoa AND p.nome ILIKE '%" + paciente + "%';";
+            //System.out.println("sql1" + sql1);
+            resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql1);
+
+            while (resultadoQ.next()) {
+
+                dadosTabela[lin][0] = resultadoQ.getInt("id_atendimento");
+                dadosTabela[lin][1] = uteis.FormatarData(resultadoQ.getString("data_atendimento"));
+                Pessoa tmpPessoa = (Pessoa) pessoaDAO.consultarId(resultadoQ.getInt("pessoa_id"));
+                String tmpPessoaConca = tmpPessoa.getID() + "-" + tmpPessoa.getNome();
+                dadosTabela[lin][2] = tmpPessoaConca;
+                Pessoa tmpMedico = (Pessoa) pessoaDAO.consultarId(resultadoQ.getInt("medico_id"));
+                String tmpMedicoConca = tmpMedico.getID() + "-" + tmpMedico.getNome();
+                dadosTabela[lin][3] = tmpMedicoConca;
 
                 // caso a coluna precise exibir uma imagem
 //                if (resultadoQ.getBoolean("Situacao")) {
@@ -412,6 +559,24 @@ public class AgendaDAO implements IDAO {
             Logger.getLogger(AgendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public boolean checkHorario(String dataHora) throws SQLException {
+
+        String sql = "SELECT count(*) FROM agenda WHERE data_atendimento = '" + dataHora + "';";
+        System.out.println("sql1" + sql);
+        ResultSet resultadoQ;
+        resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(sql);
+        resultadoQ.next();
+
+        int resultado = 0;
+        resultado = resultadoQ.getInt(1);
+        System.out.println("resultado" + resultado);
+        if (resultado == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

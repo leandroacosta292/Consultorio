@@ -11,11 +11,14 @@ import daos.PessoaDAO;
 import entidades.AgendaEnt;
 import entidades.Medico;
 import entidades.Pessoa;
+import java.sql.SQLException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import static java.util.Calendar.HOUR;
 import static java.util.Calendar.MINUTE;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,12 +33,13 @@ public class agendar extends javax.swing.JDialog {
     Pessoa tmpPessoa;
     Pessoa tmpPessoaMedica;
     AgendaEnt tmpAgenda;
-    Uteis uteis;
+    Uteis uteis = new Uteis();
     int idAtendimento = 0;
     AgendaDAO agendaDAO;
     String retorno;
     PessoaDAO pessoaDAO;
     boolean alterando;
+    boolean horarioOk = false;
 
     public agendar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -195,13 +199,13 @@ public class agendar extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sfdMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3))
+                        .addComponent(sfdMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblValor)
                         .addGap(18, 18, 18)
                         .addComponent(tfdValor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
                 .addGap(42, 42, 42))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -298,42 +302,64 @@ public class agendar extends javax.swing.JDialog {
     }//GEN-LAST:event_btnMedicoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if (!alterando) {
-            tmpAgenda = new AgendaEnt();
-            tmpAgenda.setPessoaId(tmpPessoa.getID());
-            tmpAgenda.setMedicoId(tmpPessoaMedica.getID());
-            tmpAgenda.setValor(tfdValor.getText());
-            Calendar calendario = clData.getCalendar();
-            calendario.set(HOUR, sfdHora.getValue());
-            calendario.set(MINUTE, sfdMinutos.getValue());
-            tmpAgenda.setDataAtendimento(calendario.getTime());
-            tmpAgenda.setAtendido(false);
-            retorno = agendaDAO.salvar(tmpAgenda);
-            if (retorno.length() < 6) {
-                JOptionPane.showMessageDialog(null, "Salvo");
+        Calendar calendario = null;
+        calendario = clData.getCalendar();
+        calendario.set(HOUR, sfdHora.getValue());
+        calendario.set(MINUTE, sfdMinutos.getValue());
+      //  System.out.println(calendario.getTime());
+
+        try {
+         //   System.out.println(agendaDAO.checkHorario(uteis.FormatarDatayyyyMMdd(calendario)));
+            if (agendaDAO.checkHorario(uteis.FormatarDatayyyyMMdd(calendario)) == true || horarioOk == true) {
+             //   System.out.println(agendaDAO.checkHorario(uteis.FormatarDatayyyyMMdd(calendario)));
+                if (!alterando) {
+                    tmpAgenda = new AgendaEnt();
+                    tmpAgenda.setPessoaId(tmpPessoa.getID());
+                    tmpAgenda.setMedicoId(tmpPessoaMedica.getID());
+                    tmpAgenda.setValor(tfdValor.getText());
+                    tmpAgenda.setDataAtendimento(calendario.getTime());
+                    tmpAgenda.setAtendido(false);
+                    retorno = agendaDAO.salvar(tmpAgenda);
+                    if (retorno.length() < 6) {
+                        JOptionPane.showMessageDialog(null, "Salvo");
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, retorno);
+                    }
+                    this.dispose();
+                } else {
+                    tmpAgenda = new AgendaEnt();
+                    tmpAgenda.setIdAtendimento(idAtendimento);
+                    tmpAgenda.setPessoaId(tmpPessoa.getID());
+                    tmpAgenda.setMedicoId(tmpPessoaMedica.getID());
+                    tmpAgenda.setValor(tfdValor.getText());
+                    tmpAgenda.setDataAtendimento(calendario.getTime());
+                    tmpAgenda.setAtendido(false);
+                    tmpAgenda.setIdAtendimento(idAtendimento);
+                    retorno = agendaDAO.atualizar(tmpAgenda);
+                    if (retorno.length() < 6) {
+                        JOptionPane.showMessageDialog(null, "Alterado");
+                    } else {
+                        JOptionPane.showMessageDialog(null, retorno);
+                    }
+                    this.dispose();
+                }
+
             } else {
-                JOptionPane.showMessageDialog(null, retorno);
+                //System.out.println("data já usada");
+                int resposta;
+
+                resposta = JOptionPane.showConfirmDialog(null, "A data/hora agendado já foi usada\nDeseja Continuar?");
+
+                if (resposta == JOptionPane.YES_OPTION) {
+                    horarioOk = true;
+                    btnSalvarActionPerformed(evt);
+                }
             }
-        } else {
-            tmpAgenda = new AgendaEnt();
-            tmpAgenda.setIdAtendimento(idAtendimento);
-            tmpAgenda.setPessoaId(tmpPessoa.getID());
-            tmpAgenda.setMedicoId(tmpPessoaMedica.getID());
-            tmpAgenda.setValor(tfdValor.getText());
-            Calendar calendario = clData.getCalendar();
-            calendario.set(HOUR, sfdHora.getValue());
-            calendario.set(MINUTE, sfdMinutos.getValue());
-            tmpAgenda.setDataAtendimento(calendario.getTime());
-            tmpAgenda.setAtendido(false);
-            tmpAgenda.setIdAtendimento(idAtendimento);
-            retorno = agendaDAO.atualizar(tmpAgenda);
-            if (retorno.length() < 6) {
-                JOptionPane.showMessageDialog(null, "Alterado");
-            } else {
-                JOptionPane.showMessageDialog(null, retorno);
-            }
+        } catch (SQLException ex) {
+            Logger.getLogger(agendar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.dispose();
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacienteActionPerformed

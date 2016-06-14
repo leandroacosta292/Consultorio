@@ -31,14 +31,14 @@ public class agenda extends javax.swing.JInternalFrame {
 
     public agenda() {
         initComponents();
-        //System.out.println(uteis.FormatarDatayyyyMMdd(calendario.getCalendar()));
+        System.out.println(uteis.FormatarDatayyyyMMdd(calendario.getCalendar()));
         agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
 
     }
 
     public agenda(JPanel fundo) {
         initComponents();
-        //System.out.println(uteis.FormatarDatayyyyMMdd(calendario.getCalendar()));
+        System.out.println(uteis.FormatarDatayyyyMMdd(calendario.getCalendar()));
         agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
         this.fundo = fundo;
     }
@@ -60,6 +60,7 @@ public class agenda extends javax.swing.JInternalFrame {
         btnAgendar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
         btnProcurar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         calendario = new com.toedter.calendar.JCalendar();
         btnPagar = new javax.swing.JButton();
 
@@ -116,7 +117,7 @@ public class agenda extends javax.swing.JInternalFrame {
             }
         });
 
-        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar32.png"))); // NOI18N
+        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair32.png"))); // NOI18N
         btnFechar.setText("Fechar");
         btnFechar.setMaximumSize(new java.awt.Dimension(122, 50));
         btnFechar.setMinimumSize(new java.awt.Dimension(122, 50));
@@ -138,31 +139,46 @@ public class agenda extends javax.swing.JInternalFrame {
             }
         });
 
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar32.png"))); // NOI18N
+        btnExcluir.setText("Excluir");
+        btnExcluir.setToolTipText("");
+        btnExcluir.setMaximumSize(new java.awt.Dimension(122, 50));
+        btnExcluir.setMinimumSize(new java.awt.Dimension(122, 50));
+        btnExcluir.setPreferredSize(new java.awt.Dimension(122, 50));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnProcurar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnProcurar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                .addContainerGap())
         );
 
         calendario.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -184,14 +200,15 @@ public class agenda extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnPagar)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(calendario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(calendario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnPagar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -199,12 +216,13 @@ public class agenda extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPagar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPagar)
-                .addContainerGap(61, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -213,6 +231,7 @@ public class agenda extends javax.swing.JInternalFrame {
     private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
         agendar Agendar = new agendar(null, true);
         Agendar.setVisible(true);
+        agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
     }//GEN-LAST:event_btnAgendarActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
@@ -222,6 +241,7 @@ public class agenda extends javax.swing.JInternalFrame {
     private void btnProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarActionPerformed
         procurarAgendamento procurar = new procurarAgendamento(null, true);
         tmpAgenda = procurar.retornarAgenda();
+        calendario.setDate(tmpAgenda.getDataAtendimento());
     }//GEN-LAST:event_btnProcurarActionPerformed
 
     private void calendarioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_calendarioPropertyChange
@@ -231,17 +251,19 @@ public class agenda extends javax.swing.JInternalFrame {
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
         agendaDAO.pagar((int) tabela.getValueAt(tabela.getSelectedRow(), 0), true);
+        agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
+        JOptionPane.showMessageDialog(this, "Pagamento efetuado");
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         if (evt.getClickCount() == 1) {
             tmpAgenda = (AgendaEnt) agendaDAO.consultarId((int) tabela.getValueAt(tabela.getSelectedRow(), 0));
             btnAlterar.setEnabled(true);
-        }    
+        }
         if (evt.getClickCount() == 2) {
             if (tabela.getValueAt(tabela.getSelectedRow(), 5).equals("Não")) {
                 agendamentoSelecionado = (AgendaEnt) agendaDAO.consultarId((int) tabela.getValueAt(tabela.getSelectedRow(), 0));
-                atender atendimento = new atender(agendamentoSelecionado);                
+                atender atendimento = new atender(agendamentoSelecionado);
                 this.dispose();
                 fundo.add(atendimento);
                 atendimento.setVisible(true);
@@ -253,9 +275,23 @@ public class agenda extends javax.swing.JInternalFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         agendar Agendar = new agendar(null, true, (AgendaEnt) agendaDAO.consultarId((int) tabela.getValueAt(tabela.getSelectedRow(), 0)));
-        Agendar.setVisible(true);        
+        Agendar.setVisible(true);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if (tabela.getValueAt(tabela.getSelectedRow(), 5).equals("Não")) {
+            int resposta;
+            resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o Agendamento?");
+            if (resposta == JOptionPane.YES_OPTION) {
+                agendaDAO.excluir((int) tabela.getValueAt(tabela.getSelectedRow(), 0));
+                JOptionPane.showMessageDialog(null, "Agendamento Excluído");
+                agendaDAO.popularTabela(tabela, uteis.FormatarDatayyyyMMdd(calendario.getCalendar().getTime()), "data_atendimento");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Este agendamento não pode ser excluído!");
+        }
+
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,6 +331,7 @@ public class agenda extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgendar;
     private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnProcurar;
